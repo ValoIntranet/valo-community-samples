@@ -1,0 +1,106 @@
+<?xml version="1.0"?>
+<pnp:Provisioning xmlns:pnp="http://schemas.dev.office.com/PnP/2019/09/ProvisioningSchema">
+  <pnp:Preferences Generator="OfficeDevPnP.Core, Version=3.16.1912.0, Culture=neutral, PublicKeyToken=5e633289e95c321a" />
+  <pnp:Templates ID="CONTAINER-ValoUserProfiles-v-0.1">
+    <pnp:ProvisioningTemplate ID="ValoUserProfiles-v-0.1" Version="1" BaseSiteTemplate="SITEPAGEPUBLISHING#0" Scope="RootSite">
+      <pnp:SiteFields>
+        <Field Type="Text" DisplayName="ValoProfileMobilePhone" Required="FALSE" EnforceUniqueValues="FALSE" Indexed="FALSE" MaxLength="255" Group="Valo" ID="{cbc69f1a-234e-4890-af52-fca1cc951598}" SourceID="{74384c0e-5522-4a24-9b7b-ad28ff0978d3}" StaticName="ValoProfileMobilePhone" Name="ValoProfileMobilePhone">
+        </Field>
+        <Field Type="Text" DisplayName="ValoProfileOfficeNumber" Required="FALSE" EnforceUniqueValues="FALSE" Indexed="FALSE" MaxLength="255" Group="Valo" ID="{d088cf45-68a3-4270-be74-0d5ffbae0f0d}" SourceID="{74384c0e-5522-4a24-9b7b-ad28ff0978d3}" StaticName="ValoProfileOfficeNumber" Name="ValoProfileOfficeNumber">
+        </Field>
+        <Field Type="Text" DisplayName="ValoProfileAccountPictureURL" Required="FALSE" EnforceUniqueValues="FALSE" Indexed="FALSE" MaxLength="255" Group="Valo" ID="{c82c494c-11e4-4d6f-84ad-4d86bbc78406}" SourceID="{74384c0e-5522-4a24-9b7b-ad28ff0978d3}" StaticName="ValoProfileAccountPictureURL" Name="ValoProfileAccountPictureURL">
+        </Field>
+        <Field Type="Text" DisplayName="ValoProfileWorkPhone" Required="FALSE" EnforceUniqueValues="FALSE" Indexed="FALSE" MaxLength="255" Group="Valo" ID="{bd626c8c-893e-4d67-af2b-455c2bade7d2}" SourceID="{74384c0e-5522-4a24-9b7b-ad28ff0978d3}" StaticName="ValoProfileWorkPhone" Name="ValoProfileWorkPhone">
+        </Field>
+        <Field Type="Text" DisplayName="ValoProfileDisplayName" Required="FALSE" EnforceUniqueValues="FALSE" Indexed="FALSE" MaxLength="255" Group="Valo" ID="{8bb1ab8d-fbfd-48fa-a749-a070aac26c17}" SourceID="{74384c0e-5522-4a24-9b7b-ad28ff0978d3}" StaticName="ValoProfileDisplayName" Name="ValoProfileDisplayName">
+        </Field>
+        <Field Type="Text" DisplayName="ValoProfileType" Required="FALSE" EnforceUniqueValues="FALSE" Indexed="FALSE" MaxLength="255" Group="Valo" ID="{a85a01a9-c973-4f6c-bd41-e411f6a25e41}" SourceID="{74384c0e-5522-4a24-9b7b-ad28ff0978d3}" StaticName="ValoProfileType" Name="ValoProfileType">
+        </Field>
+        <Field Type="Text" DisplayName="ValoProfileJobTitle" Required="FALSE" EnforceUniqueValues="FALSE" Indexed="FALSE" MaxLength="255" Group="Valo" ID="{a54766af-95d7-48c7-b787-a51137383d7d}" SourceID="{74384c0e-5522-4a24-9b7b-ad28ff0978d3}" StaticName="ValoProfileJobTitle" Name="ValoProfileJobTitle">
+        </Field>
+        <Field Type="Text" DisplayName="ValoProfileAccountName" Required="FALSE" EnforceUniqueValues="FALSE" Indexed="FALSE" MaxLength="255" Group="Valo" ID="{d6f0b3b0-68f7-4f1b-8247-d5a3be44779b}" SourceID="{74384c0e-5522-4a24-9b7b-ad28ff0978d3}" StaticName="ValoProfileAccountName" Name="ValoProfileAccountName">
+        </Field>
+        <Field Type="Text" DisplayName="ValoProfileWorkEmail" Required="FALSE" EnforceUniqueValues="FALSE" Indexed="FALSE" MaxLength="255" Group="Valo" ID="{dc4f44ba-c131-4348-9277-cb3d8346fa71}" SourceID="{74384c0e-5522-4a24-9b7b-ad28ff0978d3}" StaticName="ValoProfileWorkEmail" Name="ValoProfileWorkEmail">
+        </Field>
+        <Field Type="Text" DisplayName="ValoProfileDepartment" Required="FALSE" EnforceUniqueValues="FALSE" Indexed="FALSE" MaxLength="255" Group="Valo" ID="{13292bc5-8557-4e48-81b4-a7a5ecd0b5dd}" SourceID="{74384c0e-5522-4a24-9b7b-ad28ff0978d3}" StaticName="ValoProfileDepartment" Name="ValoProfileDepartment">
+        </Field>
+        <Field Type="Text" DisplayName="ValoProfileFirstName" Required="FALSE" EnforceUniqueValues="FALSE" Indexed="FALSE" MaxLength="255" Group="Valo" ID="{463223d3-137d-4581-b2ea-5f4f7b799eed}" SourceID="{74384c0e-5522-4a24-9b7b-ad28ff0978d3}" StaticName="ValoProfileFirstName" Name="ValoProfileFirstName">
+        </Field>
+        <Field Type="Text" DisplayName="ValoProfileLastName" Required="FALSE" EnforceUniqueValues="FALSE" Indexed="FALSE" MaxLength="255" Group="Valo" ID="{c14406df-8426-423c-94d9-2f7ccacc2eb5}" SourceID="{74384c0e-5522-4a24-9b7b-ad28ff0978d3}" StaticName="ValoProfileLastName" Name="ValoProfileLastName">
+        </Field>
+      </pnp:SiteFields>
+      <pnp:ContentTypes>
+        <pnp:ContentType ID="0x01004126A32E6638A34CADC2B1551C91F241" Name="Valo User Profile" Description="" Group="Valo" NewFormUrl="" EditFormUrl="" DisplayFormUrl="">
+          <pnp:FieldRefs>
+            <pnp:FieldRef ID="c042a256-787d-4a6f-8a8a-cf6ab767f12d" Name="ContentType" UpdateChildren="true" />
+            <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true" UpdateChildren="true" />
+            <pnp:FieldRef ID="8bb1ab8d-fbfd-48fa-a749-a070aac26c17" Name="ValoProfileDisplayName" UpdateChildren="true" />
+            <pnp:FieldRef ID="463223d3-137d-4581-b2ea-5f4f7b799eed" Name="ValoProfileFirstName" UpdateChildren="true" />
+            <pnp:FieldRef ID="c14406df-8426-423c-94d9-2f7ccacc2eb5" Name="ValoProfileLastName" UpdateChildren="true" />
+            <pnp:FieldRef ID="a54766af-95d7-48c7-b787-a51137383d7d" Name="ValoProfileJobTitle" UpdateChildren="true" />
+            <pnp:FieldRef ID="13292bc5-8557-4e48-81b4-a7a5ecd0b5dd" Name="ValoProfileDepartment" UpdateChildren="true" />
+            <pnp:FieldRef ID="bd626c8c-893e-4d67-af2b-455c2bade7d2" Name="ValoProfileWorkPhone" UpdateChildren="true" />
+            <pnp:FieldRef ID="cbc69f1a-234e-4890-af52-fca1cc951598" Name="ValoProfileMobilePhone" UpdateChildren="true" />
+            <pnp:FieldRef ID="dc4f44ba-c131-4348-9277-cb3d8346fa71" Name="ValoProfileWorkEmail" UpdateChildren="true" />
+            <pnp:FieldRef ID="d088cf45-68a3-4270-be74-0d5ffbae0f0d" Name="ValoProfileOfficeNumber" UpdateChildren="true" />
+            <pnp:FieldRef ID="c82c494c-11e4-4d6f-84ad-4d86bbc78406" Name="ValoProfileAccountPictureURL" UpdateChildren="true" />
+            <pnp:FieldRef ID="d6f0b3b0-68f7-4f1b-8247-d5a3be44779b" Name="ValoProfileAccountName" UpdateChildren="true" />
+            <pnp:FieldRef ID="a85a01a9-c973-4f6c-bd41-e411f6a25e41" Name="ValoProfileType" UpdateChildren="true" />
+          </pnp:FieldRefs>
+        </pnp:ContentType>
+      </pnp:ContentTypes>
+      <pnp:Lists>
+        <pnp:ListInstance Title="Valo User Profiles" Description="" DocumentTemplate="" TemplateType="100" Url="Lists/ValoUserProfiles" MinorVersionLimit="0" MaxVersionLimit="0" DraftVersionVisibility="0" TemplateFeatureID="00bfea71-de22-43b2-a848-c05709900100" ContentTypesEnabled="true" EnableFolderCreation="false" DefaultDisplayFormUrl="{site}/Lists/ValoUserProfiles/DispForm.aspx" DefaultEditFormUrl="{site}/Lists/ValoUserProfiles/EditForm.aspx" DefaultNewFormUrl="{site}/Lists/ValoUserProfiles/NewForm.aspx" ImageUrl="/_layouts/15/images/itgen.png?rev=47" IrmExpire="false" IrmReject="false" IsApplicationList="false" ValidationFormula="" ValidationMessage="">
+          <pnp:ContentTypeBindings>
+            <pnp:ContentTypeBinding ContentTypeID="0x01004126A32E6638A34CADC2B1551C91F241" Default="true" />
+            <pnp:ContentTypeBinding ContentTypeID="0x0120" />
+          </pnp:ContentTypeBindings>
+          <pnp:Views>
+            <View Name="{DDCC4FB1-3554-4F82-9C58-37DED8CCD5E3}" DefaultView="TRUE" MobileView="TRUE" MobileDefaultView="TRUE" Type="HTML" DisplayName="All Items" Url="{site}/Lists/ValoUserProfiles/AllItems.aspx" Level="1" BaseViewID="1" ContentTypeID="0x" ImageUrl="/_layouts/15/images/generic.png?rev=47">
+              <Query>
+                <OrderBy>
+                  <FieldRef Name="ID" />
+                </OrderBy>
+              </Query>
+              <ViewFields>
+                <FieldRef Name="LinkTitle" />
+                <FieldRef Name="ValoProfileAccountName" />
+                <FieldRef Name="ValoProfileAccountPictureURL" />
+                <FieldRef Name="ValoProfileDepartment" />
+                <FieldRef Name="ValoProfileDisplayName" />
+                <FieldRef Name="ValoProfileFirstName" />
+                <FieldRef Name="ValoProfileJobTitle" />
+                <FieldRef Name="ValoProfileLastName" />
+                <FieldRef Name="ValoProfileMobilePhone" />
+                <FieldRef Name="ValoProfileOfficeNumber" />
+                <FieldRef Name="ValoProfileType" />
+                <FieldRef Name="ValoProfileWorkEmail" />
+                <FieldRef Name="ValoProfileWorkPhone" />
+              </ViewFields>
+              <RowLimit Paged="TRUE">30</RowLimit>
+              <Aggregations Value="Off" />
+              <JSLink>clienttemplates.js</JSLink>
+            </View>
+          </pnp:Views>
+          <pnp:FieldRefs>
+            <pnp:FieldRef ID="8bb1ab8d-fbfd-48fa-a749-a070aac26c17" Name="ValoProfileDisplayName" DisplayName="ValoProfileDisplayName" />
+            <pnp:FieldRef ID="463223d3-137d-4581-b2ea-5f4f7b799eed" Name="ValoProfileFirstName" DisplayName="ValoProfileFirstName" />
+            <pnp:FieldRef ID="c14406df-8426-423c-94d9-2f7ccacc2eb5" Name="ValoProfileLastName" DisplayName="ValoProfileLastName" />
+            <pnp:FieldRef ID="a54766af-95d7-48c7-b787-a51137383d7d" Name="ValoProfileJobTitle" DisplayName="ValoProfileJobTitle" />
+            <pnp:FieldRef ID="13292bc5-8557-4e48-81b4-a7a5ecd0b5dd" Name="ValoProfileDepartment" DisplayName="ValoProfileDepartment" />
+            <pnp:FieldRef ID="bd626c8c-893e-4d67-af2b-455c2bade7d2" Name="ValoProfileWorkPhone" DisplayName="ValoProfileWorkPhone" />
+            <pnp:FieldRef ID="cbc69f1a-234e-4890-af52-fca1cc951598" Name="ValoProfileMobilePhone" DisplayName="ValoProfileMobilePhone" />
+            <pnp:FieldRef ID="dc4f44ba-c131-4348-9277-cb3d8346fa71" Name="ValoProfileWorkEmail" DisplayName="ValoProfileWorkEmail" />
+            <pnp:FieldRef ID="d088cf45-68a3-4270-be74-0d5ffbae0f0d" Name="ValoProfileOfficeNumber" DisplayName="ValoProfileOfficeNumber" />
+            <pnp:FieldRef ID="c82c494c-11e4-4d6f-84ad-4d86bbc78406" Name="ValoProfileAccountPictureURL" DisplayName="ValoProfileAccountPictureURL" />
+            <pnp:FieldRef ID="d6f0b3b0-68f7-4f1b-8247-d5a3be44779b" Name="ValoProfileAccountName" DisplayName="ValoProfileAccountName" />
+            <pnp:FieldRef ID="a85a01a9-c973-4f6c-bd41-e411f6a25e41" Name="ValoProfileType" DisplayName="ValoProfileType" />
+          </pnp:FieldRefs>
+          <pnp:Webhooks>
+            <pnp:Webhook ServerNotificationUrl="https://13-northeurope1.pushp.svc.ms/notifications?token=w2-85b64647-1f29-40ec-bbb8-96ade0d16e37" ExpiresInDays="1" />
+          </pnp:Webhooks>
+        </pnp:ListInstance>
+      </pnp:Lists>
+    </pnp:ProvisioningTemplate>
+  </pnp:Templates>
+</pnp:Provisioning>

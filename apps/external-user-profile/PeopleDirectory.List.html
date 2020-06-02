@@ -1,0 +1,104 @@
+<content id="metadata" type="x-handlebars-metadata">
+  {
+    "fields": ["ValoProfileDisplayName", "ValoProfileFirstName", "ValoProfileLastName", "ValoProfileJobTitle", "ValoProfileDepartment", "ValoProfileWorkPhone", "ValoProfileMobilePhone", "ValoProfileWorkEmail", "ValoProfileOfficeNumber", "ValoProfilePictureURL", "ValoProfileAccountName"],
+    "query": "ContentTypeId:0x01004126A32E6638A34CADC2B1551C91F24100*",
+    "sorting": "ValoProfileFirstName:ascending",
+    "totalResults": 12,
+    "resources": [
+      {
+        "key": "empty",
+        "values": {
+          "default": "n/a"
+        }
+      }
+    ],
+    "parameters": [
+      {
+        "name": "BannerStyle",
+        "value": "Candela",
+        "options": ["Candela","Lux"],
+        "description": "universalBannerTmplStyleParamDesc"
+      }
+    ],
+    "pagingType": 3
+  }
+</content>
+
+<content id="template" type="x-handlebars-template">
+  <style></style>
+
+  <div class="ms-Grid valo-people-finder {{parameters.BannerStyle}}">
+    <div class="ms-Grid-row vm-Cards valo-people-finder__list">
+      {{#if dsData.items}}
+        {{#each dsData.items}}
+          <div class="ms-sm12 ms-smd6 ms-lg4 ms-xlg3 valo-people-finder__item-link">
+            <div class="valo-people-finder__item-wrapper">
+              <div class="valo-people-finder__item-header">
+                <div class="valo-people-finder__item-header__picture">
+                  {{#if ValoProfilePictureURL}}
+                    <div class="valo-people-finder__item-header__picture__placeholder valo-classic-spfxcontrols-bordercolor" style="background-image: url('{{SPWebUrl}}/_layouts/15/userphoto.aspx?size=L&amp;accountname={{resolveAccountName ValoProfileAccountName}}');"></div>
+                  {{else}}
+                    <div class="valo-people-finder__item-header__picture__placeholder valo-classic-spfxcontrols-bordercolor">
+                      <i class="ms-Icon ms-Icon--Contact valo-people-finder__item-header__picture__placeholder-icon" aria-hidden="true"></i>
+                    </div>
+                  {{/if}}
+                  {{#if ValoProfileWorkEmail}}
+                  <div class="valo-people-finder__item-header__icon">
+                    <a title="{{resourceLabel 'GeneralIM'}}: {{ValoProfileWorkEmail}}"href="IM:sip:{{ValoProfileWorkEmail}}" class="valo-people-finder__item-header__icon-link">
+                      <i title="{{resourceLabel 'GeneralIM'}}" class="ms-Icon ms-Icon--Message valo-people-finder__item-header__icon-container" aria-hidden="true"></i>
+                    </a>
+                  </div>
+                  {{/if}}
+                </div>
+                <a href="{{userProfileUrl ValoProfileWorkEmail}}" class="valo-people-finder__item-header__name valo-classic-spfxcontrols-bgcolor valo-classic-spfxcontrols-wp-title" title="{{ValoProfileDisplayName}}">{{ValoProfileDisplayName}}</a>
+                <div class="valo-people-finder__item-header__position">{{ValoProfileJobTitle}}</div>
+              </div>
+              <div class="valo-people-finder__item-body">
+                {{#if ValoProfileDepartment}}
+                <div class="valo-people-finder__item-body__part">
+                    <i title="{{resourceLabel 'GeneralDepartment'}}" class="ms-Icon ms-Icon--Group valo-people-finder__item-body__part__icon" aria-hidden="true"></i>
+                    <span title="{{Department}}" class="valo-people-finder__item-body__part__text">{{ValoProfileDepartment}}</span>
+                </div>
+                {{/if}}
+                {{#if ValoProfileMobilePhone}}
+                <div class="valo-people-finder__item-body__part">
+                    <i title="{{resourceLabel 'GeneralPhone'}}" class="ms-Icon ms-Icon--CellPhone valo-people-finder__item-body__part__icon" aria-hidden="true"></i>
+                    <a title="{{resourceLabel 'GeneralPhone'}}: {{ValoProfileMobilePhone}}" href="tel:{{ValoProfileMobilePhone}}" class="valo-people-finder__item-body__part__text">{{ValoProfileMobilePhone}}</a>
+                </div>
+                {{/if}}
+                {{#if ValoProfileWorkPhone}}
+                <div class="valo-people-finder__item-body__part">
+                    <i title="{{resourceLabel 'GeneralPhone'}}" class="ms-Icon ms-Icon--Phone valo-people-finder__item-body__part__icon" aria-hidden="true"></i>
+                    <a title="{{resourceLabel 'GeneralPhone'}}: {{ValoProfileWorkPhone}}" href="tel:{{ValoProfileWorkPhone}}" class="valo-people-finder__item-body__part__text">{{ValoProfileWorkPhone}}</a>
+                </div>
+                {{/if}}
+                {{#if ValoProfileWorkEmail}}
+                <div class="valo-people-finder__item-body__part">
+                    <i title="{{resourceLabel 'GeneralEmail'}}" class="ms-Icon ms-Icon--Mail valo-people-finder__item-body__part__icon" aria-hidden="true"></i>
+                    <a title="{{resourceLabel 'GeneralEmail'}}: {{ValoProfileWorkEmail}}" href="mailto:{{ValoProfileWorkEmail}}" class="valo-people-finder__item-body__part__text">{{ValoProfileWorkEmail}}</a>
+                </div>
+                {{/if}}
+                {{#if ValoProfileOfficeNumber}}
+                <div class="valo-people-finder__item-body__part">
+                    <i title="{{resourceLabel 'GeneralOffice'}}" class="ms-Icon ms-Icon--POI valo-people-finder__item-body__part__icon" aria-hidden="true"></i>
+                    <span title="{{OfficeNumber}}" class="valo-people-finder__item-body__part__text">{{ValoProfileOfficeNumber}}</span>
+                </div>
+                {{/if}}
+              </div>
+            </div>
+          </div>
+        {{/each}}
+      {{else}}
+        {{resourceLabel "NoResultsFound"}}
+      {{/if}}
+    </div>
+  </div>
+</content>
+<html xmlns:mso="urn:schemas-microsoft-com:office:office" xmlns:msdt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882"><head>
+<!--[if gte mso 9]><xml>
+<mso:CustomDocumentProperties>
+<mso:TemplateTitle msdt:dt="string">People Directory - List</mso:TemplateTitle>
+<mso:DataSource msdt:dt="string">SearchDataSource</mso:DataSource>
+</mso:CustomDocumentProperties>
+</xml><![endif]-->
+</head>
