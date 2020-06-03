@@ -47,8 +47,6 @@ jobs:
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
         with:
           tag_name: ${{ steps.tag.outputs.result }}
           release_name: Release ${{ steps.tag.outputs.result }}
@@ -57,15 +55,16 @@ jobs:
           draft: ${{ $SOURCE_BRANCH != 'master' }}
           prerelease: false
         env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SOURCE_BRANCH: ${{ steps.branch_name.outputs.SOURCE_BRANCH }}
 
       - name: Upload Release Asset
         id: upload-release-asset
         uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./release.json
           asset_name: release.json
           asset_content_type: application/json
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
