@@ -1,3 +1,15 @@
+---
+title: Crisis Communication Site
+author: Jouni Pohjohlainen
+createdByValo: true
+htmlTemplate: ""
+pnpTemplate:
+  - CrisisCommunicationSite.pnp
+script:
+  - Provision-CrisisCommunicationSite.ps1
+sppkg: ""
+---
+
 # Crisis Communication Site
 
 ## Summary

@@ -1,3 +1,16 @@
+---
+title: External User Profile
+author: Sébastien Levert
+createdByValo: true
+htmlTemplate:
+  - PeopleDirectory.List.html
+pnpTemplate:
+  - ValoUserProfiles.xml
+script:
+  - Sync-Users.ps1
+sppkg: ""
+---
+
 # External User Profile
 
 ## Summary
