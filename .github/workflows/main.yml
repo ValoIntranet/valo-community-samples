@@ -11,6 +11,9 @@ jobs:
     name: Create Release
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
       - name: Get branch variables
         id: branch_name
         run: |
@@ -36,9 +39,6 @@ jobs:
         if: startsWith(steps.branch_name.outputs.SOURCE_TAG, 'refs/')
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Checkout code
-        uses: actions/checkout@v2
 
       - name: Install npm dependencies
         run: npm i
