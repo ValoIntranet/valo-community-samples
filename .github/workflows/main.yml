@@ -30,10 +30,9 @@ jobs:
 
       - name: Cancel workflow if not running for tags
         uses: andymckay/cancel-action@0.2
-        if: $[startsWith($SOURCE_TAG, 'refs/tags/')]
+        if: startsWith(steps.branch_name.outputs.SOURCE_TAG, 'refs/tags/')
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SOURCE_TAG: ${{ steps.branch_name.outputs.SOURCE_TAG }}
 
       - name: Checkout code
         uses: actions/checkout@v2
