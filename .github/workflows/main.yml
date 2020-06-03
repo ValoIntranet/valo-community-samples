@@ -1,10 +1,9 @@
 on:
   push:
     branches:
-      - master
-      - dev
+      - refs/tags/*
 
-name: Create Sample Release
+name: Create Release
 
 jobs:
   build:
