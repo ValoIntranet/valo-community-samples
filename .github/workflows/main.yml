@@ -11,14 +11,14 @@ jobs:
     name: Create Release
     runs-on: ubuntu-latest
     steps:
-      - name: Branch name
+      - name: Get branch variables
         id: branch_name
         run: |
           echo ::set-output name=SOURCE_NAME::${GITHUB_REF#refs/*/}
           echo ::set-output name=SOURCE_BRANCH::${GITHUB_REF#refs/heads/}
           echo ::set-output name=SOURCE_TAG::${GITHUB_REF#refs/tags/}
       
-      - name: Echo
+      - name: Show the retrieved branch variables
         run: |
           echo $SOURCE_NAME
           echo $SOURCE_BRANCH
@@ -28,23 +28,24 @@ jobs:
           SOURCE_BRANCH: ${{ steps.branch_name.outputs.SOURCE_BRANCH }}
           SOURCE_TAG: ${{ steps.branch_name.outputs.SOURCE_TAG }}
 
+      - name: Cancel workflow if not running for tags
+        uses: andymckay/cancel-action@0.2
+        if: "startsWith($SOURCE_TAG, 'refs/tags/')"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SOURCE_TAG: ${{ steps.branch_name.outputs.SOURCE_TAG }}
+
       - name: Checkout code
         uses: actions/checkout@v2
-        if: "!startsWith(steps.branch_name.outputs.SOURCE_TAG, 'refs/tags/')"
 
       - name: Install npm dependencies
         run: npm i
-        if: "!startsWith(steps.branch_name.outputs.SOURCE_TAG, 'refs/tags/')"
 
       - name: Install npm dependencies
         run: node .github/scripts/generate-index.js
-        if: "!startsWith(steps.branch_name.outputs.SOURCE_TAG, 'refs/tags/')"
-
-      
 
       - name: Create Release
         id: create_release
-        if: "!startsWith(steps.branch_name.outputs.SOURCE_TAG, 'refs/tags/')"
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
@@ -53,12 +54,13 @@ jobs:
           release_name: Release ${{ steps.tag.outputs.result }}
           body: |
             Sample release ${{ steps.tag.outputs.result }}
-          draft: ${{ github.ref != 'refs/heads/master' }}
+          draft: ${{ $SOURCE_BRANCH != 'master' }}
           prerelease: false
+        env:
+          SOURCE_BRANCH: ${{ steps.branch_name.outputs.SOURCE_BRANCH }}
 
       - name: Upload Release Asset
         id: upload-release-asset
-        if: "!startsWith(steps.branch_name.outputs.SOURCE_TAG, 'refs/tags/')"
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
