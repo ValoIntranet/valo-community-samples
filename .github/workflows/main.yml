@@ -1,7 +1,5 @@
 on:
   push:
-    tags:
-      - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
     branches:
       - master
       - dev
@@ -13,22 +11,13 @@ jobs:
     name: Create Release
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Install npm dependencies
-        run: npm i
-
-      - name: Install npm dependencies
-        run: node .github/scripts/generate-index.js
-
       - name: Branch name
         id: branch_name
         run: |
           echo ::set-output name=SOURCE_NAME::${GITHUB_REF#refs/*/}
           echo ::set-output name=SOURCE_BRANCH::${GITHUB_REF#refs/heads/}
           echo ::set-output name=SOURCE_TAG::${GITHUB_REF#refs/tags/}
-
+      
       - name: Echo
         run: |
           echo $SOURCE_NAME
@@ -39,8 +28,23 @@ jobs:
           SOURCE_BRANCH: ${{ steps.branch_name.outputs.SOURCE_BRANCH }}
           SOURCE_TAG: ${{ steps.branch_name.outputs.SOURCE_TAG }}
 
+      - name: Checkout code
+        uses: actions/checkout@v2
+        if: "!startsWith(steps.branch_name.outputs.SOURCE_TAG, 'refs/tags/')"
+
+      - name: Install npm dependencies
+        run: npm i
+        if: "!startsWith(steps.branch_name.outputs.SOURCE_TAG, 'refs/tags/')"
+
+      - name: Install npm dependencies
+        run: node .github/scripts/generate-index.js
+        if: "!startsWith(steps.branch_name.outputs.SOURCE_TAG, 'refs/tags/')"
+
+      
+
       - name: Create Release
         id: create_release
+        if: "!startsWith(steps.branch_name.outputs.SOURCE_TAG, 'refs/tags/')"
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
@@ -53,7 +57,8 @@ jobs:
           prerelease: false
 
       - name: Upload Release Asset
-        id: upload-release-asset 
+        id: upload-release-asset
+        if: "!startsWith(steps.branch_name.outputs.SOURCE_TAG, 'refs/tags/')"
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
