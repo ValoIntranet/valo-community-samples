@@ -24,12 +24,12 @@ jobs:
         run: |
           echo $VERSION
         env:
-          SOURCE_NAME: ${{steps.branch_name.outputs.VERSION}}
+          VERSION: ${{steps.branch_name.outputs.VERSION}}
           
       - name: Install npm dependencies
         run: npm i
 
-      - name: Install npm dependencies
+      - name: Generate the release file
         run: node .github/scripts/generate-index.js
 
       - name: Create Release
@@ -40,7 +40,7 @@ jobs:
           release_name: Release v${{ steps.branch_name.outputs.VERSION }}
           body: |
             Sample release ${{ steps.branch_name.outputs.VERSION }}
-          draft: steps.branch_name.outputs.SOURCE_BRANCH != 'master'
+          draft: ${{ github.ref != 'refs/heads/master' }}
           prerelease: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -47,6 +47,8 @@ const repo_url = `https://github.com/ValoIntranet/valo-community-samples`;
   }
 
   if (samples) {
-    fs.writeFileSync('release.json', JSON.stringify(samples, null, 2), { encoding: "utf8" });
+    const pkg = fs.readFileSync(path.join(__dirname, "../../package.json"), { encoding: 'utf8' });
+    const pkgJson = JSON.parse(pkg)
+    fs.writeFileSync('release.json', JSON.stringify({ version: pkgJson.version, samples}, null, 2), { encoding: "utf8" });
   }
 })();
