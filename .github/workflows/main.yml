@@ -1,9 +1,5 @@
 on:
   push:
-    # Sequence of patterns matched against refs/tags
-    branches:
-      - master
-      - dev
     tags:
       - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
 
@@ -23,16 +19,27 @@ jobs:
       - name: Install npm dependencies
         run: node .github/scripts/generate-index.js
 
+      - name: Extract tag name
+        id: tag
+        uses: actions/github-script@0.2.0
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            return context.payload.ref.replace(/\/refs\/tags\//, '');
+
+      - name: Echo
+        run: echo ${{ steps.tag.outputs.result }}
+
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
         with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
+          tag_name: ${{ steps.tag.outputs.result }}
+          release_name: Release ${{ steps.tag.outputs.result }}
           body: |
-            Sample release ${{ github.ref }}
+            Sample release ${{ steps.tag.outputs.result }}
           draft: ${{ github.ref != 'refs/heads/master' }}
           prerelease: false
 
