@@ -52,7 +52,7 @@ jobs:
           release_name: Release ${{ steps.tag.outputs.result }}
           body: |
             Sample release ${{ steps.tag.outputs.result }}
-          draft: ${{ $SOURCE_BRANCH != 'master' }}
+          draft: $SOURCE_BRANCH != 'master'
           prerelease: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
