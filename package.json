@@ -20,6 +20,7 @@
   "homepage": "https://github.com/ValoIntranet/valo-community-samples#readme",
   "devDependencies": {
     "fast-glob": "3.2.2",
-    "gray-matter": "4.0.2"
+    "gray-matter": "4.0.2",
+    "node-fetch": "2.6.0"
   }
 }
