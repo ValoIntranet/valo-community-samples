@@ -30,7 +30,7 @@ jobs:
 
       - name: Cancel workflow if not running for tags
         uses: andymckay/cancel-action@0.2
-        if: startsWith(steps.branch_name.outputs.SOURCE_TAG, 'refs/tags/')
+        if: startsWith(steps.branch_name.outputs.SOURCE_TAG, 'refs/')
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -47,10 +47,10 @@ jobs:
         id: create_release
         uses: actions/create-release@v1
         with:
-          tag_name: ${{ steps.tag.outputs.result }}
-          release_name: Release ${{ steps.tag.outputs.result }}
+          tag_name: ${{ steps.branch_name.outputs.SOURCE_TAG }}
+          release_name: Release ${{ steps.branch_name.outputs.SOURCE_TAG }}
           body: |
-            Sample release ${{ steps.tag.outputs.result }}
+            Sample release ${{ steps.branch_name.outputs.SOURCE_TAG }}
           draft: $[$SOURCE_BRANCH != 'master']
           prerelease: false
         env:
