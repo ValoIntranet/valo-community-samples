@@ -1,7 +1,7 @@
 # Azure VM for Valo Installation
 
 ## Summary
-This is a script can be used to install VM e.g into customer tenant for Valo installations. It will automatically install latest modules required for installing Valo products. Additionally in blocks access to the VM using Network security group IP filtering from other IPs than one being used to create the VM.
+This script can be used to install VM e.g., into customer tenant for Valo installations. It will automatically install the latest modules required for installing Valo products. If you have added files such as partner pack into the data folder, those will be copied automatically into c:\valo -directory. Additionally, access to the VM is blocked using Network security group IP filtering from other IPs than one being used to create the VM.
 
 This app is developed using below technologies 
 * PowerShell
