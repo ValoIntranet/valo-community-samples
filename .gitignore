@@ -1,3 +1,5 @@
 node_modules
 
 release.json
+
+.DS_Store
