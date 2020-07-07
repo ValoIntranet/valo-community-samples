@@ -23,6 +23,7 @@ azure-vm-for-valo-installation | [Ilija Lazarov](https://www.linkedin.com/in/ili
 
 Version|Date|Comments
 -------|----|--------
+1.1 | July 07, 2020 | Fixes and support for valofiles parameter.
 1.0 | June 03, 2020 | Initial Release
 
 ## Disclaimer

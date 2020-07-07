@@ -8,4 +8,5 @@ $wshell.SendKeys('%u')
 $wshell.SendKeys('%o')
 Stop-Process -Name iexplore
 
-Get-ChildItem -Recurse | Unblock-File
+
+
