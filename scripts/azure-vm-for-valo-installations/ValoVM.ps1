@@ -130,7 +130,8 @@ function New-ValoVMStorageAccount{
     $vmScriptModified = $timeStamp+"-Copy-Items.ps1" 
 
     Write-Host 'Creating storage account '$storageAccountName
-    $sa = New-AzStorageAccount -Name $storageAccountName -ResourceGroupName $resourceGroupName -Location $location -SkuName  Standard_LRS -AccessTier Cool -EnableHttpsTrafficOnly $true
+    $sa = New-AzStorageAccount -Name $storageAccountName -ResourceGroupName $resourceGroupName -Location $location `
+    -SkuName 'Standard_LRS' -AccessTier 'Cool' -EnableHttpsTrafficOnly $true
     New-AzStorageContainer -Name $storageContainer -Context $sa.Context -Permission Off
     Set-AzStorageBlobContent -File '.\InitIE.ps1' -Container $storageContainer -Blob 'InitIE.ps1' -Context $sa.Context |Out-Null
     $key = ((Get-AzStorageAccountKey -ResourceGroupName $resourceGroupName -Name $storageAccountName)| Where-Object {$_.KeyName -eq "key1"})[0].Value
@@ -230,17 +231,15 @@ This function install a new VM for Valo installations.
         $resourceGroupName='valo-win10-'+$timeStamp
         $vmName='win10'
         $osDiskName=$vmName+"-osdisk"
+        $vmScriptModified = $timeStamp+"-Copy-Items.ps1" 
 
         New-ValoVMResourceGroup -resourceGroupName $resourceGroupName -location $VMLocation 
 
         New-ValoVMStorageAccount -ValoFiles $ValoFiles -storageAccountName $storageAccountName -storageContainer $storageContainer `
         -resourceGroupName $resourceGroupName -location $VMLocation -timestamp $timeStamp 
-        $vmScriptModified = $timeStamp+"-Copy-Items.ps1" 
-
 
         $vmNIC = New-ValoVMNetwork -resourceGroupName $resourceGroupName -location $VMLocation -vmName $vmName 
 
-        #vm creation
         $vm = New-AzVMConfig -VMName $vmName -VMSize $VMSize
         $vm = Set-AzVMOperatingSystem -VM $vm -Windows -ComputerName $vmName -Credential $adminCredentials -ProvisionVMAgent -EnableAutoUpdate 
         $vm = Add-AzVMNetworkInterface -VM $vm -Id $vmNIC.Id
@@ -262,7 +261,7 @@ This function install a new VM for Valo installations.
         }
     }
     catch{
-#         Remove-AzResourceGroup -Name $resourceGroupName -Force
+         Remove-AzResourceGroup -Name $resourceGroupName -Force
          Write-Host "Error: "$_.Exception.Message " with item "$_.Exception.ItemNameß
 
     }
