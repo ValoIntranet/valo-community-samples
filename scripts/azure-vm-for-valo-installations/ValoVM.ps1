@@ -180,8 +180,8 @@ function New-ValoVMNetwork{
         $vmPublicIP = New-AzPublicIpAddress -Name $vmPublicIPName -ResourceGroupName $resourceGroupName -AllocationMethod Static -Location $location
         $vmIPConfig = New-AzNetworkInterfaceIpConfig -Name "VMIPConfig" -Subnet $vnet.Subnets[0] -PublicIpAddress $vmPublicIP -Primary
         Write-Host 'Creating NIC for VM '
-        $vmNIC = New-AzNetworkInterface -Name $vmNICName -ResourceGroupName $resourceGroupName -Location $location -IpConfiguration $vmIPConfig
-        return $vmNIC
+        New-AzNetworkInterface -Name $vmNICName -ResourceGroupName $resourceGroupName -Location $location -IpConfiguration $vmIPConfig | Out-Null
+        return $vmPublicIP
 
 }
 function New-ValoVM {
@@ -238,11 +238,11 @@ This function install a new VM for Valo installations.
         New-ValoVMStorageAccount -ValoFiles $ValoFiles -storageAccountName $storageAccountName -storageContainer $storageContainer `
         -resourceGroupName $resourceGroupName -location $VMLocation -timestamp $timeStamp 
 
-        $vmNIC = New-ValoVMNetwork -resourceGroupName $resourceGroupName -location $VMLocation -vmName $vmName 
+        $vmPublicIP = New-ValoVMNetwork -resourceGroupName $resourceGroupName -location $VMLocation -vmName $vmName 
 
         $vm = New-AzVMConfig -VMName $vmName -VMSize $VMSize
         $vm = Set-AzVMOperatingSystem -VM $vm -Windows -ComputerName $vmName -Credential $adminCredentials -ProvisionVMAgent -EnableAutoUpdate 
-        $vm = Add-AzVMNetworkInterface -VM $vm -Id $vmNIC.Id
+        $vm = Add-AzVMNetworkInterface -VM $vm  -Id (Get-AzNetworkInterface -Name ("$vmName-nic1") -ResourceGroupName $resourceGroupName).Id 
         $vm = Set-AzVMSourceImage -VM $vm -PublisherName $publisher -Offer $offer -Skus $sku -Version $version  
         $vm = Set-AzVMOSDisk -VM $vm -Name $osDiskName -Windows -CreateOption FromImage -DiskSizeInGB 128 -StorageAccountType StandardSSD_LRS
         $vm = Set-AzVMBootDiagnostic -VM $vm -Disable
@@ -261,6 +261,7 @@ This function install a new VM for Valo installations.
         }
     }
     catch{
+        Write-Host "Deleting the created resource group $resourceGroupName"        
          Remove-AzResourceGroup -Name $resourceGroupName -Force
          Write-Host "Error: "$_.Exception.Message " with item "$_.Exception.ItemNameß
 
