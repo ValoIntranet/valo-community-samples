@@ -1,5 +1,5 @@
 <#PSScriptInfo      
-.VERSION 1.1.0.0                       
+.VERSION 1.1.1.0                       
 .GUID 7bafe56d-60c6-4713-9dd0-73622e13a9f9 
 .DESCRIPTION This script will help you to install VM for Valo installations.
 .AUTHOR ilija@valointranet.com      
@@ -133,7 +133,7 @@ function New-ValoVMStorageAccount{
     $sa = New-AzStorageAccount -Name $storageAccountName -ResourceGroupName $resourceGroupName -Location $location `
     -SkuName 'Standard_LRS' -AccessTier 'Cool' -EnableHttpsTrafficOnly $true
     New-AzStorageContainer -Name $storageContainer -Context $sa.Context -Permission Off
-    Set-AzStorageBlobContent -File '.\InitIE.ps1' -Container $storageContainer -Blob 'InitIE.ps1' -Context $sa.Context |Out-Null
+    Set-AzStorageBlobContent -File '.\InitIE.reg' -Container $storageContainer -Blob 'InitIE.reg' -Context $sa.Context |Out-Null
     $key = ((Get-AzStorageAccountKey -ResourceGroupName $resourceGroupName -Name $storageAccountName)| Where-Object {$_.KeyName -eq "key1"})[0].Value
     $connectionString="DefaultEndpointsProtocol=https;AccountName="+$storageAccountName+";AccountKey="+$key+";EndpointSuffix=core.windows.net"
     $outfile = $((Get-Content -path $vmScript -Raw) -replace 'connectionStringValue',$connectionString) | Set-Content -Path $vmScriptModified  | Out-Null   
@@ -198,10 +198,12 @@ This function install a new VM for Valo installations.
         [Parameter(Mandatory)]
         [Alias("LOC")]
         [string]$VMLocation,
+        [Alias("DIR")]
+        [string]$ValoFiles,
         [Alias("SIZE")]
         [string]$VMSize ='Standard_DS1_v2',
-        [Alias("DIR")]
-        [string]$ValoFiles
+        [Alias("RG")]
+        [string]$VMResourceGroupName
     )
 
     Install-ValoVMInstallationDependecies
@@ -228,7 +230,12 @@ This function install a new VM for Valo installations.
     
         #generic contatenated parameters
         $timeStamp = (Get-Date -Format "MMddyy-HHmm")
-        $resourceGroupName='valo-win10-'+$timeStamp
+        if ($VMResourceGroupName){
+            $resourceGroupName = $VMResourceGroupName
+        }
+        else {
+            $resourceGroupName='valo-win10-'+$timeStamp
+        }
         $vmName='win10'
         $osDiskName=$vmName+"-osdisk"
         $vmScriptModified = $timeStamp+"-Copy-Items.ps1" 
