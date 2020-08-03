@@ -30,7 +30,16 @@ This app is developed using below technologies
 
 ## Prerequisites
  
-It is required that the users have view access to the User Profile list.
+An existing Valo site must be used to deploy this document hub to.
+
+## PowerShell provisioning command
+
+```powershell
+cd .\samples\document-hub-site
+.\Provision-DocumentHubSite.ps1 `
+    -SiteUrl https://contoso.sharepoint.com/sites/my-document-hub `
+    -Office365CredentialStoreKey ValoOffice365Admin
+```
 
 ## Solution
 
