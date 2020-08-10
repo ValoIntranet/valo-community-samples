@@ -11,8 +11,8 @@
  .PARAMETER SiteTitle
     Optional, the document hub site will be updated with this Title 
 
- .PARAMETER PnPFilePath
-    Optional, Where is the Document Hub site template located. If not defined, uses the default filename DocumentHubSite.pnp in the execution folder
+ .PARAMETER PnPPath
+    Optional, Where is the Document Hub site template located. If not defined, uses the default filename ".\ProvisioningTemplates\*" in the execution folder
 
  .PARAMETER Office365CredentialStoreKey
     Optional, If credentials to O365 are stored in Credential Manager, give the store key
@@ -40,9 +40,9 @@ Param(
     [ValidateNotNullOrEmpty()]
     [String]$SiteTitle,
     
-    [Parameter(Mandatory = $false, HelpMessage = "File path to the pnp template used for this provisioning process")]
+    [Parameter(Mandatory = $false, HelpMessage = "File path to the pnp template(s) used for this provisioning process")]
     [ValidateNotNullOrEmpty()]
-    [String]$PnPFilePath = ".\DocumentHubSite.pnp",
+    [String]$PnPPath = ".\ProvisioningTemplates\*",
 
     [Parameter(Mandatory = $false, HelpMessage = "Name of Windows Credentials key used for connecting to Office 365 with a saved account.")]
     [String]$Office365CredentialStoreKey,
@@ -97,8 +97,67 @@ function Get-Framework($PartnerPackScriptRoot = $null) {
     
 }
 
-function Get-ValoConfigFromHubSite {
-    Get-PnPHubSite
+function Get-ValoTemplatesUrl {
+    Param (
+        $SiteUrl
+    )
+
+    $connected = Ensure-ValoConnection -url $SiteUrl
+
+    if (!$connected) {
+        Log -Message "Something went wrong while connecting to the site $SiteUrl, exiting.." -Level Error 
+        Exit
+    }
+    
+    if ($ShowDebug) {
+        Set-PnPTraceLog -On -Level:Debug -LogFile ("pnp-debug-log_{0}.txt" -f (Get-Date -Format yyyyMMdd-HHmm))
+    }
+    
+    Log -Message "Obtaining Valo Templates site url" -Level Info -wrapWithSeparator
+    
+    $HubSiteUrl = (Get-PnPHubSite (Get-PnPProperty -ClientObject (Get-PnPSite) -Property HubSiteId).ToString()).SiteUrl
+    $hubSiteConnected = Ensure-ValoConnection -url $HubSiteurl
+    
+    if (!$hubSiteConnected) {
+        Log -Message "Something went wrong while connecting to the hub site $HubSiteUrl, exiting.." -Level Error 
+        Exit
+    }
+    
+    $ValoNavigationData = ConvertFrom-Json (Get-PnPFile -Url "$(Get-PnPProperty -ClientObject (Get-PnPSite) -Property ServerRelativeUrl)/config/navigation.json" -AsString -ErrorAction Stop)
+    $TemplateSiteUrl = $ValoNavigationData.valoHubData.config.ValoPageTemplates
+    
+    if (!$TemplateSiteUrl) {
+        Log -Message "Something went wrong while getting the Valo config from $HubSiteUrl, exiting.." -Level Error 
+        Exit
+    }
+
+    return $TemplateSiteUrl
+
+}
+
+function Add-FolderStructure($SourceFolder, $DestinationFolder) {
+
+    $RootFolder = Get-Item $SourceFolder
+    
+    Get-ChildItem "$($RootFolder.FullName)" -Recurse | % { 
+    
+        # Check if current item is a folder
+        if ($_.PSIsContainer) {
+            $FolderToCreateParent = "$DestinationFolder$($_.Parent.FullName.Replace($RootFolder.FullName, '').Replace("\", "/"))"
+            if (-not (Get-PnPFolder "$FolderToCreateParent/$($_.Name)" -ErrorAction SilentlyContinue)) {
+                Log -Message "Creating folder $($_.Name) in $FolderToCreateParent on template site."
+                Add-PnPFolder -Name $_.Name -Folder $FolderToCreateParent | Out-Null
+            }
+        }
+        else {
+            $FileToCreateParent = "$DestinationFolder$($_.DirectoryName.Replace($RootFolder.FullName, '').Replace("\", "/"))"
+            Log -Message "Uploading file $($_.Name) to $FileToCreateParent on template site."
+            Add-PnPFile -Path $_.FullName -Folder $FileToCreateParent | Out-Null
+    
+        }
+    }
+    
+    
 }
 
 
@@ -138,34 +197,12 @@ Initialize-Credentials `
 
 # Execution
 
-$connected = Ensure-ValoConnection -url $SiteUrl
+$TemplateSiteUrl = Get-ValoTemplatesUrl -SiteUrl $SiteUrl
 
-if (!$connected) {
-    Log -Message "Something went wrong while connecting to the site $SiteUrl, exiting.." -Level Error 
-    Exit
-}
 
-if ($ShowDebug) {
-    Set-PnPTraceLog -On -Level:Debug -LogFile ("pnp-debug-log_{0}.txt" -f (Get-Date -Format yyyyMMdd-HHmm))
-}
+## Commence updates to Valo templates site
 
-Log -Message "Obtaining Valo Templates site url" -Level Info -wrapWithSeparator
-
-$HubSiteUrl = (Get-PnPHubSite (Get-PnPProperty -ClientObject (Get-PnPSite) -Property HubSiteId).ToString()).SiteUrl
-$hubSiteConnected = Ensure-ValoConnection -url $HubSiteurl
-
-if (!$hubSiteConnected) {
-    Log -Message "Something went wrong while connecting to the hub site $HubSiteUrl, exiting.." -Level Error 
-    Exit
-}
-
-$ValoNavigationData = ConvertFrom-Json (Get-PnPFile -Url "$(Get-PnPProperty -ClientObject (Get-PnPSite) -Property ServerRelativeUrl)/config/navigation.json" -AsString -ErrorAction Stop)
-$TemplateSiteUrl = $ValoNavigationData.valoHubData.config.ValoPageTemplates
-
-if (!$TemplateSiteUrl) {
-    Log -Message "Something went wrong while getting the Valo config from $HubSiteUrl, exiting.." -Level Error 
-    Exit
-}
+Log -Message "Connecting to Valo Templates site $TemplateSiteUrl" -Level Info -wrapWithSeparator
 $templateSiteConnected = Ensure-ValoConnection -url $TemplateSiteUrl
 
 if (!$templateSiteConnected) {
@@ -174,12 +211,36 @@ if (!$templateSiteConnected) {
 }
 
 Log -Message "Uploading web part templates to Valo Templates Gallery" -Level Info -wrapWithSeparator
-Add-PnPFile -Path .\TemplatesGallery\DocumentHub.html -Folder TemplatesGallery -Values @{ "TemplateTitle" = "Document Hub"; "IsFullBleed" = $false } | Out-Null
+Get-Item .\ValoTemplates\TemplatesGallery\*.html | % {
+
+    # Check if there's a matching .xml file, to use as metadata associated to the upladed html file
+    if (Test-Path $_.FullName.Replace(".html", ".xml")) {
+        $Values = Import-Clixml $_.FullName.Replace(".html", ".xml")
+    }
+    else {
+        $Values = $null
+    }
+
+    # Upload the HTML file and associated metadata to the TemplatesGallery
+    Add-PnPFile -Path $_.FullName -Folder TemplatesGallery -Values $Values | Out-Null
+}
+
+Log -Message "Ensuring site assets library exists on site $TemplateSiteUrl" -Level Info -wrapWithSeparator
+Ensure-SiteAssetsLibrary
+
+Log -Message "Uploading assets to Valo Templates Site Assets folder" -Level Info -wrapWithSeparator
+. Add-FolderStructure .\ValoTemplates\SiteAssets SiteAssets
 
 Log -Message "Uploading page templates to Valo Templates" -Level Info -wrapWithSeparator
-Apply-PnPProvisioningTemplate -Path ".\ValoTemplates.pnp" -Debug:$ShowDebug
+$PnPTemplates = (Get-ChildItem -Path ".\ValoTemplates\ProvisioningTemplates\*" | Sort-Object -Property Name)
 
+$PnPTemplates | % { 
+    Log -Message $("Applying site template {0} to the site {1}" -f @($_.Name, $TemplateSiteUrl)) -Level Info -wrapWithSeparator
+    Apply-PnPProvisioningTemplate -Path $_.FullName -Debug:$ShowDebug
+    
+}
 
+## Commence updates to target site
 
 $connected = Ensure-ValoConnection -url $SiteUrl
 
@@ -188,11 +249,16 @@ if (!$connected) {
     Exit
 }
 
-Log -Message $("Applying site template to the site {0}" -f $SiteUrl) -Level Info -wrapWithSeparator
-Apply-PnPProvisioningTemplate -Path $PnPFilePath -Debug:$ShowDebug
+$PnPTemplates = (Get-ChildItem -Path $PnPPath | Sort-Object -Property Name)
+
+$PnPTemplates | % { 
+    Log -Message $("Applying site template {0} to the site {1}" -f @($_.Name, $SiteUrl)) -Level Info -wrapWithSeparator
+    Apply-PnPProvisioningTemplate -Path $_.FullName -Debug:$ShowDebug
+    
+}
 
 #Possible additional configurations
-Log -Message "Executing additional configurations" -Level Info -wrapWithSeparator
+Log -Message $("Executing additional configurations to {0}" -f $SiteUrl) -Level Info -wrapWithSeparator
 
 if ($SiteTitle) {
     Log -Message "  Setting site title to $SiteTitle" -Level Info -wrapWithSeparator

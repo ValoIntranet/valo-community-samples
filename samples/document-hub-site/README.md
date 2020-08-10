@@ -30,7 +30,8 @@ This app is developed using below technologies
 
 ## Prerequisites
  
-An existing Valo site must be used to deploy this document hub to.
+* An unzipped copy of the [Valo Modern PartnerPack (1.61 or above)](https://bluemeteorite.sharepoint.com/sites/partnerhub-valo-intranet/sitepages/valo-modern.aspxFEnsure)
+* An existing Valo site must be used to deploy the document hub template to
 
 ## PowerShell provisioning command
 

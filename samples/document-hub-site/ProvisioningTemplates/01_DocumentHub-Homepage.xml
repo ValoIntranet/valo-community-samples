@@ -1,0 +1,637 @@
+<?xml version="1.0"?>
+<pnp:Provisioning xmlns:pnp="http://schemas.dev.office.com/PnP/2020/02/ProvisioningSchema">
+  <pnp:Preferences Generator="OfficeDevPnP.Core, Version=3.19.2003.0, Culture=neutral, PublicKeyToken=5e633289e95c321a" />
+  <pnp:Templates ID="CONTAINER-TEMPLATE-A2ABF08A44EB476996E7BCFC9626E9B9">
+    <pnp:ProvisioningTemplate ID="TEMPLATE-A2ABF08A44EB476996E7BCFC9626E9B9" Version="1" BaseSiteTemplate="SITEPAGEPUBLISHING#0" Scope="RootSite">
+      <pnp:Navigation AddNewPagesToNavigation="true" CreateFriendlyUrlsForNewPages="true">
+        <pnp:GlobalNavigation NavigationType="Structural">
+          <pnp:StructuralNavigation RemoveExistingNodes="false" />
+        </pnp:GlobalNavigation>
+        <pnp:CurrentNavigation NavigationType="StructuralLocal">
+          <pnp:StructuralNavigation RemoveExistingNodes="false">
+            <pnp:NavigationNode Title="Home" Url="{site}" />
+          </pnp:StructuralNavigation>
+        </pnp:CurrentNavigation>
+      </pnp:Navigation>
+      <pnp:SiteFields>
+        <Field Type="TaxonomyFieldType" DisplayName="Language" Description="Description of the language" WebId="{siteid}" ShowField="Term1033" Required="FALSE" EnforceUniqueValues="FALSE" Group="Valo" ID="{79708502-bcdd-478e-a2b2-b26c9b840d49}" SourceID="{{siteid}}" StaticName="ValoLanguage" Name="ValoLanguage" List="{{listid:TaxonomyHiddenList}}" AllowDeletion="TRUE">
+          <Default>
+          </Default>
+          <Customization>
+            <ArrayOfProperty>
+              <Property>
+                <Name>SspId</Name>
+                <Value xmlns:q1="http://www.w3.org/2001/XMLSchema" p4:type="q1:string" xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">{sitecollectiontermstoreid}</Value>
+              </Property>
+              <Property>
+                <Name>GroupId</Name>
+              </Property>
+              <Property>
+                <Name>TermSetId</Name>
+                <Value xmlns:q2="http://www.w3.org/2001/XMLSchema" p4:type="q2:string" xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">{termsetid:Valo4:Language}</Value>
+              </Property>
+              <Property>
+                <Name>AnchorId</Name>
+                <Value xmlns:q3="http://www.w3.org/2001/XMLSchema" p4:type="q3:string" xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">00000000-0000-0000-0000-000000000000</Value>
+              </Property>
+              <Property>
+                <Name>UserCreated</Name>
+                <Value xmlns:q4="http://www.w3.org/2001/XMLSchema" p4:type="q4:boolean" xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">false</Value>
+              </Property>
+              <Property>
+                <Name>Open</Name>
+                <Value xmlns:q5="http://www.w3.org/2001/XMLSchema" p4:type="q5:boolean" xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">false</Value>
+              </Property>
+              <Property>
+                <Name>TextField</Name>
+                <Value xmlns:q6="http://www.w3.org/2001/XMLSchema" p4:type="q6:string" xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">{99caeb6b-3c32-4d8c-8147-2ff383c11344}</Value>
+              </Property>
+              <Property>
+                <Name>IsPathRendered</Name>
+                <Value xmlns:q7="http://www.w3.org/2001/XMLSchema" p4:type="q7:boolean" xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">false</Value>
+              </Property>
+              <Property>
+                <Name>IsKeyword</Name>
+                <Value xmlns:q8="http://www.w3.org/2001/XMLSchema" p4:type="q8:boolean" xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">false</Value>
+              </Property>
+              <Property>
+                <Name>TargetTemplate</Name>
+              </Property>
+              <Property>
+                <Name>CreateValuesInEditForm</Name>
+                <Value xmlns:q9="http://www.w3.org/2001/XMLSchema" p4:type="q9:boolean" xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">false</Value>
+              </Property>
+              <Property>
+                <Name>FilterAssemblyStrongName</Name>
+                <Value xmlns:q10="http://www.w3.org/2001/XMLSchema" p4:type="q10:string" xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">Microsoft.SharePoint.Taxonomy, Version=16.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c</Value>
+              </Property>
+              <Property>
+                <Name>FilterClassName</Name>
+                <Value xmlns:q11="http://www.w3.org/2001/XMLSchema" p4:type="q11:string" xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">Microsoft.SharePoint.Taxonomy.TaxonomyField</Value>
+              </Property>
+              <Property>
+                <Name>FilterMethodName</Name>
+                <Value xmlns:q12="http://www.w3.org/2001/XMLSchema" p4:type="q12:string" xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">GetFilteringHtml</Value>
+              </Property>
+              <Property>
+                <Name>FilterJavascriptProperty</Name>
+                <Value xmlns:q13="http://www.w3.org/2001/XMLSchema" p4:type="q13:string" xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">FilteringJavascript</Value>
+              </Property>
+            </ArrayOfProperty>
+          </Customization>
+        </Field>
+        <Field Type="Boolean" DisplayName="Highlight" Description="News set as highlight will be shown in the intranet frontpage" EnforceUniqueValues="FALSE" Indexed="FALSE" Group="Valo" ID="{a7c99e13-1d44-4afe-84b2-c0435c9d3a0c}" SourceID="{e6731551-e959-4236-a0a1-4f68a1d9b16a}" StaticName="ValoHighlight" Name="ValoHighlight" CustomFormatter="" Required="FALSE" AllowDeletion="TRUE">
+          <Default>0</Default>
+        </Field>
+        <Field Type="MultiChoice" DisplayName="Document Type" Required="FALSE" EnforceUniqueValues="FALSE" Indexed="FALSE" FillInChoice="FALSE" Group="Valo" ID="{8f90b81e-6984-4bff-bbd1-e2d49d8868d6}" SourceID="{d769c0fa-dbbe-4f5c-9d7e-984e54ab4e44}" StaticName="ValoDocumentType" Name="ValoDocumentType" CustomFormatter="">
+          <CHOICES>
+            <CHOICE>Policy</CHOICE>
+            <CHOICE>Procedure</CHOICE>
+            <CHOICE>Form</CHOICE>
+            <CHOICE>How to</CHOICE>
+          </CHOICES>
+        </Field>
+        <Field Type="Choice" DisplayName="Type of comments in use" Required="FALSE" EnforceUniqueValues="FALSE" Indexed="FALSE" Format="Dropdown" FillInChoice="FALSE" Group="Valo" ID="{69d3482c-3259-49cc-900e-0f3b9cc565d5}" SourceID="{d769c0fa-dbbe-4f5c-9d7e-984e54ab4e44}" StaticName="ValoCommentingType" Name="ValoCommentingType" CustomFormatter="" AllowDeletion="TRUE">
+          <Default>3. Yammer</Default>
+          <CHOICES>
+            <CHOICE>1. Disabled</CHOICE>
+            <CHOICE>2. SharePoint</CHOICE>
+            <CHOICE>3. Yammer</CHOICE>
+          </CHOICES>
+        </Field>
+        <Field Type="Note" DisplayName="ValoRecurrenceData" StaticName="ValoRecurrenceData" Name="ValoRecurrenceData" ID="{5b424778-052f-4d8e-a78b-4a61cfb21b76}" ShowInNewForm="FALSE" ShowInEditForm="FALSE" ShowInViewForms="FALSE" Required="FALSE" Hidden="FALSE" CanToggleHidden="TRUE" SourceID="{d769c0fa-dbbe-4f5c-9d7e-984e54ab4e44}" AllowDeletion="TRUE" />
+        <Field Type="DateTime" DisplayName="News publish date" Description="Publish date for this news item" Required="TRUE" EnforceUniqueValues="FALSE" Indexed="FALSE" Format="DateTime" Group="Valo" FriendlyDisplayFormat="Disabled" ID="{01955690-bb1c-4f1f-9bbd-fe4ab9300823}" SourceID="{e6731551-e959-4236-a0a1-4f68a1d9b16a}" StaticName="ValoNewsPublishDate" Name="ValoNewsPublishDate" CustomFormatter="" CalType="0" AllowDeletion="TRUE">
+          <Default>[today]</Default>
+        </Field>
+        <Field Type="Text" DisplayName="Yammer Group ID" Required="FALSE" Group="Valo" ID="{7f6656bf-2eb9-4571-b013-431917536dc8}" SourceID="{d769c0fa-dbbe-4f5c-9d7e-984e54ab4e44}" StaticName="ValoYammerGroupId" Name="ValoYammerGroupId" AllowDeletion="TRUE">
+        </Field>
+        <Field Type="TaxonomyFieldType" DisplayName="Business Area" Description="Choose the Business Area from the available options" List="{{listid:TaxonomyHiddenList}}" WebId="{siteid}" ShowField="Term1033" Required="FALSE" EnforceUniqueValues="FALSE" Group="Valo" ID="{618b04da-70e6-4624-b04c-bf4596b827ab}" SourceID="{{siteid}}" StaticName="ValoBusinessArea" Name="ValoBusinessArea" AllowDeletion="TRUE">
+          <Default>
+          </Default>
+          <Customization>
+            <ArrayOfProperty>
+              <Property>
+                <Name>SspId</Name>
+                <Value xmlns:q1="http://www.w3.org/2001/XMLSchema" p4:type="q1:string" xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">{sitecollectiontermstoreid}</Value>
+              </Property>
+              <Property>
+                <Name>GroupId</Name>
+              </Property>
+              <Property>
+                <Name>TermSetId</Name>
+                <Value xmlns:q2="http://www.w3.org/2001/XMLSchema" p4:type="q2:string" xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">{termsetid:Valo4:Business Area}</Value>
+              </Property>
+              <Property>
+                <Name>AnchorId</Name>
+                <Value xmlns:q3="http://www.w3.org/2001/XMLSchema" p4:type="q3:string" xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">00000000-0000-0000-0000-000000000000</Value>
+              </Property>
+              <Property>
+                <Name>UserCreated</Name>
+                <Value xmlns:q4="http://www.w3.org/2001/XMLSchema" p4:type="q4:boolean" xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">false</Value>
+              </Property>
+              <Property>
+                <Name>Open</Name>
+                <Value xmlns:q5="http://www.w3.org/2001/XMLSchema" p4:type="q5:boolean" xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">false</Value>
+              </Property>
+              <Property>
+                <Name>TextField</Name>
+                <Value xmlns:q6="http://www.w3.org/2001/XMLSchema" p4:type="q6:string" xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">{454bf651-4738-479f-8ac6-446602ab249a}</Value>
+              </Property>
+              <Property>
+                <Name>IsPathRendered</Name>
+                <Value xmlns:q7="http://www.w3.org/2001/XMLSchema" p4:type="q7:boolean" xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">false</Value>
+              </Property>
+              <Property>
+                <Name>IsKeyword</Name>
+                <Value xmlns:q8="http://www.w3.org/2001/XMLSchema" p4:type="q8:boolean" xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">false</Value>
+              </Property>
+              <Property>
+                <Name>TargetTemplate</Name>
+              </Property>
+              <Property>
+                <Name>CreateValuesInEditForm</Name>
+                <Value xmlns:q9="http://www.w3.org/2001/XMLSchema" p4:type="q9:boolean" xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">false</Value>
+              </Property>
+              <Property>
+                <Name>FilterAssemblyStrongName</Name>
+                <Value xmlns:q10="http://www.w3.org/2001/XMLSchema" p4:type="q10:string" xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">Microsoft.SharePoint.Taxonomy, Version=16.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c</Value>
+              </Property>
+              <Property>
+                <Name>FilterClassName</Name>
+                <Value xmlns:q11="http://www.w3.org/2001/XMLSchema" p4:type="q11:string" xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">Microsoft.SharePoint.Taxonomy.TaxonomyField</Value>
+              </Property>
+              <Property>
+                <Name>FilterMethodName</Name>
+                <Value xmlns:q12="http://www.w3.org/2001/XMLSchema" p4:type="q12:string" xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">GetFilteringHtml</Value>
+              </Property>
+              <Property>
+                <Name>FilterJavascriptProperty</Name>
+                <Value xmlns:q13="http://www.w3.org/2001/XMLSchema" p4:type="q13:string" xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">FilteringJavascript</Value>
+              </Property>
+            </ArrayOfProperty>
+          </Customization>
+        </Field>
+        <Field Type="TaxonomyFieldType" DisplayName="Office Location" Description="Choose the office location from the available options" List="{{listid:TaxonomyHiddenList}}" WebId="{siteid}" ShowField="Term1033" Required="FALSE" EnforceUniqueValues="FALSE" Group="Valo" ID="{597d1be2-005b-4620-9cc7-ea5ea9e3a4b3}" SourceID="http://schemas.microsoft.com/sharepoint/v3" StaticName="ValoOfficeLocation" Name="ValoOfficeLocation" AllowDeletion="TRUE">
+          <Default>
+          </Default>
+          <Customization>
+            <ArrayOfProperty>
+              <Property>
+                <Name>SspId</Name>
+                <Value xmlns:q1="http://www.w3.org/2001/XMLSchema" p4:type="q1:string" xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">{sitecollectiontermstoreid}</Value>
+              </Property>
+              <Property>
+                <Name>GroupId</Name>
+              </Property>
+              <Property>
+                <Name>TermSetId</Name>
+                <Value xmlns:q2="http://www.w3.org/2001/XMLSchema" p4:type="q2:string" xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">{termsetid:Valo4:Office Location}</Value>
+              </Property>
+              <Property>
+                <Name>AnchorId</Name>
+                <Value xmlns:q3="http://www.w3.org/2001/XMLSchema" p4:type="q3:string" xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">00000000-0000-0000-0000-000000000000</Value>
+              </Property>
+              <Property>
+                <Name>UserCreated</Name>
+                <Value xmlns:q4="http://www.w3.org/2001/XMLSchema" p4:type="q4:boolean" xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">false</Value>
+              </Property>
+              <Property>
+                <Name>Open</Name>
+                <Value xmlns:q5="http://www.w3.org/2001/XMLSchema" p4:type="q5:boolean" xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">false</Value>
+              </Property>
+              <Property>
+                <Name>TextField</Name>
+                <Value xmlns:q6="http://www.w3.org/2001/XMLSchema" p4:type="q6:string" xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">{f91ae5c7-6278-444b-922e-ed3e2c047bec}</Value>
+              </Property>
+              <Property>
+                <Name>IsPathRendered</Name>
+                <Value xmlns:q7="http://www.w3.org/2001/XMLSchema" p4:type="q7:boolean" xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">false</Value>
+              </Property>
+              <Property>
+                <Name>IsKeyword</Name>
+                <Value xmlns:q8="http://www.w3.org/2001/XMLSchema" p4:type="q8:boolean" xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">false</Value>
+              </Property>
+              <Property>
+                <Name>TargetTemplate</Name>
+              </Property>
+              <Property>
+                <Name>CreateValuesInEditForm</Name>
+                <Value xmlns:q9="http://www.w3.org/2001/XMLSchema" p4:type="q9:boolean" xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">false</Value>
+              </Property>
+              <Property>
+                <Name>FilterAssemblyStrongName</Name>
+                <Value xmlns:q10="http://www.w3.org/2001/XMLSchema" p4:type="q10:string" xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">Microsoft.SharePoint.Taxonomy, Version=16.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c</Value>
+              </Property>
+              <Property>
+                <Name>FilterClassName</Name>
+                <Value xmlns:q11="http://www.w3.org/2001/XMLSchema" p4:type="q11:string" xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">Microsoft.SharePoint.Taxonomy.TaxonomyField</Value>
+              </Property>
+              <Property>
+                <Name>FilterMethodName</Name>
+                <Value xmlns:q12="http://www.w3.org/2001/XMLSchema" p4:type="q12:string" xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">GetFilteringHtml</Value>
+              </Property>
+              <Property>
+                <Name>FilterJavascriptProperty</Name>
+                <Value xmlns:q13="http://www.w3.org/2001/XMLSchema" p4:type="q13:string" xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">FilteringJavascript</Value>
+              </Property>
+            </ArrayOfProperty>
+          </Customization>
+        </Field>
+        <Field Type="Text" DisplayName="Yammer Thread ID" Required="FALSE" Group="Valo" ID="{d16f0fe3-1502-4f0b-9aa3-b8301f596734}" SourceID="{d769c0fa-dbbe-4f5c-9d7e-984e54ab4e44}" StaticName="ValoYammerThreadId" Name="ValoYammerThreadId" AllowDeletion="TRUE">
+        </Field>
+        <Field Type="TaxonomyFieldTypeMulti" DisplayName="Tags" Description="Choose the tags from the available options" WebId="{siteid}" ShowField="Term1033" Required="FALSE" EnforceUniqueValues="FALSE" Group="Valo" Mult="TRUE" ID="{56a362fd-0732-48b4-b3b2-e315014ae97c}" SourceID="{{siteid}}" StaticName="ValoTags" Name="ValoTags" List="{{listid:TaxonomyHiddenList}}" AllowDeletion="TRUE">
+          <Default>
+          </Default>
+          <Customization>
+            <ArrayOfProperty>
+              <Property>
+                <Name>SspId</Name>
+                <Value xmlns:q1="http://www.w3.org/2001/XMLSchema" p4:type="q1:string" xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">{sitecollectiontermstoreid}</Value>
+              </Property>
+              <Property>
+                <Name>GroupId</Name>
+              </Property>
+              <Property>
+                <Name>TermSetId</Name>
+                <Value xmlns:q2="http://www.w3.org/2001/XMLSchema" p4:type="q2:string" xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">{termsetid:Valo4:Tags}</Value>
+              </Property>
+              <Property>
+                <Name>AnchorId</Name>
+                <Value xmlns:q3="http://www.w3.org/2001/XMLSchema" p4:type="q3:string" xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">00000000-0000-0000-0000-000000000000</Value>
+              </Property>
+              <Property>
+                <Name>UserCreated</Name>
+                <Value xmlns:q4="http://www.w3.org/2001/XMLSchema" p4:type="q4:boolean" xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">false</Value>
+              </Property>
+              <Property>
+                <Name>Open</Name>
+                <Value xmlns:q5="http://www.w3.org/2001/XMLSchema" p4:type="q5:boolean" xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">false</Value>
+              </Property>
+              <Property>
+                <Name>TextField</Name>
+                <Value xmlns:q6="http://www.w3.org/2001/XMLSchema" p4:type="q6:string" xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">{b8916543-0ad2-4b97-a9ed-7aeccb50e351}</Value>
+              </Property>
+              <Property>
+                <Name>IsPathRendered</Name>
+                <Value xmlns:q7="http://www.w3.org/2001/XMLSchema" p4:type="q7:boolean" xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">false</Value>
+              </Property>
+              <Property>
+                <Name>IsKeyword</Name>
+                <Value xmlns:q8="http://www.w3.org/2001/XMLSchema" p4:type="q8:boolean" xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">false</Value>
+              </Property>
+              <Property>
+                <Name>TargetTemplate</Name>
+              </Property>
+              <Property>
+                <Name>CreateValuesInEditForm</Name>
+                <Value xmlns:q9="http://www.w3.org/2001/XMLSchema" p4:type="q9:boolean" xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">false</Value>
+              </Property>
+              <Property>
+                <Name>FilterAssemblyStrongName</Name>
+                <Value xmlns:q10="http://www.w3.org/2001/XMLSchema" p4:type="q10:string" xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">Microsoft.SharePoint.Taxonomy, Version=16.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c</Value>
+              </Property>
+              <Property>
+                <Name>FilterClassName</Name>
+                <Value xmlns:q11="http://www.w3.org/2001/XMLSchema" p4:type="q11:string" xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">Microsoft.SharePoint.Taxonomy.TaxonomyField</Value>
+              </Property>
+              <Property>
+                <Name>FilterMethodName</Name>
+                <Value xmlns:q12="http://www.w3.org/2001/XMLSchema" p4:type="q12:string" xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">GetFilteringHtml</Value>
+              </Property>
+              <Property>
+                <Name>FilterJavascriptProperty</Name>
+                <Value xmlns:q13="http://www.w3.org/2001/XMLSchema" p4:type="q13:string" xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">FilteringJavascript</Value>
+              </Property>
+            </ArrayOfProperty>
+          </Customization>
+        </Field>
+      </pnp:SiteFields>
+      <pnp:ContentTypes>
+        <pnp:ContentType ID="0x0101009D1CB255DA76424F860D91F20E6C41180065789619A4EFB44992AF42CEEBB13C9A03" Name="Valo Document Page" Description="" Group="Valo" NewFormUrl="" EditFormUrl="" DisplayFormUrl="">
+          <pnp:FieldRefs>
+            <pnp:FieldRef ID="c042a256-787d-4a6f-8a8a-cf6ab767f12d" Name="ContentType" UpdateChildren="true" />
+            <pnp:FieldRef ID="5f47e085-2150-41dc-b661-442f3027f552" Name="SelectFilename" UpdateChildren="true" />
+            <pnp:FieldRef ID="8553196d-ec8d-4564-9861-3dbe931050c8" Name="FileLeafRef" Required="true" UpdateChildren="true" />
+            <pnp:FieldRef ID="8c06beca-0777-48f7-91c7-6da68bc07b69" Name="Created" Hidden="true" UpdateChildren="true" />
+            <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" UpdateChildren="true" />
+            <pnp:FieldRef ID="28cf69c5-fa48-462a-b5cd-27b6f9d2bd5f" Name="Modified" Hidden="true" UpdateChildren="true" />
+            <pnp:FieldRef ID="822c78e3-1ea9-4943-b449-57863ad33ca9" Name="Modified_x0020_By" UpdateChildren="true" />
+            <pnp:FieldRef ID="4dd7e525-8d6b-4cb4-9d3e-44ee25f973eb" Name="Created_x0020_By" UpdateChildren="true" />
+            <pnp:FieldRef ID="82642ec8-ef9b-478f-acf9-31f7d45fbc31" Name="LinkTitle" UpdateChildren="true" />
+            <pnp:FieldRef ID="7efc33c1-b56b-490e-9c9b-1097e971ba96" Name="ClientSideApplicationId" UpdateChildren="true" />
+            <pnp:FieldRef ID="daef58d7-ccfd-43fc-b776-2e292cc66bba" Name="PageLayoutType" UpdateChildren="true" />
+            <pnp:FieldRef ID="4966388e-6e12-4bc6-8990-5b5b66153eae" Name="CanvasContent1" UpdateChildren="true" />
+            <pnp:FieldRef ID="5baf6db5-9d25-4738-b15e-db5789298e82" Name="BannerImageUrl" UpdateChildren="true" />
+            <pnp:FieldRef ID="fb3259ac-bd07-4397-b7aa-03e885b0838e" Name="BannerImageOffset" UpdateChildren="true" />
+            <pnp:FieldRef ID="3f155110-a6a2-4d70-926c-94648101f0e8" Name="Description" UpdateChildren="true" />
+            <pnp:FieldRef ID="f5ad16a2-85be-46b2-b5f0-2bb8b4a5074a" Name="PromotedState" UpdateChildren="true" />
+            <pnp:FieldRef ID="c84f8697-331e-457d-884a-c4fb8f30ea74" Name="FirstPublishedDate" UpdateChildren="true" />
+            <pnp:FieldRef ID="261075db-0525-4fb8-a6ea-772014186599" Name="LayoutWebpartsContent" UpdateChildren="true" />
+            <pnp:FieldRef ID="f3b0adf9-c1a2-4b02-920d-943fba4b3611" Name="TaxCatchAll" Hidden="true" UpdateChildren="true" />
+            <pnp:FieldRef ID="8f6b6dd8-9357-4019-8172-966fcd502ed2" Name="TaxCatchAllLabel" Hidden="true" UpdateChildren="true" />
+            <pnp:FieldRef ID="b8916543-0ad2-4b97-a9ed-7aeccb50e351" Name="l6a362fd073248b4b3b2e315014ae97c" Hidden="true" UpdateChildren="true" />
+            <pnp:FieldRef ID="56a362fd-0732-48b4-b3b2-e315014ae97c" Name="ValoTags" UpdateChildren="true" />
+            <pnp:FieldRef ID="20a86a6a-2c24-44b9-8fc2-6ad37dc3faa2" Name="ValoLinkedId" UpdateChildren="true" />
+            <pnp:FieldRef ID="99caeb6b-3c32-4d8c-8147-2ff383c11344" Name="n9708502bcdd478ea2b2b26c9b840d49" Hidden="true" UpdateChildren="true" />
+            <pnp:FieldRef ID="79708502-bcdd-478e-a2b2-b26c9b840d49" Name="ValoLanguage" UpdateChildren="true" />
+            <pnp:FieldRef ID="454bf651-4738-479f-8ac6-446602ab249a" Name="ValoBusinessAreaTaxHTField0" Hidden="true" UpdateChildren="true" />
+            <pnp:FieldRef ID="618b04da-70e6-4624-b04c-bf4596b827ab" Name="ValoBusinessArea" UpdateChildren="true" />
+            <pnp:FieldRef ID="f91ae5c7-6278-444b-922e-ed3e2c047bec" Name="ValoOfficeLocationTaxHTField0" Hidden="true" UpdateChildren="true" />
+            <pnp:FieldRef ID="597d1be2-005b-4620-9cc7-ea5ea9e3a4b3" Name="ValoOfficeLocation" UpdateChildren="true" />
+            <pnp:FieldRef ID="9de685c5-fdf5-4319-b987-3edf55efb36f" Name="_SPSitePageFlags" UpdateChildren="true" />
+            <pnp:FieldRef ID="1a7348e7-1bb7-4a47-9790-088e7cb20b58" Name="_AuthorByline" UpdateChildren="true" />
+            <pnp:FieldRef ID="d60d65ff-ff42-4044-a684-ac3f7a5e598c" Name="_TopicHeader" UpdateChildren="true" />
+          </pnp:FieldRefs>
+          <pnp:DocumentTemplate TargetName="/_layouts/15/CreateSitePage.aspx" />
+        </pnp:ContentType>
+        <pnp:ContentType ID="0x0101009D1CB255DA76424F860D91F20E6C41180065789619A4EFB44992AF42CEEBB13C9A0301" Name="Valo Policy Page" Description="" Group="Valo" NewFormUrl="" EditFormUrl="" DisplayFormUrl="">
+          <pnp:FieldRefs>
+            <pnp:FieldRef ID="c042a256-787d-4a6f-8a8a-cf6ab767f12d" Name="ContentType" UpdateChildren="true" />
+            <pnp:FieldRef ID="5f47e085-2150-41dc-b661-442f3027f552" Name="SelectFilename" UpdateChildren="true" />
+            <pnp:FieldRef ID="8553196d-ec8d-4564-9861-3dbe931050c8" Name="FileLeafRef" Required="true" UpdateChildren="true" />
+            <pnp:FieldRef ID="8c06beca-0777-48f7-91c7-6da68bc07b69" Name="Created" Hidden="true" UpdateChildren="true" />
+            <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" UpdateChildren="true" />
+            <pnp:FieldRef ID="28cf69c5-fa48-462a-b5cd-27b6f9d2bd5f" Name="Modified" Hidden="true" UpdateChildren="true" />
+            <pnp:FieldRef ID="822c78e3-1ea9-4943-b449-57863ad33ca9" Name="Modified_x0020_By" UpdateChildren="true" />
+            <pnp:FieldRef ID="4dd7e525-8d6b-4cb4-9d3e-44ee25f973eb" Name="Created_x0020_By" UpdateChildren="true" />
+            <pnp:FieldRef ID="82642ec8-ef9b-478f-acf9-31f7d45fbc31" Name="LinkTitle" UpdateChildren="true" />
+            <pnp:FieldRef ID="7efc33c1-b56b-490e-9c9b-1097e971ba96" Name="ClientSideApplicationId" UpdateChildren="true" />
+            <pnp:FieldRef ID="daef58d7-ccfd-43fc-b776-2e292cc66bba" Name="PageLayoutType" UpdateChildren="true" />
+            <pnp:FieldRef ID="4966388e-6e12-4bc6-8990-5b5b66153eae" Name="CanvasContent1" UpdateChildren="true" />
+            <pnp:FieldRef ID="5baf6db5-9d25-4738-b15e-db5789298e82" Name="BannerImageUrl" UpdateChildren="true" />
+            <pnp:FieldRef ID="fb3259ac-bd07-4397-b7aa-03e885b0838e" Name="BannerImageOffset" UpdateChildren="true" />
+            <pnp:FieldRef ID="3f155110-a6a2-4d70-926c-94648101f0e8" Name="Description" UpdateChildren="true" />
+            <pnp:FieldRef ID="f5ad16a2-85be-46b2-b5f0-2bb8b4a5074a" Name="PromotedState" UpdateChildren="true" />
+            <pnp:FieldRef ID="c84f8697-331e-457d-884a-c4fb8f30ea74" Name="FirstPublishedDate" UpdateChildren="true" />
+            <pnp:FieldRef ID="261075db-0525-4fb8-a6ea-772014186599" Name="LayoutWebpartsContent" UpdateChildren="true" />
+            <pnp:FieldRef ID="f3b0adf9-c1a2-4b02-920d-943fba4b3611" Name="TaxCatchAll" Hidden="true" UpdateChildren="true" />
+            <pnp:FieldRef ID="8f6b6dd8-9357-4019-8172-966fcd502ed2" Name="TaxCatchAllLabel" Hidden="true" UpdateChildren="true" />
+            <pnp:FieldRef ID="b8916543-0ad2-4b97-a9ed-7aeccb50e351" Name="l6a362fd073248b4b3b2e315014ae97c" Hidden="true" UpdateChildren="true" />
+            <pnp:FieldRef ID="56a362fd-0732-48b4-b3b2-e315014ae97c" Name="ValoTags" UpdateChildren="true" />
+            <pnp:FieldRef ID="20a86a6a-2c24-44b9-8fc2-6ad37dc3faa2" Name="ValoLinkedId" UpdateChildren="true" />
+            <pnp:FieldRef ID="99caeb6b-3c32-4d8c-8147-2ff383c11344" Name="n9708502bcdd478ea2b2b26c9b840d49" Hidden="true" UpdateChildren="true" />
+            <pnp:FieldRef ID="79708502-bcdd-478e-a2b2-b26c9b840d49" Name="ValoLanguage" UpdateChildren="true" />
+            <pnp:FieldRef ID="454bf651-4738-479f-8ac6-446602ab249a" Name="ValoBusinessAreaTaxHTField0" Hidden="true" UpdateChildren="true" />
+            <pnp:FieldRef ID="618b04da-70e6-4624-b04c-bf4596b827ab" Name="ValoBusinessArea" UpdateChildren="true" />
+            <pnp:FieldRef ID="f91ae5c7-6278-444b-922e-ed3e2c047bec" Name="ValoOfficeLocationTaxHTField0" Hidden="true" UpdateChildren="true" />
+            <pnp:FieldRef ID="597d1be2-005b-4620-9cc7-ea5ea9e3a4b3" Name="ValoOfficeLocation" UpdateChildren="true" />
+            <pnp:FieldRef ID="9de685c5-fdf5-4319-b987-3edf55efb36f" Name="_SPSitePageFlags" UpdateChildren="true" />
+            <pnp:FieldRef ID="1a7348e7-1bb7-4a47-9790-088e7cb20b58" Name="_AuthorByline" UpdateChildren="true" />
+            <pnp:FieldRef ID="d60d65ff-ff42-4044-a684-ac3f7a5e598c" Name="_TopicHeader" UpdateChildren="true" />
+          </pnp:FieldRefs>
+          <pnp:DocumentTemplate TargetName="/_layouts/15/CreateSitePage.aspx" />
+        </pnp:ContentType>
+        <pnp:ContentType ID="0x0101009D1CB255DA76424F860D91F20E6C41180065789619A4EFB44992AF42CEEBB13C9A0302" Name="Valo Procedure Page" Description="" Group="Valo" NewFormUrl="" EditFormUrl="" DisplayFormUrl="">
+          <pnp:FieldRefs>
+            <pnp:FieldRef ID="c042a256-787d-4a6f-8a8a-cf6ab767f12d" Name="ContentType" UpdateChildren="true" />
+            <pnp:FieldRef ID="5f47e085-2150-41dc-b661-442f3027f552" Name="SelectFilename" UpdateChildren="true" />
+            <pnp:FieldRef ID="8553196d-ec8d-4564-9861-3dbe931050c8" Name="FileLeafRef" Required="true" UpdateChildren="true" />
+            <pnp:FieldRef ID="8c06beca-0777-48f7-91c7-6da68bc07b69" Name="Created" Hidden="true" UpdateChildren="true" />
+            <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" UpdateChildren="true" />
+            <pnp:FieldRef ID="28cf69c5-fa48-462a-b5cd-27b6f9d2bd5f" Name="Modified" Hidden="true" UpdateChildren="true" />
+            <pnp:FieldRef ID="822c78e3-1ea9-4943-b449-57863ad33ca9" Name="Modified_x0020_By" UpdateChildren="true" />
+            <pnp:FieldRef ID="4dd7e525-8d6b-4cb4-9d3e-44ee25f973eb" Name="Created_x0020_By" UpdateChildren="true" />
+            <pnp:FieldRef ID="82642ec8-ef9b-478f-acf9-31f7d45fbc31" Name="LinkTitle" UpdateChildren="true" />
+            <pnp:FieldRef ID="7efc33c1-b56b-490e-9c9b-1097e971ba96" Name="ClientSideApplicationId" UpdateChildren="true" />
+            <pnp:FieldRef ID="daef58d7-ccfd-43fc-b776-2e292cc66bba" Name="PageLayoutType" UpdateChildren="true" />
+            <pnp:FieldRef ID="4966388e-6e12-4bc6-8990-5b5b66153eae" Name="CanvasContent1" UpdateChildren="true" />
+            <pnp:FieldRef ID="5baf6db5-9d25-4738-b15e-db5789298e82" Name="BannerImageUrl" UpdateChildren="true" />
+            <pnp:FieldRef ID="fb3259ac-bd07-4397-b7aa-03e885b0838e" Name="BannerImageOffset" UpdateChildren="true" />
+            <pnp:FieldRef ID="3f155110-a6a2-4d70-926c-94648101f0e8" Name="Description" UpdateChildren="true" />
+            <pnp:FieldRef ID="f5ad16a2-85be-46b2-b5f0-2bb8b4a5074a" Name="PromotedState" UpdateChildren="true" />
+            <pnp:FieldRef ID="c84f8697-331e-457d-884a-c4fb8f30ea74" Name="FirstPublishedDate" UpdateChildren="true" />
+            <pnp:FieldRef ID="261075db-0525-4fb8-a6ea-772014186599" Name="LayoutWebpartsContent" UpdateChildren="true" />
+            <pnp:FieldRef ID="f3b0adf9-c1a2-4b02-920d-943fba4b3611" Name="TaxCatchAll" Hidden="true" UpdateChildren="true" />
+            <pnp:FieldRef ID="8f6b6dd8-9357-4019-8172-966fcd502ed2" Name="TaxCatchAllLabel" Hidden="true" UpdateChildren="true" />
+            <pnp:FieldRef ID="b8916543-0ad2-4b97-a9ed-7aeccb50e351" Name="l6a362fd073248b4b3b2e315014ae97c" Hidden="true" UpdateChildren="true" />
+            <pnp:FieldRef ID="56a362fd-0732-48b4-b3b2-e315014ae97c" Name="ValoTags" UpdateChildren="true" />
+            <pnp:FieldRef ID="20a86a6a-2c24-44b9-8fc2-6ad37dc3faa2" Name="ValoLinkedId" UpdateChildren="true" />
+            <pnp:FieldRef ID="99caeb6b-3c32-4d8c-8147-2ff383c11344" Name="n9708502bcdd478ea2b2b26c9b840d49" Hidden="true" UpdateChildren="true" />
+            <pnp:FieldRef ID="79708502-bcdd-478e-a2b2-b26c9b840d49" Name="ValoLanguage" UpdateChildren="true" />
+            <pnp:FieldRef ID="454bf651-4738-479f-8ac6-446602ab249a" Name="ValoBusinessAreaTaxHTField0" Hidden="true" UpdateChildren="true" />
+            <pnp:FieldRef ID="618b04da-70e6-4624-b04c-bf4596b827ab" Name="ValoBusinessArea" UpdateChildren="true" />
+            <pnp:FieldRef ID="f91ae5c7-6278-444b-922e-ed3e2c047bec" Name="ValoOfficeLocationTaxHTField0" Hidden="true" UpdateChildren="true" />
+            <pnp:FieldRef ID="597d1be2-005b-4620-9cc7-ea5ea9e3a4b3" Name="ValoOfficeLocation" UpdateChildren="true" />
+            <pnp:FieldRef ID="9de685c5-fdf5-4319-b987-3edf55efb36f" Name="_SPSitePageFlags" UpdateChildren="true" />
+            <pnp:FieldRef ID="1a7348e7-1bb7-4a47-9790-088e7cb20b58" Name="_AuthorByline" UpdateChildren="true" />
+            <pnp:FieldRef ID="d60d65ff-ff42-4044-a684-ac3f7a5e598c" Name="_TopicHeader" UpdateChildren="true" />
+          </pnp:FieldRefs>
+          <pnp:DocumentTemplate TargetName="/_layouts/15/CreateSitePage.aspx" />
+        </pnp:ContentType>
+        <pnp:ContentType ID="0x0101009D1CB255DA76424F860D91F20E6C41180065789619A4EFB44992AF42CEEBB13C9A0303" Name="Valo How To Page" Description="" Group="Valo" NewFormUrl="" EditFormUrl="" DisplayFormUrl="">
+          <pnp:FieldRefs>
+            <pnp:FieldRef ID="c042a256-787d-4a6f-8a8a-cf6ab767f12d" Name="ContentType" UpdateChildren="true" />
+            <pnp:FieldRef ID="5f47e085-2150-41dc-b661-442f3027f552" Name="SelectFilename" UpdateChildren="true" />
+            <pnp:FieldRef ID="8553196d-ec8d-4564-9861-3dbe931050c8" Name="FileLeafRef" Required="true" UpdateChildren="true" />
+            <pnp:FieldRef ID="8c06beca-0777-48f7-91c7-6da68bc07b69" Name="Created" Hidden="true" UpdateChildren="true" />
+            <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" UpdateChildren="true" />
+            <pnp:FieldRef ID="28cf69c5-fa48-462a-b5cd-27b6f9d2bd5f" Name="Modified" Hidden="true" UpdateChildren="true" />
+            <pnp:FieldRef ID="822c78e3-1ea9-4943-b449-57863ad33ca9" Name="Modified_x0020_By" UpdateChildren="true" />
+            <pnp:FieldRef ID="4dd7e525-8d6b-4cb4-9d3e-44ee25f973eb" Name="Created_x0020_By" UpdateChildren="true" />
+            <pnp:FieldRef ID="82642ec8-ef9b-478f-acf9-31f7d45fbc31" Name="LinkTitle" UpdateChildren="true" />
+            <pnp:FieldRef ID="7efc33c1-b56b-490e-9c9b-1097e971ba96" Name="ClientSideApplicationId" UpdateChildren="true" />
+            <pnp:FieldRef ID="daef58d7-ccfd-43fc-b776-2e292cc66bba" Name="PageLayoutType" UpdateChildren="true" />
+            <pnp:FieldRef ID="4966388e-6e12-4bc6-8990-5b5b66153eae" Name="CanvasContent1" UpdateChildren="true" />
+            <pnp:FieldRef ID="5baf6db5-9d25-4738-b15e-db5789298e82" Name="BannerImageUrl" UpdateChildren="true" />
+            <pnp:FieldRef ID="fb3259ac-bd07-4397-b7aa-03e885b0838e" Name="BannerImageOffset" UpdateChildren="true" />
+            <pnp:FieldRef ID="3f155110-a6a2-4d70-926c-94648101f0e8" Name="Description" UpdateChildren="true" />
+            <pnp:FieldRef ID="f5ad16a2-85be-46b2-b5f0-2bb8b4a5074a" Name="PromotedState" UpdateChildren="true" />
+            <pnp:FieldRef ID="c84f8697-331e-457d-884a-c4fb8f30ea74" Name="FirstPublishedDate" UpdateChildren="true" />
+            <pnp:FieldRef ID="261075db-0525-4fb8-a6ea-772014186599" Name="LayoutWebpartsContent" UpdateChildren="true" />
+            <pnp:FieldRef ID="f3b0adf9-c1a2-4b02-920d-943fba4b3611" Name="TaxCatchAll" Hidden="true" UpdateChildren="true" />
+            <pnp:FieldRef ID="8f6b6dd8-9357-4019-8172-966fcd502ed2" Name="TaxCatchAllLabel" Hidden="true" UpdateChildren="true" />
+            <pnp:FieldRef ID="b8916543-0ad2-4b97-a9ed-7aeccb50e351" Name="l6a362fd073248b4b3b2e315014ae97c" Hidden="true" UpdateChildren="true" />
+            <pnp:FieldRef ID="56a362fd-0732-48b4-b3b2-e315014ae97c" Name="ValoTags" UpdateChildren="true" />
+            <pnp:FieldRef ID="20a86a6a-2c24-44b9-8fc2-6ad37dc3faa2" Name="ValoLinkedId" UpdateChildren="true" />
+            <pnp:FieldRef ID="99caeb6b-3c32-4d8c-8147-2ff383c11344" Name="n9708502bcdd478ea2b2b26c9b840d49" Hidden="true" UpdateChildren="true" />
+            <pnp:FieldRef ID="79708502-bcdd-478e-a2b2-b26c9b840d49" Name="ValoLanguage" UpdateChildren="true" />
+            <pnp:FieldRef ID="454bf651-4738-479f-8ac6-446602ab249a" Name="ValoBusinessAreaTaxHTField0" Hidden="true" UpdateChildren="true" />
+            <pnp:FieldRef ID="618b04da-70e6-4624-b04c-bf4596b827ab" Name="ValoBusinessArea" UpdateChildren="true" />
+            <pnp:FieldRef ID="f91ae5c7-6278-444b-922e-ed3e2c047bec" Name="ValoOfficeLocationTaxHTField0" Hidden="true" UpdateChildren="true" />
+            <pnp:FieldRef ID="597d1be2-005b-4620-9cc7-ea5ea9e3a4b3" Name="ValoOfficeLocation" UpdateChildren="true" />
+            <pnp:FieldRef ID="9de685c5-fdf5-4319-b987-3edf55efb36f" Name="_SPSitePageFlags" UpdateChildren="true" />
+            <pnp:FieldRef ID="1a7348e7-1bb7-4a47-9790-088e7cb20b58" Name="_AuthorByline" UpdateChildren="true" />
+            <pnp:FieldRef ID="d60d65ff-ff42-4044-a684-ac3f7a5e598c" Name="_TopicHeader" UpdateChildren="true" />
+          </pnp:FieldRefs>
+          <pnp:DocumentTemplate TargetName="/_layouts/15/CreateSitePage.aspx" />
+        </pnp:ContentType>
+      </pnp:ContentTypes>
+      <pnp:Lists>
+        <pnp:ListInstance Title="Site Pages" Description="" DocumentTemplate="" TemplateType="119" Url="SitePages" EnableVersioning="true" EnableMinorVersions="true" MinorVersionLimit="500" MaxVersionLimit="500" DraftVersionVisibility="1" TemplateFeatureID="00bfea71-c796-4402-9f2f-0eb9a6e71b18" ContentTypesEnabled="true" EnableAttachments="false" EnableFolderCreation="false" DefaultDisplayFormUrl="{site}/SitePages/Forms/DispForm.aspx" DefaultEditFormUrl="{site}/SitePages/Forms/EditForm.aspx" DefaultNewFormUrl="{site}/SitePages/Forms/Upload.aspx" ImageUrl="/_layouts/15/images/itdl.png?rev=44" IrmExpire="false" IrmReject="false" IsApplicationList="false" ValidationFormula="" ValidationMessage="">
+          <pnp:ContentTypeBindings>
+            <pnp:ContentTypeBinding ContentTypeID="0x0101009D1CB255DA76424F860D91F20E6C41180065789619A4EFB44992AF42CEEBB13C9A" Default="true" />
+            <pnp:ContentTypeBinding ContentTypeID="0x0101009D1CB255DA76424F860D91F20E6C41180065789619A4EFB44992AF42CEEBB13C9A0303" />
+            <pnp:ContentTypeBinding ContentTypeID="0x0101009D1CB255DA76424F860D91F20E6C41180065789619A4EFB44992AF42CEEBB13C9A0301" />
+            <pnp:ContentTypeBinding ContentTypeID="0x0101009D1CB255DA76424F860D91F20E6C41180065789619A4EFB44992AF42CEEBB13C9A0302" />
+            <pnp:ContentTypeBinding ContentTypeID="0x0120" />
+          </pnp:ContentTypeBindings>
+          <pnp:Views>
+            <View Name="{AE21E871-B377-4087-973F-34A9DF210269}" DefaultView="TRUE" MobileView="TRUE" MobileDefaultView="TRUE" Type="HTML" DisplayName="By Author" Url="{site}/SitePages/Forms/ByAuthor.aspx" Level="1" BaseViewID="4" ContentTypeID="0x" ToolbarTemplate="WikiLibraryViewToolBar" ImageUrl="/_layouts/15/images/dlicon.png?rev=47">
+              <Query>
+                <GroupBy Collapse="FALSE">
+                  <FieldRef Name="Author" />
+                </GroupBy>
+                <OrderBy>
+                  <FieldRef Name="Modified" />
+                </OrderBy>
+              </Query>
+              <ViewFields>
+                <FieldRef Name="DocIcon" />
+                <FieldRef Name="LinkFilename" />
+                <FieldRef Name="Editor" />
+                <FieldRef Name="Modified" />
+                <FieldRef Name="Created" />
+                <FieldRef Name="ValoOfficeLocation" />
+                <FieldRef Name="ValoLanguage" />
+                <FieldRef Name="ValoTags" />
+              </ViewFields>
+              <RowLimit Paged="TRUE">30</RowLimit>
+              <JSLink>clienttemplates.js</JSLink>
+            </View>
+            <View Name="{DEAA2647-2C33-40E2-A9DC-AB10E7F1CB09}" Type="HTML" DisplayName="All Pages" Url="{site}/SitePages/Forms/AllPages.aspx" Level="1" BaseViewID="4" ContentTypeID="0x" ToolbarTemplate="WikiLibraryViewToolBar" ImageUrl="/_layouts/15/images/dlicon.png?rev=47">
+              <Query>
+                <OrderBy>
+                  <FieldRef Name="Modified" Ascending="FALSE" />
+                </OrderBy>
+              </Query>
+              <ViewFields>
+                <FieldRef Name="DocIcon" />
+                <FieldRef Name="LinkFilename" />
+                <FieldRef Name="Editor" />
+                <FieldRef Name="Modified" />
+                <FieldRef Name="Author" />
+                <FieldRef Name="Created" />
+                <FieldRef Name="ValoOfficeLocation" />
+                <FieldRef Name="ValoLanguage" />
+                <FieldRef Name="ValoTags" />
+                <FieldRef Name="ValoBusinessArea" />
+              </ViewFields>
+              <RowLimit Paged="TRUE">30</RowLimit>
+              <JSLink>clienttemplates.js</JSLink>
+            </View>
+            <View Name="{2267B4E9-5EA1-4A2B-9C3C-EB96227ABA22}" Type="HTML" DisplayName="Recent Changes" Url="{site}/SitePages/Forms/RecentChanges.aspx" Level="1" BaseViewID="4" ContentTypeID="0x" ToolbarTemplate="WikiLibraryViewToolBar" ImageUrl="/_layouts/15/images/dlicon.png?rev=47">
+              <Query>
+                <OrderBy>
+                  <FieldRef Name="Modified" Ascending="FALSE" />
+                </OrderBy>
+              </Query>
+              <ViewFields>
+                <FieldRef Name="DocIcon" />
+                <FieldRef Name="LinkFilename" />
+                <FieldRef Name="Editor" />
+                <FieldRef Name="Modified" />
+                <FieldRef Name="Author" />
+                <FieldRef Name="Created" />
+                <FieldRef Name="ValoOfficeLocation" />
+                <FieldRef Name="ValoLanguage" />
+                <FieldRef Name="ValoTags" />
+                <FieldRef Name="ValoBusinessArea" />
+              </ViewFields>
+              <RowLimit Paged="TRUE">30</RowLimit>
+              <JSLink>clienttemplates.js</JSLink>
+            </View>
+            <View Name="{4BFB85BC-6CC8-4D4D-AD71-A048934EA135}" Type="HTML" DisplayName="Created By Me" Url="{site}/SitePages/Forms/CreatedByMe.aspx" Level="1" BaseViewID="4" ContentTypeID="0x" ToolbarTemplate="WikiLibraryViewToolBar" ImageUrl="/_layouts/15/images/dlicon.png?rev=47">
+              <Query>
+                <Where>
+                  <Eq>
+                    <FieldRef Name="Author" />
+                    <Value Type="Integer">
+                      <UserID />
+                    </Value>
+                  </Eq>
+                </Where>
+                <OrderBy>
+                  <FieldRef Name="FileLeafRef" />
+                </OrderBy>
+              </Query>
+              <ViewFields>
+                <FieldRef Name="DocIcon" />
+                <FieldRef Name="LinkFilename" />
+                <FieldRef Name="Editor" />
+                <FieldRef Name="Modified" />
+                <FieldRef Name="Author" />
+                <FieldRef Name="Created" />
+                <FieldRef Name="ValoOfficeLocation" />
+                <FieldRef Name="ValoLanguage" />
+                <FieldRef Name="ValoTags" />
+                <FieldRef Name="ValoBusinessArea" />
+              </ViewFields>
+              <RowLimit Paged="TRUE">30</RowLimit>
+              <JSLink>clienttemplates.js</JSLink>
+            </View>
+            <View Name="{1B42176D-0ADC-4E24-99AE-D9CF97125524}" Type="HTML" DisplayName="By Editor" Url="{site}/SitePages/Forms/ByEditor.aspx" Level="1" BaseViewID="4" ContentTypeID="0x" ToolbarTemplate="WikiLibraryViewToolBar" ImageUrl="/_layouts/15/images/dlicon.png?rev=47">
+              <Query>
+                <GroupBy Collapse="FALSE">
+                  <FieldRef Name="Editor" />
+                </GroupBy>
+                <OrderBy>
+                  <FieldRef Name="FileLeafRef" />
+                </OrderBy>
+              </Query>
+              <ViewFields>
+                <FieldRef Name="DocIcon" />
+                <FieldRef Name="LinkFilename" />
+                <FieldRef Name="Editor" />
+                <FieldRef Name="Modified" />
+                <FieldRef Name="Author" />
+                <FieldRef Name="Created" />
+                <FieldRef Name="ValoOfficeLocation" />
+                <FieldRef Name="ValoLanguage" />
+                <FieldRef Name="ValoTags" />
+                <FieldRef Name="ValoBusinessArea" />
+              </ViewFields>
+              <RowLimit Paged="TRUE">30</RowLimit>
+              <JSLink>clienttemplates.js</JSLink>
+            </View>
+          </pnp:Views>
+          <pnp:FieldRefs>
+            <pnp:FieldRef ID="f91ae5c7-6278-444b-922e-ed3e2c047bec" Name="ValoOfficeLocationTaxHTField0" Hidden="true" DisplayName="Valo Office Location_0" />
+            <pnp:FieldRef ID="454bf651-4738-479f-8ac6-446602ab249a" Name="ValoBusinessAreaTaxHTField0" Hidden="true" DisplayName="ValoBusinessArea_0" />
+            <pnp:FieldRef ID="99caeb6b-3c32-4d8c-8147-2ff383c11344" Name="n9708502bcdd478ea2b2b26c9b840d49" Hidden="true" DisplayName="Valo Language_0" />
+            <pnp:FieldRef ID="b8916543-0ad2-4b97-a9ed-7aeccb50e351" Name="l6a362fd073248b4b3b2e315014ae97c" Hidden="true" DisplayName="Valo Tags_0" />
+            <pnp:FieldRef ID="4966388e-6e12-4bc6-8990-5b5b66153eae" Name="CanvasContent1" DisplayName="Authoring Canvas Content" />
+            <pnp:FieldRef ID="5baf6db5-9d25-4738-b15e-db5789298e82" Name="BannerImageUrl" DisplayName="Banner Image URL" />
+            <pnp:FieldRef ID="3f155110-a6a2-4d70-926c-94648101f0e8" Name="Description" DisplayName="Description" />
+            <pnp:FieldRef ID="f5ad16a2-85be-46b2-b5f0-2bb8b4a5074a" Name="PromotedState" DisplayName="Promoted State" />
+            <pnp:FieldRef ID="c84f8697-331e-457d-884a-c4fb8f30ea74" Name="FirstPublishedDate" DisplayName="First Published Date" />
+            <pnp:FieldRef ID="261075db-0525-4fb8-a6ea-772014186599" Name="LayoutWebpartsContent" DisplayName="Page Layout Content" />
+            <pnp:FieldRef ID="1a7348e7-1bb7-4a47-9790-088e7cb20b58" Name="_AuthorByline" DisplayName="Author Byline" />
+            <pnp:FieldRef ID="d60d65ff-ff42-4044-a684-ac3f7a5e598c" Name="_TopicHeader" DisplayName="Topic header" />
+            <pnp:FieldRef ID="9de685c5-fdf5-4319-b987-3edf55efb36f" Name="_SPSitePageFlags" DisplayName="Site Page Flags" />
+            <pnp:FieldRef ID="56a362fd-0732-48b4-b3b2-e315014ae97c" Name="ValoTags" DisplayName="Tags" />
+            <pnp:FieldRef ID="20a86a6a-2c24-44b9-8fc2-6ad37dc3faa2" Name="ValoLinkedId" DisplayName="ValoLinkedId" />
+            <pnp:FieldRef ID="79708502-bcdd-478e-a2b2-b26c9b840d49" Name="ValoLanguage" DisplayName="Language" />
+            <pnp:FieldRef ID="618b04da-70e6-4624-b04c-bf4596b827ab" Name="ValoBusinessArea" DisplayName="Business Area" />
+            <pnp:FieldRef ID="597d1be2-005b-4620-9cc7-ea5ea9e3a4b3" Name="ValoOfficeLocation" DisplayName="Office Location" />
+          </pnp:FieldRefs>
+        </pnp:ListInstance>
+      </pnp:Lists>
+      <pnp:Features>
+        <pnp:SiteFeatures>
+          <pnp:Feature ID="94280101-dc63-4b83-842a-8707b1afb62d" />
+        </pnp:SiteFeatures>
+      </pnp:Features>
+      <pnp:CustomActions>
+        <pnp:WebCustomActions>
+          <pnp:CustomAction Name="{3613eabd-311c-4184-b911-a0a67aac30e8}" Location="ClientSideExtension.ApplicationCustomizer" Title="valo-navigation-client-side-solution" Sequence="0" Rights="" RegistrationType="None" ClientSideComponentId="8d1db129-f7c6-4af8-8721-818fa401e17d" ClientSideComponentProperties="" />
+        </pnp:WebCustomActions>
+      </pnp:CustomActions>
+      <pnp:ClientSidePages>
+        <pnp:ClientSidePage PromoteAsNewsArticle="false" PromoteAsTemplate="false" Overwrite="true" Layout="Home" EnableComments="false" Title="Home" ContentTypeID="0x0101009D1CB255DA76424F860D91F20E6C41180065789619A4EFB44992AF42CEEBB13C9A" ThumbnailUrl="" PageName="Home.aspx">
+          <pnp:Header Type="Default" LayoutType="FullWidthImage" TextAlignment="Center" ShowTopicHeader="false" ShowPublishDate="false" TopicHeader="" AlternativeText="" Authors="" AuthorByLineId="-1" />
+          <pnp:Sections>
+            <pnp:Section Order="1" Type="OneColumn">
+              <pnp:Controls>
+                <pnp:CanvasControl WebPartType="Custom" JsonControlData="{&quot;id&quot;: &quot;4e1bba05-8bee-4d6e-bee4-2538fbd4e6ba&quot;, &quot;instanceId&quot;: &quot;8e77512b-8e2c-4abb-8e0e-8732f96a7339&quot;, &quot;title&quot;: &quot;Valo - Searchbox&quot;, &quot;description&quot;: &quot;A connectable search box with auto complete&quot;, &quot;dataVersion&quot;: &quot;1.0&quot;, &quot;properties&quot;: {&quot;description&quot;:&quot;SearchBox&quot;,&quot;suggestionsEnabled&quot;:true,&quot;suggestionsEnableHighlighting&quot;:true,&quot;suggestionsEnableStemming&quot;:false,&quot;suggestionsEnableQueryRules&quot;:true,&quot;suggestionsPrefixMatchAllTerms&quot;:true,&quot;suggestionsCapitalizeFirstLetters&quot;:false,&quot;suggestionsNumberOfQuery&quot;:5,&quot;disableDefaultWildcardAppend&quot;:false,&quot;title&quot;:&quot;Search policies, procedures, and how-to guides&quot;,&quot;queryStringIdentifier&quot;:&quot;&quot;,&quot;redirectPage&quot;:&quot;&quot;}, &quot;serverProcessedContent&quot;: {&quot;htmlStrings&quot;:{},&quot;searchablePlainTexts&quot;:{},&quot;imageSources&quot;:{},&quot;links&quot;:{}}, &quot;dynamicDataPaths&quot;: {}, &quot;dynamicDataValues&quot;: {}}" ControlId="4e1bba05-8bee-4d6e-bee4-2538fbd4e6ba" Order="1" Column="1" />
+                <pnp:CanvasControl WebPartType="Custom" JsonControlData="{&quot;id&quot;: &quot;56858ec9-a7cb-43c6-87c1-6edc8d92ce3a&quot;, &quot;instanceId&quot;: &quot;a2fdfb7d-09af-4179-873a-c6f5410b6845&quot;, &quot;title&quot;: &quot;Valo - Refiners&quot;, &quot;description&quot;: &quot;A connectable refiner web part&quot;, &quot;dataVersion&quot;: &quot;1.0&quot;, &quot;properties&quot;: {&quot;layout&quot;:1,&quot;searchResultsSourceId&quot;:&quot;46f303f7-e3b2-44e1-ada3-6b1e44af7931&quot;,&quot;textRefinerToggleLimit&quot;:10,&quot;refiners&quot;:[{&quot;uniqueId&quot;:&quot;72a269ca-59b8-40d5-8c1e-9b27442576b0&quot;,&quot;displayName&quot;:&quot;Business area&quot;,&quot;name&quot;:&quot;ValoBusinessArea&quot;,&quot;type&quot;:&quot;text&quot;,&quot;termsetId&quot;:null,&quot;termId&quot;:null,&quot;active&quot;:true,&quot;sortIdx&quot;:1},{&quot;uniqueId&quot;:&quot;66f9875a-c9b0-48a1-8249-78a811c18256&quot;,&quot;displayName&quot;:&quot;Document type&quot;,&quot;name&quot;:&quot;SPContentType&quot;,&quot;type&quot;:&quot;text&quot;,&quot;termsetId&quot;:null,&quot;termId&quot;:null,&quot;active&quot;:true,&quot;sortIdx&quot;:2}]}, &quot;serverProcessedContent&quot;: {&quot;htmlStrings&quot;:{},&quot;searchablePlainTexts&quot;:{},&quot;imageSources&quot;:{},&quot;links&quot;:{}}, &quot;dynamicDataPaths&quot;: {}, &quot;dynamicDataValues&quot;: {}}" ControlId="56858ec9-a7cb-43c6-87c1-6edc8d92ce3a" Order="2" Column="1" />
+                <pnp:CanvasControl WebPartType="Custom" JsonControlData="{&quot;id&quot;: &quot;0767823f-7fc4-48f8-9e92-3678d353f033&quot;, &quot;instanceId&quot;: &quot;46f303f7-e3b2-44e1-ada3-6b1e44af7931&quot;, &quot;title&quot;: &quot;Valo - Universal&quot;, &quot;description&quot;: &quot;Valo template web part&quot;, &quot;dataVersion&quot;: &quot;1.0&quot;, &quot;properties&quot;: {&quot;templateGallery&quot;:&quot;Templates gallery&quot;,&quot;templateMetadata&quot;:{&quot;fields&quot;:[&quot;Title&quot;,&quot;SiteName&quot;,&quot;SiteTitle&quot;,&quot;HitHighlightedSummary&quot;,&quot;ModifiedBy&quot;,&quot;ModifiedById&quot;,&quot;ModifiedOWSDATE&quot;,&quot;ServerRedirectedPreviewURL&quot;,&quot;BannerImageUrlOWSURLH&quot;,&quot;PictureThumbnailURL&quot;,&quot;FileExtension&quot;,&quot;Path&quot;,&quot;LayoutWebpartsContentOWSHTML&quot;,&quot;ContentType&quot;],&quot;query&quot;:&quot;ContentTypeId:0x0101009D1CB255DA76424F860D91F20E6C41180065789619A4EFB44992AF42CEEBB13C9A03*&quot;,&quot;totalResults&quot;:12,&quot;sorting&quot;:&quot;ViewsLifeTime:descending&quot;,&quot;pagingType&quot;:3,&quot;parameters&quot;:[{&quot;name&quot;:&quot;ShowMoreTitle&quot;,&quot;value&quot;:&quot;Read more&quot;,&quot;description&quot;:&quot;Title for show more link&quot;},{&quot;name&quot;:&quot;ShowMoreUrl&quot;,&quot;value&quot;:&quot;&quot;,&quot;description&quot;:&quot;Url for show more link&quot;},{&quot;name&quot;:&quot;ShowMoreTarget&quot;,&quot;value&quot;:&quot;_blank&quot;,&quot;description&quot;:&quot;Target for show more link&quot;},{&quot;name&quot;:&quot;UseThumbnailImages&quot;,&quot;value&quot;:&quot;false&quot;,&quot;options&quot;:[&quot;true&quot;,&quot;false&quot;],&quot;description&quot;:&quot;universalBannerUseThumbnailImagesDesc&quot;}]},&quot;templateParams&quot;:[{&quot;name&quot;:&quot;ShowMoreTitle&quot;,&quot;value&quot;:&quot;Read more&quot;,&quot;description&quot;:&quot;Title for show more link&quot;},{&quot;name&quot;:&quot;ShowMoreUrl&quot;,&quot;value&quot;:&quot;&quot;,&quot;description&quot;:&quot;Url for show more link&quot;},{&quot;name&quot;:&quot;ShowMoreTarget&quot;,&quot;value&quot;:&quot;_blank&quot;,&quot;description&quot;:&quot;Target for show more link&quot;},{&quot;name&quot;:&quot;UseThumbnailImages&quot;,&quot;value&quot;:&quot;false&quot;,&quot;options&quot;:[&quot;true&quot;,&quot;false&quot;],&quot;description&quot;:&quot;universalBannerUseThumbnailImagesDesc&quot;}],&quot;templateMappingSlots&quot;:[],&quot;templateMappingsSlotsUpdated&quot;:false,&quot;numberOfPagesToDisplay&quot;:5,&quot;cacheTime&quot;:5,&quot;hotItemSwap&quot;:true,&quot;dataSourceConnection&quot;:&quot;SearchDataSource&quot;,&quot;lastUpdated&quot;:&quot;1594797730755&quot;,&quot;template&quot;:{&quot;key&quot;:&quot;/sites/valotemplates/TemplatesGallery/DocumentHub.html&quot;,&quot;id&quot;:&quot;/sites/valotemplates/TemplatesGallery/DocumentHub.html&quot;,&quot;label&quot;:&quot;Document Hub&quot;,&quot;editUrl&quot;:&quot;https://onenil.sharepoint.com/sites/valotemplates/TemplatesGallery/Forms/AllItems11.aspx?id=/sites/valotemplates/TemplatesGallery/DocumentHub.html&amp;parent=3&amp;p=5&quot;,&quot;fullBleed&quot;:&quot;No&quot;,&quot;imageUrl&quot;:&quot;&quot;,&quot;scope&quot;:2,&quot;type&quot;:&quot;external&quot;,&quot;dataSourceId&quot;:null},&quot;searchDataSource&quot;:{&quot;showAdvancedSearchOptions&quot;:false,&quot;useSearchQueryBuilder&quot;:false,&quot;itemsCountPerPage&quot;:12,&quot;searchQuerySettings&quot;:{&quot;searchQuery&quot;:&quot;ContentTypeId:0x0101009D1CB255DA76424F860D91F20E6C41180065789619A4EFB44992AF42CEEBB13C9A03*&quot;,&quot;sortList&quot;:[{&quot;sortField&quot;:{&quot;name&quot;:&quot;ViewsLifeTime&quot;,&quot;typeInfo&quot;:null},&quot;sortDirection&quot;:2}],&quot;selectedProperties&quot;:[&quot;Title&quot;,&quot;SiteName&quot;,&quot;SiteTitle&quot;,&quot;HitHighlightedSummary&quot;,&quot;ModifiedBy&quot;,&quot;ModifiedById&quot;,&quot;ModifiedOWSDATE&quot;,&quot;ServerRedirectedPreviewURL&quot;,&quot;BannerImageUrlOWSURLH&quot;,&quot;PictureThumbnailURL&quot;,&quot;FileExtension&quot;,&quot;Path&quot;,&quot;LayoutWebpartsContentOWSHTML&quot;,&quot;SPContentType&quot;,&quot;ContentType&quot;,&quot;LastModifiedTime&quot;,&quot;FirstPublishedDate&quot;,&quot;AuthorOWSUSER&quot;,&quot;EditorOWSUSER&quot;,&quot;Author&quot;,&quot;Description&quot;,&quot;ListID&quot;,&quot;ListItemID&quot;,&quot;UniqueId&quot;,&quot;SPWebUrl&quot;,&quot;ValoLocationOWSTEXT&quot;,&quot;owstaxIdValoOfficeLocation&quot;,&quot;ValoOfficeLocation&quot;,&quot;ValoTagsTaxonomy&quot;,&quot;owstaxIdValoTags&quot;,&quot;ValoTags&quot;,&quot;ValoHighlightOWSBOOL&quot;,&quot;ValoCommentingTypeOWSCHCS&quot;,&quot;ValoYammerThreadIdOWSTEXT&quot;,&quot;ValoNewsPublishDate&quot;],&quot;privateGroups&quot;:false},&quot;searchScope&quot;:2,&quot;selectedListIds&quot;:[],&quot;filterConditions&quot;:[],&quot;searchBoxSourceId&quot;:&quot;8e77512b-8e2c-4abb-8e0e-8732f96a7339&quot;,&quot;searchRefinersSourceId&quot;:&quot;a2fdfb7d-09af-4179-873a-c6f5410b6845&quot;,&quot;enableAudienceTargeting&quot;:false,&quot;onlyShowResultsOnSearch&quot;:false}}, &quot;serverProcessedContent&quot;: {&quot;htmlStrings&quot;:{},&quot;searchablePlainTexts&quot;:{},&quot;imageSources&quot;:{},&quot;links&quot;:{}}, &quot;dynamicDataPaths&quot;: {}, &quot;dynamicDataValues&quot;: {}}" ControlId="0767823f-7fc4-48f8-9e92-3678d353f033" Order="3" Column="1" />
+              </pnp:Controls>
+            </pnp:Section>
+          </pnp:Sections>
+        </pnp:ClientSidePage>
+      </pnp:ClientSidePages>
+      <pnp:Header Layout="Standard" MenuStyle="MegaMenu" />
+      <pnp:Footer Enabled="true" RemoveExistingNodes="false" />
+    </pnp:ProvisioningTemplate>
+  </pnp:Templates>
+</pnp:Provisioning>
