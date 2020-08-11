@@ -15,7 +15,7 @@
         </pnp:CurrentNavigation>
       </pnp:Navigation>
       <pnp:ClientSidePages>
-        <pnp:ClientSidePage PromoteAsNewsArticle="false" PromoteAsTemplate="false" Overwrite="true" EnableComments="false" Title="Policy" ContentTypeID="0x0101009D1CB255DA76424F860D91F20E6C41180056084879C22372419844A40A70A26EE6" ThumbnailUrl="" PageName="Document-Policy-en-US.aspx">
+        <pnp:ClientSidePage PromoteAsNewsArticle="false" PromoteAsTemplate="false" Overwrite="true" EnableComments="false" Title="{parameter:ValoPageTemplateNamePolicy}" ContentTypeID="0x0101009D1CB255DA76424F860D91F20E6C41180056084879C22372419844A40A70A26EE6" ThumbnailUrl="" PageName="Document-Policy-en-US.aspx">
           <pnp:Header Type="Custom" ServerRelativeImageUrl="{site}/SiteAssets/SitePages/Document-Policy-en-US/80952-information-purple.png" TranslateX="42.6509887760556" TranslateY="47.8571428571429" LayoutType="FullWidthImage" TextAlignment="Center" ShowTopicHeader="false" ShowPublishDate="false" TopicHeader="" AlternativeText="" Authors="[]" AuthorByLine="[]" AuthorByLineId="-1" />
           <pnp:Sections>
             <pnp:Section Order="1" Type="TwoColumnLeft">
@@ -31,10 +31,10 @@
           </pnp:Sections>
           <pnp:FieldValues>
             <pnp:FieldValue Key="ValoPageType" Value="page" />
-            <pnp:FieldValue Key="ValoContentType" Value="Policy" />
+            <pnp:FieldValue Key="ValoContentType" Value="{parameter:ValoPageTemplateNamePolicy}" />
           </pnp:FieldValues>
         </pnp:ClientSidePage>
-        <pnp:ClientSidePage PromoteAsNewsArticle="false" PromoteAsTemplate="false" Overwrite="true" EnableComments="false" Title="Procedure" ContentTypeID="0x0101009D1CB255DA76424F860D91F20E6C41180056084879C22372419844A40A70A26EE6" ThumbnailUrl="" PageName="Document-Procedure-en-US.aspx">
+        <pnp:ClientSidePage PromoteAsNewsArticle="false" PromoteAsTemplate="false" Overwrite="true" EnableComments="false" Title="{parameter:ValoPageTemplateNameProcedure}" ContentTypeID="0x0101009D1CB255DA76424F860D91F20E6C41180056084879C22372419844A40A70A26EE6" ThumbnailUrl="" PageName="Document-Procedure-en-US.aspx">
           <pnp:Header Type="Custom" ServerRelativeImageUrl="{site}/SiteAssets/SitePages/Document-Procedure-en-US/4496-lightning-turquoise.png" LayoutType="FullWidthImage" TextAlignment="Center" ShowTopicHeader="false" ShowPublishDate="false" TopicHeader="" AlternativeText="" Authors="[]" AuthorByLine="[]" AuthorByLineId="-1" />
           <pnp:Sections>
             <pnp:Section Order="1" Type="TwoColumnLeft">
@@ -50,10 +50,10 @@
           </pnp:Sections>
           <pnp:FieldValues>
             <pnp:FieldValue Key="ValoPageType" Value="page" />
-            <pnp:FieldValue Key="ValoContentType" Value="Procedure" />
+            <pnp:FieldValue Key="ValoContentType" Value="{parameter:ValoPageTemplateNameProcedure}" />
           </pnp:FieldValues>
         </pnp:ClientSidePage>
-        <pnp:ClientSidePage PromoteAsNewsArticle="false" PromoteAsTemplate="false" Overwrite="true" EnableComments="false" Title="How to guide" ContentTypeID="0x0101009D1CB255DA76424F860D91F20E6C41180056084879C22372419844A40A70A26EE6" ThumbnailUrl="" PageName="Document-HowTo-en-US.aspx">
+        <pnp:ClientSidePage PromoteAsNewsArticle="false" PromoteAsTemplate="false" Overwrite="true" EnableComments="false" Title="{parameter:ValoPageTemplateNameHowToGuide}" ContentTypeID="0x0101009D1CB255DA76424F860D91F20E6C41180056084879C22372419844A40A70A26EE6" ThumbnailUrl="" PageName="Document-HowTo-en-US.aspx">
           <pnp:Header Type="Custom" ServerRelativeImageUrl="{site}/SiteAssets/SitePages/Document-HowTo-en-US/16024-question-orange.png" TranslateX="43.9337252805986" TranslateY="44.2857142857143" LayoutType="FullWidthImage" TextAlignment="Center" ShowTopicHeader="false" ShowPublishDate="false" TopicHeader="" AlternativeText="" Authors="[]" AuthorByLine="[]" AuthorByLineId="-1" />
           <pnp:Sections>
             <pnp:Section Order="1" Type="TwoColumnLeft">
@@ -75,10 +75,10 @@
           </pnp:Sections>
           <pnp:FieldValues>
             <pnp:FieldValue Key="ValoPageType" Value="page" />
-            <pnp:FieldValue Key="ValoContentType" Value="How to guide" />
+            <pnp:FieldValue Key="ValoContentType" Value="{parameter:ValoPageTemplateNameHowToGuide}" />
           </pnp:FieldValues>
         </pnp:ClientSidePage>
-        <pnp:ClientSidePage PromoteAsNewsArticle="false" PromoteAsTemplate="false" Overwrite="true" EnableComments="false" Title="Policy (with attachment)" ContentTypeID="0x0101009D1CB255DA76424F860D91F20E6C41180056084879C22372419844A40A70A26EE6" ThumbnailUrl="" PageName="Document-Policy-with-pdf-en-US.aspx">
+        <pnp:ClientSidePage PromoteAsNewsArticle="false" PromoteAsTemplate="false" Overwrite="true" EnableComments="false" Title="{parameter:ValoPageTemplateNamePolicy}{parameter:ValoPageTemplateNameWithAttachment}" ContentTypeID="0x0101009D1CB255DA76424F860D91F20E6C41180056084879C22372419844A40A70A26EE6" ThumbnailUrl="" PageName="Document-Policy-with-pdf-en-US.aspx">
           <pnp:Header Type="Custom" ServerRelativeImageUrl="{site}/SiteAssets/SitePages/Document-Policy-en-US/80952-information-purple.png" TranslateX="42.6509887760556" TranslateY="47.8571428571429" LayoutType="FullWidthImage" TextAlignment="Center" ShowTopicHeader="false" ShowPublishDate="false" TopicHeader="" AlternativeText="" Authors="[]" AuthorByLine="[]" AuthorByLineId="-1" />
           <pnp:Sections>
             <pnp:Section Order="1" Type="TwoColumnLeft">
@@ -95,10 +95,10 @@
           </pnp:Sections>
           <pnp:FieldValues>
             <pnp:FieldValue Key="ValoPageType" Value="page" />
-            <pnp:FieldValue Key="ValoContentType" Value="Policy" />
+            <pnp:FieldValue Key="ValoContentType" Value="{parameter:ValoPageTemplateNamePolicy}" />
           </pnp:FieldValues>
         </pnp:ClientSidePage>
-        <pnp:ClientSidePage PromoteAsNewsArticle="false" PromoteAsTemplate="false" Overwrite="true" EnableComments="false" Title="Procedure (with attachment)" ContentTypeID="0x0101009D1CB255DA76424F860D91F20E6C41180056084879C22372419844A40A70A26EE6" ThumbnailUrl="" PageName="Document-Procedure-with-pdf-en-US.aspx">
+        <pnp:ClientSidePage PromoteAsNewsArticle="false" PromoteAsTemplate="false" Overwrite="true" EnableComments="false" Title="{parameter:ValoPageTemplateNameProcedure}{parameter:ValoPageTemplateNameWithAttachment}" ContentTypeID="0x0101009D1CB255DA76424F860D91F20E6C41180056084879C22372419844A40A70A26EE6" ThumbnailUrl="" PageName="Document-Procedure-with-pdf-en-US.aspx">
           <pnp:Header Type="Custom" ServerRelativeImageUrl="{site}/SiteAssets/SitePages/Document-Procedure-en-US/4496-lightning-turquoise.png" LayoutType="FullWidthImage" TextAlignment="Center" ShowTopicHeader="false" ShowPublishDate="false" TopicHeader="" AlternativeText="" Authors="[]" AuthorByLine="[]" AuthorByLineId="-1" />
           <pnp:Sections>
             <pnp:Section Order="1" Type="TwoColumnLeft">
@@ -115,10 +115,10 @@
           </pnp:Sections>
           <pnp:FieldValues>
             <pnp:FieldValue Key="ValoPageType" Value="page" />
-            <pnp:FieldValue Key="ValoContentType" Value="Procedure" />
+            <pnp:FieldValue Key="ValoContentType" Value="{parameter:ValoPageTemplateNameProcedure}" />
           </pnp:FieldValues>
         </pnp:ClientSidePage>
-        <pnp:ClientSidePage PromoteAsNewsArticle="false" PromoteAsTemplate="false" Overwrite="true" EnableComments="false" Title="How to guide (with attachment)" ContentTypeID="0x0101009D1CB255DA76424F860D91F20E6C41180056084879C22372419844A40A70A26EE6" ThumbnailUrl="" PageName="Document-HowTo-with-pdf-en-US.aspx">
+        <pnp:ClientSidePage PromoteAsNewsArticle="false" PromoteAsTemplate="false" Overwrite="true" EnableComments="false" Title="{parameter:ValoPageTemplateNameHowToGuide}{parameter:ValoPageTemplateNameWithAttachment}" ContentTypeID="0x0101009D1CB255DA76424F860D91F20E6C41180056084879C22372419844A40A70A26EE6" ThumbnailUrl="" PageName="Document-HowTo-with-pdf-en-US.aspx">
           <pnp:Header Type="Custom" ServerRelativeImageUrl="{site}/SiteAssets/SitePages/Document-HowTo-en-US/16024-question-orange.png" TranslateX="43.9337252805986" TranslateY="44.2857142857143" LayoutType="FullWidthImage" TextAlignment="Center" ShowTopicHeader="false" ShowPublishDate="false" TopicHeader="" AlternativeText="" Authors="[]" AuthorByLine="[]" AuthorByLineId="-1" />
           <pnp:Sections>
             <pnp:Section Order="1" Type="TwoColumnLeft">
@@ -135,7 +135,7 @@
           </pnp:Sections>
           <pnp:FieldValues>
             <pnp:FieldValue Key="ValoPageType" Value="page" />
-            <pnp:FieldValue Key="ValoContentType" Value="How to guide" />
+            <pnp:FieldValue Key="ValoContentType" Value="{parameter:ValoPageTemplateNameHowToGuide}" />
           </pnp:FieldValues>
         </pnp:ClientSidePage>
       </pnp:ClientSidePages>

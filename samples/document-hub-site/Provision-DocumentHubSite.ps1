@@ -157,7 +157,24 @@ function Add-FolderStructure($SourceFolder, $DestinationFolder) {
         }
     }
     
+}
+
+function Get-SiteDefaultLanguage {
+    Param (
+        $Url
+    )
+
+    $connected = Ensure-ValoConnection -url $Url
+
+    if (!$connected) {
+        Log -Message "Something went wrong while connecting to the site $Url, exiting.." -Level Error 
+        Exit
+    }
     
+    $LCID = Get-PnPProperty -ClientObject (Get-PnPWeb) -Property Language
+
+    return $LCID
+
 }
 
 
@@ -196,6 +213,25 @@ Initialize-Credentials `
     -useMFA:$useMFA
 
 # Execution
+
+## Get target site's default language
+
+$LCID = Get-SiteDefaultLanguage -Url $SiteUrl
+$LanguageTable = Import-Csv -Path .\LanguageResources\Languages.csv
+$ResourceFile = Get-ChildItem -Path ".\LanguageResources\$($LCID)_*.xml"
+if (-not $ResourceFile) { 
+    $ResourceFile = Get-ChildItem -Path ".\LanguageResources\1033_*.xml" 
+    Log -Message "Default language for site $SiteUrl isn't available in LanguageResources - defaulting to $($ResourceFile.Name)." -Level Warning
+}
+if ($ResourceFile) {
+    $SiteLanguageResource = Import-Clixml $ResourceFile.FullName
+}
+else {
+    $SiteLanguageResource = @{}
+}
+
+
+## Get target site's valo templates site
 
 $TemplateSiteUrl = Get-ValoTemplatesUrl -SiteUrl $SiteUrl
 
@@ -236,7 +272,7 @@ $PnPTemplates = (Get-ChildItem -Path ".\ValoTemplates\ProvisioningTemplates\*" |
 
 $PnPTemplates | % { 
     Log -Message $("Applying site template {0} to the site {1}" -f @($_.Name, $TemplateSiteUrl)) -Level Info -wrapWithSeparator
-    Apply-PnPProvisioningTemplate -Path $_.FullName -Debug:$ShowDebug
+    Apply-PnPProvisioningTemplate -Path $_.FullName -Parameters $SiteLanguageResource -Debug:$ShowDebug
     
 }
 
@@ -253,7 +289,7 @@ $PnPTemplates = (Get-ChildItem -Path $PnPPath | Sort-Object -Property Name)
 
 $PnPTemplates | % { 
     Log -Message $("Applying site template {0} to the site {1}" -f @($_.Name, $SiteUrl)) -Level Info -wrapWithSeparator
-    Apply-PnPProvisioningTemplate -Path $_.FullName -Debug:$ShowDebug
+    Apply-PnPProvisioningTemplate -Path $_.FullName -Parameters $SiteLanguageResource -Debug:$ShowDebug
     
 }
 
@@ -281,9 +317,9 @@ $ContentTypesToRemove | % {
 Log -Message "  Renaming content types in the Site Pages library" -Level Info
 
 $ContentTypesToRename = @(
-    @{ Id = '0x0101009D1CB255DA76424F860D91F20E6C41180065789619A4EFB44992AF42CEEBB13C9A0301'; Name = 'Policy' }
-    @{ Id = '0x0101009D1CB255DA76424F860D91F20E6C41180065789619A4EFB44992AF42CEEBB13C9A0302'; Name = 'Procedure' }
-    @{ Id = '0x0101009D1CB255DA76424F860D91F20E6C41180065789619A4EFB44992AF42CEEBB13C9A0303'; Name = 'How to guide' }
+    @{ Id = '0x0101009D1CB255DA76424F860D91F20E6C41180065789619A4EFB44992AF42CEEBB13C9A0301'; Name = "$($SiteLanguageResource.ValoPageTemplateNamePolicy)" }
+    @{ Id = '0x0101009D1CB255DA76424F860D91F20E6C41180065789619A4EFB44992AF42CEEBB13C9A0302'; Name = "$($SiteLanguageResource.ValoPageTemplateNameProcedure)" }
+    @{ Id = '0x0101009D1CB255DA76424F860D91F20E6C41180065789619A4EFB44992AF42CEEBB13C9A0303'; Name = "$($SiteLanguageResource.ValoPageTemplateNameHowToGuide)" }
 )
 
 $SitePagesList = Get-PnPList "Site Pages"
