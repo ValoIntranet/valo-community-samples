@@ -1,0 +1,195 @@
+<content id="metadata" type="x-handlebars-metadata">
+  {
+    "fields": ["Path", "Created", "Title", "AuthorOWSUSER", "BannerImageUrlOWSURLH", "PictureThumbnailURL", "Description", "ValoTags", "ValoVideoSpeakersOWSUSER", "ValoVideoPlaylistOWSCHCS"],
+    "query": "ContentTypeId:0x0101009D1CB255DA76424F860D91F20E6C41180065789619A4EFB44992AF42CEEBB13C9A03*",
+    "sorting": "Created:descending",
+    "parameters": [
+      {
+        "name": "ShowMoreTitle",
+        "value": "Read more",
+        "description": "Title for show more link"
+      },
+      {
+        "name": "ShowMoreUrl",
+        "value": "",
+        "description": "Url for show more link"
+      },
+      {
+        "name": "ShowMoreTarget",
+        "value": "_blank",
+        "description": "Target for show more link"
+      }
+    ]
+  }
+</content>
+
+<content id="template" type="x-handlebars-template">
+  <style>
+    #{{componentId}} a.vm-Card.valo-news__item:hover,
+    #{{componentId}} a.vm-Card.valo-news__item:visited {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    #{{componentId}} a.vm-Card.valo-news__item {
+      display: block;
+      text-decoration: none;
+    }
+
+    #{{componentId}} .valo-news__item__abstract {
+      line-height: 1.5em;
+      min-height: 6em;
+    }
+
+    #{{componentId}} .valo-news__item__info {
+      padding-left: 15px;
+      padding-right: 15px;
+      height: auto;
+    }
+    
+    #{{componentId}} .valo-video-persona {
+      display: inline-block;
+    }
+
+    #{{componentId}} .valo-video__item-speakers__personas {
+      display: flex;
+      align-items: center;
+    }
+
+    #{{componentId}} .valo-news__item__tags {
+      left: auto;
+      right: auto;
+    }
+  </style>
+
+  <!-- Initialize batched Likes/Comments requests-->
+  {{prepareBatchSocialInfoPromises dsData.items}}
+  <!-- Initialize batched terms requests-->
+  {{#if parameters.UseMultilingualTerms}}
+    {{prepareBatchTermsPromises dsData.items language}}
+  {{/if}}
+
+  <!-- Initialize batched PageImageInfo requests-->
+  {{prepareBatchPageImageInfoPromises dsData.items}}
+
+  <div class="valo-news ms-Grid">
+    {{setVariable "id" (randomId "news")}}
+    {{setVariable "canUseIntersectionObserver" (useIntersectionObserver parameters.UseImageLazyLoading) }}
+    <div class="valo-news__list ms-Grid-row vm-Cards" id="{{@root.id}}">
+      {{#each dsData.items}}
+      <div class="valo-news__item vm-Card showTransition">
+        <div class="valo-news__item__wrapper">
+          <div class="valo-events__item__banner-zone">
+            <a class="valo-news__item__banner" href="{{Path}}" title="{{Title}}">
+              {{#if PictureThumbnailURL}}
+                <valo-image-focal-point css-names="valo-news__item__banner__parallax parallax parallaxSlow" img-url="{{imageResolution PictureThumbnailURL 4 null null ../parameters.UseThumbnailImages}}" item-id="{{ListItemID}}" list-id="{{ListID}}" site-url="{{SPWebUrl}}" layout-content="{{LayoutWebpartsContentOWSHTML}}" observer-support="{{@root.canUseIntersectionObserver}}"></valo-image-focal-point>
+              {{else}}
+                <valo-image-focal-point css-names="valo-news__item__banner__parallax parallax parallaxSlow" img-url="{{imageResolution BannerImageUrlOWSURLH 4 null null ../parameters.UseThumbnailImages}}" item-id="{{ListItemID}}" list-id="{{ListID}}" site-url="{{SPWebUrl}}" layout-content="{{LayoutWebpartsContentOWSHTML}}" observer-support="{{@root.canUseIntersectionObserver}}"></valo-image-focal-point>
+              {{/if}}
+              
+              <div class="valo-events__item__banner-info">
+                <div class="valo-events__item__banner-info__icon">
+                  <i class="valo-events__item__banner-info__icon-i ms-Icon ms-Icon--Video" aria-hidden="true"></i>
+                </div>
+                <div class="valo-events__item__banner-info__text">
+                  <span class="valo-events__item__banner-info__title">{{Title}}</span>
+                  {{#if ValoVideoPlaylistOWSCHCS}}
+                    <span class="valo-events__item__banner-info__title">{{ValoVideoPlaylistOWSCHCS}}</span>
+                  {{/if}}
+                </div>
+              </div>
+            </a>
+          </div>
+          
+          <div class="valo-news__item__info">
+            <div class="valo-news__item__meta">
+
+              {{#if ValoVideoSpeakersOWSUSER}}
+                <span class="valo-news__item__meta__editor">
+                  <div class="valo-video__item-speakers__personas">  
+                    <valo-persona-card 
+                      class="valo-video-persona"
+                      image-url="{{../SPWebUrl}}/_layouts/15/userphoto.aspx?size=L&username={{splitSPUser ValoVideoSpeakersOWSUSER 'email'}}" 
+                      text="{{splitSPUser ValoVideoSpeakersOWSUSER 'displayName'}}" 
+                      persona-size="10">
+                    </valo-persona-card>
+                    <span>{{dateAgoFormat Created}}</span>
+                  </div>
+                </span>
+              {{else}}
+                <span class="valo-news__item__meta__editor">
+                  <div class="valo-video__item-speakers__personas">  
+                    <valo-persona-card 
+                      image-url="{{../SPWebUrl}}/_layouts/15/userphoto.aspx?size=L&username={{splitSPUser AuthorOWSUSER 'email'}}" 
+                      text="{{splitSPUser AuthorOWSUSER 'displayName'}}" 
+                      persona-size="10">
+                    </valo-persona-card>
+                    <span>{{dateAgoFormat Created}}</span>
+                  </div>
+                </span>
+              {{/if}}
+            </div>
+            <div class="valo-news__item__abstract">{{ellipsis Description 200}}</div>
+            <div class="valo-news__item__social">
+              <span class="valo-news__item__social__comments">
+                <valo-page-social-info item-id="{{ListItemID}}" list-id="{{ListID}}" site-url="{{SPWebUrl}}"></valo-page-social-info>
+              </span>
+            </div>
+            <div class="valo-news__item__tags">
+              {{#or ValoTagsTaxonomy owstaxIdValoTags ValoTags}}
+                <valo-terms term-value="{{#if ValoTagsTaxonomy}}{{ValoTagsTaxonomy}}{{else if owstaxIdValoTags }}{{owstaxIdValoTags}}{{else if ValoTags}}{{ValoTags}}{{/if}}"
+                            web-url="{{SPWebUrl}}"
+                            multilingual="{{@root.parameters.UseMultilingualTerms}}"
+                            css-span="valo-news__item__tags__tag"
+                            css-icon="valo-news__item__tag-icon ms-Icon ms-Icon--Tag"
+                            css-more="valo-news__item__tags__more"
+                            show-more-tag="true">
+                </valo-terms>
+              {{/or}}
+            </div>
+          </div>
+        </div>
+      </div>
+      {{/each}}
+    </div>
+  </div>
+  {{#if parameters.ShowMoreUrl}}
+    <div class="valo-showMore">
+      <a href="{{parameters.ShowMoreUrl}}" target="{{parameters.ShowMoreTarget}}">{{parameters.ShowMoreTitle}}</a>
+    </div>
+  {{/if}}
+
+</content>
+
+
+<content id="placeholder" type="x-handlebars-template">
+  <div class="valo-news ms-Grid">
+    <div class="valo-news__list ms-Grid-row vm-Cards placeholder">
+      {{#repeat nrOfResults}}
+      <div class="valo-news__item ms-sm4 vm-Card">
+        <div class="valo-news__item__wrapper">
+          <div class="valo-news__item__banner">
+            <div style="background-image:url('/_layouts/15/images/sitepagethumbnail.png');"></div>
+          </div>
+          <div class="valo-news__item__info">
+            <p class="valo-news__item__title"></p>
+            <div class="valo-news__item__meta"></div>
+            <div class="valo-news__item__abstract"></div>
+            <div class="valo-news__item__social"></div>
+            <div class="valo-news__item__tags"></div>
+          </div>
+        </div>
+      </div>
+      {{/repeat}}
+    </div>
+  </div>
+</content><html><head><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8"><meta name="Robots" content="NOINDEX " /></head><body></body>
+                <script type="text/javascript">
+                 var gearPage = document.getElementById('GearPage');
+                 if(null != gearPage)
+                 {
+                     gearPage.parentNode.removeChild(gearPage);
+                     document.title = "Error";
+                 }
+                 </script>
+                 </html>

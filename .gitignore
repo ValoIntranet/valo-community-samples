@@ -5,3 +5,5 @@ release.json
 .DS_Store
 
 *.log
+
+pnp-debug*
