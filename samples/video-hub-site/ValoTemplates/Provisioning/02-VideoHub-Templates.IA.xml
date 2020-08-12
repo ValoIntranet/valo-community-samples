@@ -1,7 +1,7 @@
 <pnp:Provisioning xmlns:pnp="http://schemas.dev.office.com/PnP/2020/02/ProvisioningSchema">
   <pnp:Preferences />
-  <pnp:Templates ID="CONTAINER-TEMPLATE-VIDEOPAGE">
-    <pnp:ProvisioningTemplate ID="TEMPLATE-VIDEOPAGE" Version="1" Scope="RootSite">
+  <pnp:Templates ID="CONTAINER-TEMPLATE-VIDEOHUB">
+    <pnp:ProvisioningTemplate ID="TEMPLATE-VIDEOHUB" Version="1" Scope="RootSite">
       <pnp:ClientSidePages>
         <pnp:ClientSidePage PromoteAsNewsArticle="false" PromoteAsTemplate="false" Overwrite="true" Title="{parameter:PageVideoTemplateTitle}" ContentTypeID="0x0101009D1CB255DA76424F860D91F20E6C41180056084879C22372419844A40A70A26EE6" ThumbnailUrl="" PageName="Video-Page-en-US.aspx">
           <pnp:Header Type="Custom" ServerRelativeImageUrl="{site}/SiteAssets/SitePages/Video-Page-en-US/61847-art-backdrop-bright-53265.jpg" TranslateX="50.0326583932071" TranslateY="27.8571428571429" LayoutType="FullWidthImage" TextAlignment="Center" ShowTopicHeader="false" ShowPublishDate="false" TopicHeader="" AlternativeText="" Authors="[]" AuthorByLine="[]" AuthorByLineId="-1" />

@@ -8,5 +8,7 @@
   "FieldValoVideoSpeakersDisplayName": "Speakers",
   "ListSitePagesTitle": "Site pages",
   "PageVideoTemplateTitle": "Video Page",
-  "PageVideoHubTitle": "Video Hub"
+  "PageVideoHubTitle": "Video Hub",
+  "FileVideosCardTemplateTitle": "Valo - Videos",
+  "FileVideosCardTemplateDataSource": "SearchDataSource"
 }

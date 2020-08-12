@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<pnp:Provisioning xmlns:pnp="http://schemas.dev.office.com/PnP/2020/02/ProvisioningSchema">
+  <pnp:Preferences />
+  <pnp:Templates ID="CONTAINER-TEMPLATE-VIDEOHUB">
+    <pnp:ProvisioningTemplate ID="TEMPLATE-VIDEOHUB" Version="1" Scope="RootSite">
+      <pnp:Files>
+        <pnp:Directory Src="..\Files\SiteAssets" Folder="SiteAssets" Overwrite="true" Recursive="true" />
+      </pnp:Files>
+    </pnp:ProvisioningTemplate>
+  </pnp:Templates>
+</pnp:Provisioning>
