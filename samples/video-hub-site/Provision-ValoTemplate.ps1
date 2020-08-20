@@ -7,6 +7,9 @@
 
  .PARAMETER SiteUrl
     Required, Site Url where to deploy the template 
+    
+ .PARAMETER TemplatesSiteUrl
+    Required, Valo Templates Site Url
 
  .PARAMETER SiteTitle
     Optional, the site will be updated with this Title 
@@ -35,6 +38,10 @@ Param(
     [Parameter(Mandatory = $true, HelpMessage = "Url of the site where site resources are to be provisioned.")]
     [ValidateNotNullOrEmpty()]
     [String]$SiteUrl,
+    
+    [Parameter(Mandatory = $true, HelpMessage = "Url of the site where site resources are to be provisioned.")]
+    [ValidateNotNullOrEmpty()]
+    [String]$TemplatesSiteUrl,
     
     [Parameter(Mandatory = $false, HelpMessage = "The site will be updated with this Title (if specified)")]
     [ValidateNotNullOrEmpty()]
@@ -269,7 +276,11 @@ Initialize-Credentials `
 #-----------------------------------------------------------------------
 # Deploy the Valo Templates artefacts
 #-----------------------------------------------------------------------
-Deploy-ValoTemplate -SiteUrl (Get-ValoTemplatesUrl -SiteUrl $SiteUrl) -TemplatePath $ValoTemplatesPnPPath
+if(!$TemplatesSiteUrl) {
+    $TemplatesSiteUrl = Get-ValoTemplatesUrl -SiteUrl $SiteUrl
+}
+
+Deploy-ValoTemplate -SiteUrl $TemplatesSiteUrl -TemplatePath $ValoTemplatesPnPPath
 
 #-----------------------------------------------------------------------
 # Deploy the Target Site artefacts

@@ -3,7 +3,20 @@
   <pnp:Templates ID="CONTAINER-TEMPLATE-VIDEOHUB">
     <pnp:ProvisioningTemplate ID="TEMPLATE-VIDEOHUB" Version="1" Scope="RootSite">
       <pnp:Files>
-        <pnp:File Src="..\Files\TemplatesGallery\Valo.Videos.html" Folder="TemplatesGallery" Overwrite="true" />
+        <pnp:File Src="..\Files\TemplatesGallery\Valo.Videos.html" Folder="TemplatesGallery" Overwrite="true">
+          <pnp:Properties>
+            <pnp:Property Key="Title" Value="{parameter:FileVideosCardTemplateTitle}" />
+            <pnp:Property Key="TemplateTitle" Value="{parameter:FileVideosCardTemplateTitle}" />
+            <pnp:Property Key="DataSource" Value="{parameter:FileVideosCardTemplateDataSource}" />
+          </pnp:Properties>
+        </pnp:File>
+        <pnp:File Src="..\Files\TemplatesGallery\Valo.Person.html" Folder="TemplatesGallery" Overwrite="true">
+          <pnp:Properties>
+            <pnp:Property Key="Title" Value="{parameter:FilePersonTemplateTitle}" />
+            <pnp:Property Key="TemplateTitle" Value="{parameter:FilePersonTemplateTitle}" />
+            <pnp:Property Key="DataSource" Value="{parameter:FilePersonTemplateDataSource}" />
+          </pnp:Properties>
+        </pnp:File>
         <pnp:Directory Src="..\Files\SiteAssets" Folder="SiteAssets" Overwrite="true" Recursive="true" />
       </pnp:Files>
     </pnp:ProvisioningTemplate>

@@ -10,5 +10,7 @@
   "PageVideoTemplateTitle": "Video Page",
   "PageVideoHubTitle": "Video Hub",
   "FileVideosCardTemplateTitle": "Valo - Videos",
-  "FileVideosCardTemplateDataSource": "SearchDataSource"
+  "FileVideosCardTemplateDataSource": "SearchDataSource",
+  "FilePersonTemplateTitle": "Valo - Person",
+  "FilePersonTemplateDataSource": "CurrentPageDataSource"
 }

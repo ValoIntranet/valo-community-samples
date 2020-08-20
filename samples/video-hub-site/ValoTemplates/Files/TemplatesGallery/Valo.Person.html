@@ -1,0 +1,39 @@
+<content id="metadata" type="x-handlebars-metadata">
+    {
+      "parameters": [
+        {
+          "name": "ColumnName",
+          "value": "AuthorId",
+          "description": "Internal Column Name"
+        }
+      ]
+    }
+</content>
+
+<content id="customHelpers" type="x-handlebars-helpers">
+  <script>
+    Handlebars.registerHelper('getUserId', function(data, columnName) {
+      if(data && columnName && data[columnName]) {
+        return data[columnName];
+      }
+
+      return data.AuthorId;
+    });
+  </script>
+</content>
+
+<content id="template" type="x-handlebars-template">
+  <style>
+    .valo-person_contact {
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+  </style>
+
+  <div class="valo-person_contact">
+      <valo-persona-card 
+          user-id="{{getUserId dsData parameters.ColumnName}}"
+          persona-size="13" >
+      </valo-persona-card>
+  </div>
+</content>
