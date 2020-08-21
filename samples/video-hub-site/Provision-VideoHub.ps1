@@ -32,8 +32,7 @@
 #>
 [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSAvoidUsingPlainTextForPassword", "PasswordAuthenticationContext")]
 Param(
-    [Parameter(Mandatory = $true, HelpMessage = "Url of the tenant")]
-    [ValidateNotNullOrEmpty()]
+    [Parameter(Mandatory = $false, HelpMessage = "Url of the tenant")]
     [String]$TenantUrl,
 
     [Parameter(Mandatory = $false, HelpMessage = "Url of the Valo Templates site")]
@@ -122,11 +121,12 @@ Log -Message $("Provisioning $($TemplateParameters.Name) template") -Level Info 
 #-----------------------------------------------------------------------
 # Building the Template specific parameters
 #-----------------------------------------------------------------------
+$TemplateParameters.TenantUrl = if($TenantUrl) { $TenantUrl } else { $TemplateParameters.TenantUrl };
 $TemplateParameters.ValoTemplatesUrl = if($ValoTemplatesUrl) { $ValoTemplatesUrl } else { $TemplateParameters.ValoTemplatesUrl };
 $TemplateParameters.VideoHubUrl = if($VideoHubUrl) { $VideoHubUrl } else { $TemplateParameters.VideoHubUrl };
 
-if(!($TemplateParameters.ValoTemplatesUrl) -or !($TemplateParameters.VideoHubUrl)) {
-    Log -Message "Please provide ValoTemplatesUrl and VideoHubUrl..." -Level Error 
+if(!($TemplateParameters.TenantUrl) -or !($TemplateParameters.ValoTemplatesUrl) -or !($TemplateParameters.VideoHubUrl)) {
+    Log -Message "Please provide TenantUrl, ValoTemplatesUrl and VideoHubUrl..." -Level Error 
     Exit
 }
 
@@ -134,8 +134,8 @@ if(!($TemplateParameters.ValoTemplatesUrl) -or !($TemplateParameters.VideoHubUrl
 # Provisoning the Template
 #-----------------------------------------------------------------------
 Provision-ValoTemplate `
-    -TenantUrl $TenantUrl `
-    -TemplateName "video-hub-site" `
+    -TenantUrl $TemplateParameters.TenantUrl `
+    -TemplateName $TemplateParameters.Name `
     -TemplateParameters $TemplateParameters `
     -Office365CredentialStoreKey $Office365CredentialStoreKey `
     -SharePointUserName $SharePointUserName `
