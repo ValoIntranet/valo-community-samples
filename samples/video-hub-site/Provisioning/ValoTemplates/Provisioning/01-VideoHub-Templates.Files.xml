@@ -1,0 +1,24 @@
+<pnp:Provisioning xmlns:pnp="http://schemas.dev.office.com/PnP/2020/02/ProvisioningSchema">
+  <pnp:Preferences />
+  <pnp:Templates ID="CONTAINER-TEMPLATE-VIDEOHUB">
+    <pnp:ProvisioningTemplate ID="TEMPLATE-VIDEOHUB" Version="1" Scope="RootSite">
+      <pnp:Files>
+        <pnp:File Src="ValoTemplates\Files\TemplatesGallery\Valo.Videos.html" Folder="TemplatesGallery" Overwrite="true">
+          <pnp:Properties>
+            <pnp:Property Key="Title" Value="{localization:template:FileVideosCardTemplateTitle}" />
+            <pnp:Property Key="TemplateTitle" Value="{localization:template:FileVideosCardTemplateTitle}" />
+            <pnp:Property Key="DataSource" Value="{localization:template:FileVideosCardTemplateDataSource}" />
+          </pnp:Properties>
+        </pnp:File>
+        <pnp:File Src="ValoTemplates\Files\TemplatesGallery\Valo.Person.html" Folder="TemplatesGallery" Overwrite="true">
+          <pnp:Properties>
+            <pnp:Property Key="Title" Value="{localization:template:FilePersonTemplateTitle}" />
+            <pnp:Property Key="TemplateTitle" Value="{localization:template:FilePersonTemplateTitle}" />
+            <pnp:Property Key="DataSource" Value="{localization:template:FilePersonTemplateDataSource}" />
+          </pnp:Properties>
+        </pnp:File>
+        <pnp:Directory Src="ValoTemplates\Files\SiteAssets" Folder="SiteAssets" Overwrite="true" Recursive="true" />
+      </pnp:Files>
+    </pnp:ProvisioningTemplate>
+  </pnp:Templates>
+</pnp:Provisioning>

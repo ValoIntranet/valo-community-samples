@@ -4,18 +4,21 @@
   <pnp:Templates ID="CONTAINER-TEMPLATE-VIDEOHUB">
     <pnp:ProvisioningTemplate ID="TEMPLATE-VIDEOHUB" Version="1" Scope="RootSite">
       <pnp:SiteFields>
-        <Field Type="Choice" DisplayName="{parameter:FieldValoVideoPlaylistDisplayName}" Required="FALSE" EnforceUniqueValues="FALSE" Indexed="FALSE" Format="Dropdown" FillInChoice="FALSE" Group="Valo" ID="{f28a687d-f20a-42e2-8ab0-11599b541c41}" SourceID="{05efaeb3-a4e5-462c-a4f2-a0661315c47a}" StaticName="ValoVideoPlaylist" Name="ValoVideoPlaylist" CustomFormatter="">
-          <Default>{parameter:FieldValoVideoPlaylistChoiceDefault}</Default>
+        <Field Type="Choice" DisplayName="{localization:template:FieldValoVideoPlaylistDisplayName}" Required="FALSE" EnforceUniqueValues="FALSE" Indexed="FALSE" Format="Dropdown" FillInChoice="FALSE" Group="Valo" ID="{f28a687d-f20a-42e2-8ab0-11599b541c41}" SourceID="{05efaeb3-a4e5-462c-a4f2-a0661315c47a}" StaticName="ValoVideoPlaylist" Name="ValoVideoPlaylist" CustomFormatter="">
+          <Default>{localization:template:FieldValoVideoPlaylistChoiceDefault}</Default>
           <CHOICES>
-            <CHOICE>{parameter:FieldValoVideoPlaylistChoice01}</CHOICE>
-            <CHOICE>{parameter:FieldValoVideoPlaylistChoice02}</CHOICE>
-            <CHOICE>{parameter:FieldValoVideoPlaylistChoice03}</CHOICE>
+            <CHOICE>{localization:template:FieldValoVideoPlaylistChoice01}</CHOICE>
+            <CHOICE>{localization:template:FieldValoVideoPlaylistChoice02}</CHOICE>
+            <CHOICE>{localization:template:FieldValoVideoPlaylistChoice03}</CHOICE>
           </CHOICES>
         </Field>
-        <Field Type="User" DisplayName="{parameter:FieldValoVideoSpeakersDisplayName}" List="UserInfo" Required="FALSE" EnforceUniqueValues="FALSE" ShowField="ImnName" UserSelectionMode="PeopleOnly" UserSelectionScope="0" Mult="FALSE" Group="Valo" ID="{2d2db8c5-8567-475b-9c77-a9337c31c850}" SourceID="{{siteid}}" StaticName="ValoVideoSpeakers" Name="ValoVideoSpeakers" />
+        <Field Type="User" DisplayName="{localization:template:FieldValoVideoSpeakersDisplayName}" List="UserInfo" Required="FALSE" EnforceUniqueValues="FALSE" ShowField="ImnName" UserSelectionMode="PeopleOnly" UserSelectionScope="0" Mult="FALSE" Group="Valo" ID="{2d2db8c5-8567-475b-9c77-a9337c31c850}" SourceID="{{siteid}}" StaticName="ValoVideoSpeakers" Name="ValoVideoSpeakers" />
       </pnp:SiteFields>
       <pnp:ContentTypes>
-        <pnp:ContentType ID="0x0101009D1CB255DA76424F860D91F20E6C41180065789619A4EFB44992AF42CEEBB13C9A03" Name="{parameter:ContentTypeValoVideoPageTitle}" Description="" Group="Valo" NewFormUrl="" EditFormUrl="" DisplayFormUrl="">
+        <pnp:ContentType  ID="0x0101009D1CB255DA76424F860D91F20E6C41180065789619A4EFB44992AF42CEEBB13C9A03" 
+                          Name="{localization:template:ContentTypeValoVideoPageTitle}" 
+                          Description="" 
+                          Group="Valo">
           <pnp:FieldRefs>
             <pnp:FieldRef ID="c042a256-787d-4a6f-8a8a-cf6ab767f12d" Name="ContentType" UpdateChildren="true" />
             <pnp:FieldRef ID="5f47e085-2150-41dc-b661-442f3027f552" Name="SelectFilename" UpdateChildren="true" />
@@ -56,7 +59,7 @@
         </pnp:ContentType>
       </pnp:ContentTypes>
       <pnp:Lists>
-        <pnp:ListInstance Title="{parameter:ListSitePagesTitle}" Description="" DocumentTemplate="" TemplateType="119" Url="SitePages" EnableVersioning="true" EnableMinorVersions="true" MinorVersionLimit="500" MaxVersionLimit="500" DraftVersionVisibility="1" TemplateFeatureID="00bfea71-c796-4402-9f2f-0eb9a6e71b18" ContentTypesEnabled="true" EnableAttachments="false" EnableFolderCreation="false" DefaultDisplayFormUrl="{site}/SitePages/Forms/DispForm.aspx" DefaultEditFormUrl="{site}/SitePages/Forms/EditForm.aspx" DefaultNewFormUrl="{site}/SitePages/Forms/Upload.aspx" ImageUrl="/_layouts/15/images/itdl.png?rev=44" IrmExpire="false" IrmReject="false" IsApplicationList="false" ValidationFormula="" ValidationMessage="">
+        <pnp:ListInstance Title="{localization:template:ListSitePagesTitle}" Description="" DocumentTemplate="" TemplateType="119" Url="SitePages" EnableVersioning="true" EnableMinorVersions="true" MinorVersionLimit="500" MaxVersionLimit="500" DraftVersionVisibility="1" TemplateFeatureID="00bfea71-c796-4402-9f2f-0eb9a6e71b18" ContentTypesEnabled="true" EnableAttachments="false" EnableFolderCreation="false" DefaultDisplayFormUrl="{site}/SitePages/Forms/DispForm.aspx" DefaultEditFormUrl="{site}/SitePages/Forms/EditForm.aspx" DefaultNewFormUrl="{site}/SitePages/Forms/Upload.aspx" ImageUrl="/_layouts/15/images/itdl.png?rev=44" IrmExpire="false" IrmReject="false" IsApplicationList="false" ValidationFormula="" ValidationMessage="">
           <pnp:ContentTypeBindings>
             <pnp:ContentTypeBinding ContentTypeID="0x0101009D1CB255DA76424F860D91F20E6C41180065789619A4EFB44992AF42CEEBB13C9A" />
             <pnp:ContentTypeBinding ContentTypeID="0x0101009D1CB255DA76424F860D91F20E6C4118" />

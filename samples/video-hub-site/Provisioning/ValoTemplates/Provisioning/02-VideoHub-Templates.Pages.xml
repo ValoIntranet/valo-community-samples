@@ -3,7 +3,7 @@
   <pnp:Templates ID="CONTAINER-TEMPLATE-VIDEOHUB">
     <pnp:ProvisioningTemplate ID="TEMPLATE-VIDEOHUB" Version="1" Scope="RootSite">
       <pnp:ClientSidePages>
-        <pnp:ClientSidePage PromoteAsNewsArticle="false" PromoteAsTemplate="false" Overwrite="true" Title="{parameter:PageVideoTemplateTitle}" ContentTypeID="0x0101009D1CB255DA76424F860D91F20E6C41180056084879C22372419844A40A70A26EE6" ThumbnailUrl="" PageName="Video-Page-en-US.aspx">
+        <pnp:ClientSidePage PromoteAsNewsArticle="false" PromoteAsTemplate="false" Overwrite="true" Title="{localization:template:PageVideoTemplateTitle}" ContentTypeID="0x0101009D1CB255DA76424F860D91F20E6C41180056084879C22372419844A40A70A26EE6" ThumbnailUrl="" PageName="Video-Page-en-US.aspx">
           <pnp:Header Type="Custom" ServerRelativeImageUrl="{site}/SiteAssets/SitePages/Video-Page-en-US/61847-art-backdrop-bright-53265.jpg" TranslateX="50.0326583932071" TranslateY="27.8571428571429" LayoutType="FullWidthImage" TextAlignment="Center" ShowTopicHeader="false" ShowPublishDate="false" TopicHeader="" AlternativeText="" Authors="[]" AuthorByLine="[]" AuthorByLineId="-1" />
           <pnp:Sections>
             <pnp:Section Order="1" Type="TwoColumnLeft">
@@ -21,7 +21,7 @@
           </pnp:Sections>
           <pnp:FieldValues>
             <pnp:FieldValue Key="ValoPageType" Value="page" />
-            <pnp:FieldValue Key="ValoContentType" Value="{parameter:ContentTypeValoVideoPageTitle}" />
+            <pnp:FieldValue Key="ValoContentType" Value="{localization:template:ContentTypeValoVideoPageTitle}" />
           </pnp:FieldValues>
         </pnp:ClientSidePage>
       </pnp:ClientSidePages>

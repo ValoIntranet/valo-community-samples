@@ -1,4 +1,6 @@
 {
   "Name": "Video Hub",
-  "InternalName": "VideoHubTemplate"
+  "InternalName": "VideoHubTemplate",
+  "VideoHubUrl": "",
+  "ValoTemplatesUrl": ""
 }

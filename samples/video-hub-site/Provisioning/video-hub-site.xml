@@ -1,0 +1,46 @@
+<pnp:Provisioning xmlns:pnp="http://schemas.dev.office.com/PnP/2020/02/ProvisioningSchema">
+  <pnp:Preferences>
+    <pnp:Parameters>
+      <pnp:Parameter Key="VideoHubUrl">/sites/valo-videos</pnp:Parameter>
+      <pnp:Parameter Key="ValoTemplatesUrl">/sites/valotemplates</pnp:Parameter>
+    </pnp:Parameters>
+  </pnp:Preferences>  
+  <pnp:Localizations>
+    <pnp:Localization LCID="1033" Name="template" ResourceFile="Resources\en-US.json" />
+    <pnp:Localization LCID="1036" Name="template" ResourceFile="Resources\fr-FR.json" />
+  </pnp:Localizations>
+  <pnp:Templates ID="VIDEO-HUB-TEMPLATES">
+    <pnp:ProvisioningTemplateFile ID="VIDEO-HUB-IA" File="Templates\Provisioning\01-VideoHub.IA.xml" />
+    <pnp:ProvisioningTemplateFile ID="VIDEO-HUB-FILES" File="Templates\Provisioning\02-VideoHub.Files.xml" />
+    <pnp:ProvisioningTemplateFile ID="VIDEO-HUB-PAGES" File="Templates\Provisioning\03-VideoHub.Pages.xml" />
+    <pnp:ProvisioningTemplateFile ID="VALO-TEMPLATES-FILES" File="ValoTemplates\Provisioning\01-VideoHub-Templates.Files.xml" />
+    <pnp:ProvisioningTemplateFile ID="VALO-TEMPLATES-PAGES" File="ValoTemplates\Provisioning\02-VideoHub-Templates.Pages.xml" />
+  </pnp:Templates>
+  <pnp:Sequence ID="VIDEO-HUB-SEQUENCE">
+    <pnp:SiteCollections>
+      <pnp:SiteCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                          xsi:type="pnp:CommunicationSite"
+                          Url="{parameter:ValoTemplatesUrl}"
+                          Title=""
+                          Description=""
+                          Owner="">
+        <pnp:Templates>
+          <pnp:ProvisioningTemplateReference ID="VALO-TEMPLATES-FILES" />
+          <pnp:ProvisioningTemplateReference ID="VALO-TEMPLATES-PAGES" />
+        </pnp:Templates>
+      </pnp:SiteCollection>
+      <pnp:SiteCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                          xsi:type="pnp:CommunicationSite"
+                          Url="{parameter:VideoHubUrl}"
+                          Title=""
+                          Description=""
+                          Owner="">
+        <pnp:Templates>
+          <pnp:ProvisioningTemplateReference ID="VIDEO-HUB-IA" />
+          <pnp:ProvisioningTemplateReference ID="VIDEO-HUB-FILES" />
+          <pnp:ProvisioningTemplateReference ID="VIDEO-HUB-PAGES" />
+        </pnp:Templates>
+      </pnp:SiteCollection>
+    </pnp:SiteCollections>  
+  </pnp:Sequence>
+</pnp:Provisioning>
