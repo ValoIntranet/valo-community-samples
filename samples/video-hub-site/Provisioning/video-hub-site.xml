@@ -1,8 +1,8 @@
 <pnp:Provisioning xmlns:pnp="http://schemas.dev.office.com/PnP/2020/02/ProvisioningSchema">
   <pnp:Preferences>
     <pnp:Parameters>
-      <pnp:Parameter Key="VideoHubUrl">/sites/valo-videos</pnp:Parameter>
-      <pnp:Parameter Key="ValoTemplatesUrl">/sites/valotemplates</pnp:Parameter>
+      <pnp:Parameter Key="VideoHubUrl"></pnp:Parameter>
+      <pnp:Parameter Key="ValoTemplatesUrl"></pnp:Parameter>
     </pnp:Parameters>
   </pnp:Preferences>  
   <pnp:Localizations>
