@@ -11,6 +11,8 @@
   "PageVideoHubTitle": "Video Hub",
   "FileVideosCardTemplateTitle": "Valo - Videos",
   "FileVideosCardTemplateDataSource": "SearchDataSource",
+  "FileVideosSingleTemplateTitle": "Valo - Videos - Single",
+  "FileVideosSingleTemplateDataSource": "SearchDataSource",
   "FilePersonTemplateTitle": "Valo - Person",
   "FilePersonTemplateDataSource": "CurrentPageDataSource"
 }

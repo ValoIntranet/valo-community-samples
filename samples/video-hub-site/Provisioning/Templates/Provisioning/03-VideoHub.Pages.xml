@@ -4,7 +4,7 @@
   <pnp:Templates ID="CONTAINER-TEMPLATE-VIDEOHUB">
     <pnp:ProvisioningTemplate ID="TEMPLATE-VIDEOHUB" Version="1" Scope="RootSite">
       <pnp:ClientSidePages>
-        <pnp:ClientSidePage PromoteAsNewsArticle="false" PromoteAsTemplate="false" Overwrite="true" EnableComments="false" Title="{localization:template:PageVideoHubTitle}" ContentTypeID="0x0101009D1CB255DA76424F860D91F20E6C41180065789619A4EFB44992AF42CEEBB13C9A" ThumbnailUrl="" PageName="Videos.aspx">
+        <pnp:ClientSidePage PromoteAsNewsArticle="false" PromoteAsTemplate="false" Overwrite="false" EnableComments="false" Title="{localization:template:PageVideoHubTitle}" ContentTypeID="0x0101009D1CB255DA76424F860D91F20E6C41180065789619A4EFB44992AF42CEEBB13C9A" ThumbnailUrl="" PageName="Videos.aspx">
           <pnp:Header Type="Custom" ServerRelativeImageUrl="{site}/SiteAssets/SitePages/Videos/76557-Close-up-of-a-camera-lens.jpg" TranslateX="14.5656779661017" TranslateY="16.0714285714286" LayoutType="FullWidthImage" TextAlignment="Center" ShowTopicHeader="false" ShowPublishDate="false" TopicHeader="" AlternativeText="" Authors="[]" AuthorByLine="[]" AuthorByLineId="-1" />
           <pnp:Sections>
             <pnp:Section Order="1" Type="OneColumn">

@@ -1,0 +1,199 @@
+<content id="metadata" type="x-handlebars-metadata">
+  {
+      "fields": ["Path", "Created", "Title", "ListItemID", "ListID", "SPWebUrl", "LayoutWebpartsContentOWSHTML", "AuthorOWSUSER", "BannerImageUrlOWSURLH", "PictureThumbnailURL", "Description", "ValoTags", "ValoVideoSpeakersOWSUSER", "ValoVideoPlaylistOWSCHCS"],
+      "query": "ContentTypeId:0x0101009D1CB255DA76424F860D91F20E6C41180065789619A4EFB44992AF42CEEBB13C9A03*",
+      "sorting": "Created:descending",
+      "totalResults": 1,
+      "skipResults": 0,
+      "parameters": [
+        {
+          "name": "BannerStyle",
+          "value": "Candela",
+          "options": ["Candela","Lux"],
+          "description": "universalBannerTmplStyleParamDesc"
+        },
+        {
+          "name": "UseThumbnailImages",
+          "value": "false",
+          "options": ["true","false"],
+          "description": "universalBannerUseThumbnailImagesDesc"
+        },
+        {
+          "name": "UseImageLazyLoading",
+          "value": "true",
+          "options": ["true","false"],
+          "description": "universalBannerUseImageLazyLoadingDesc"
+        }
+      ]
+    }
+  </content>
+  
+  <content id="template" type="x-handlebars-template">
+
+    <style>
+      #{{componentId}} .valo-banner__item__link {
+        padding-left: 33%;
+      }
+
+      #{{componentId}} .ms-Persona-primaryText {
+        color: #ffffff;
+      }
+
+      #{{componentId}} .valo-banner__item__description {
+        width: 100%;
+      }
+
+      #{{componentId}} .valo-events__item__banner-info__icon {
+        font-size: 60px;
+        width: 33%;
+        margin-top: 20%;
+        color: #ffffff;
+        text-shadow: 1px 0 4px rgba(0,0,0,.5);
+      }
+
+      #{{componentId}} .valo-banner__item__social__comments {
+        padding-top: 12px;
+      }
+      
+      #{{componentId}} .valo-banner__item__social__tags {
+        padding-top: 12px;
+      }
+
+      #{{componentId}} .valo-banner__item__overlay {
+        background-color: rgba(0,0,0,.65);
+      }
+
+      #{{componentId}} .valo-banner__item__image, .valo-banner__item__image-bg {
+        position: unset;
+      }
+
+      #{{componentId}} .valo-banner.hero .valo-banner__item__link {
+        position: absolute;
+      }
+    </style>
+
+    <!-- Initialize batched Likes/Comments requests-->
+    {{prepareBatchSocialInfoPromises dsData.items}}
+
+    <!-- Initialize batched terms requests-->
+    {{#if parameters.UseMultilingualTerms}}
+      {{prepareBatchTermsPromises dsData.items language}}
+    {{/if}}
+  
+    <!-- Initialize batched PageImageInfo requests-->
+    {{prepareBatchPageImageInfoPromises dsData.items}}
+  
+    <div class="valo-banner hero {{parameters.BannerStyle}}">       
+      {{setVariable "canUseIntersectionObserver" (useIntersectionObserver parameters.UseImageLazyLoading) }}
+      <div class="siema">
+        {{#each dsData.items}}
+        <div class="valo-banner__item showTransition">
+          {{#if PictureThumbnailURL}}
+            <valo-image-focal-point css-names="valo-banner__item__image parallax" img-url="{{imageResolution PictureThumbnailURL 4 null null ../parameters.UseThumbnailImages}}" item-id="{{ListItemID}}" list-id="{{ListID}}" site-url="{{SPWebUrl}}" layout-content="{{LayoutWebpartsContentOWSHTML}}" observer-support="{{@root.canUseIntersectionObserver}}" observer-margin="0px 0px 0px -20px"></valo-image-focal-point>
+          {{else}}
+            <valo-image-focal-point css-names="valo-banner__item__image parallax" img-url="{{imageResolution BannerImageUrlOWSURLH 4 null null ../parameters.UseThumbnailImages}}" item-id="{{ListItemID}}" list-id="{{ListID}}" site-url="{{SPWebUrl}}" layout-content="{{LayoutWebpartsContentOWSHTML}}" observer-support="{{@root.canUseIntersectionObserver}}" observer-margin="0px 0px 0px -20px"></valo-image-focal-point>
+          {{/if}}
+          <div class="valo-banner__item__overlay">
+            <div class="valo-events__item__banner-info__icon">
+                  <i class="valo-events__item__banner-info__icon-i ms-Icon ms-Icon--Video" aria-hidden="true"></i>
+                </div>
+          </div>
+  
+          <a class="valo-banner__item__link" href="{{Path}}" title="{{Title}}">
+            <span class="valo-banner__item__title">{{Title}}</span>
+            <div class="valo-banner__item__description">{{ellipsis Description 180}}</div>
+            <div class="valo-banner__item__social">
+              <span class="valo-banner__item__social__meta">
+                {{#if ValoVideoSpeakersOWSUSER}}
+                <span class="valo-news__item__meta__editor">
+                  <div class="valo-video__item-speakers__personas">  
+                    <valo-persona-card 
+                      class="valo-video-persona"
+                      image-url="{{../SPWebUrl}}/_layouts/15/userphoto.aspx?size=L&username={{splitSPUser ValoVideoSpeakersOWSUSER 'email'}}" 
+                      text="{{splitSPUser ValoVideoSpeakersOWSUSER 'displayName'}}" 
+                      persona-size="24">
+                    </valo-persona-card>
+                  </div>
+                </span>
+              {{else}}
+                <span class="valo-news__item__meta__editor">
+                  <div class="valo-video__item-speakers__personas">  
+                    <valo-persona-card 
+                      image-url="{{../SPWebUrl}}/_layouts/15/userphoto.aspx?size=L&username={{splitSPUser AuthorOWSUSER 'email'}}" 
+                      text="{{splitSPUser AuthorOWSUSER 'displayName'}}" 
+                      persona-size="24">
+                    </valo-persona-card>
+                  </div>
+                </span>
+              {{/if}}
+              </span>
+              {{#if (isUniversalWebPart ../items ../dsData)}}
+                <span class="valo-banner__item__social__comments">
+                  <valo-page-social-info item-id="{{ListItemID}}" list-id="{{ListID}}" site-url="{{SPWebUrl}}"></valo-page-social-info>
+                </span>
+              {{else if (isSearchVisualizerWebPart ../items ../dsData)}}
+              <span class="valo-banner__item__social__comments">
+                <i class="valo-banner__item__social-icon ms-Icon ms-Icon--Comment" aria-label="Comment"></i>
+                <span
+                  class="valo-banner__item__social__counter">{{totalComments SPWebUrl ListID ListItemID UniqueId}}</span>
+              </span>
+              <span class="valo-banner__item__social__likes">
+                <i class="valo-banner__item__social-icon ms-Icon ms-Icon--Like" aria-label="Like"></i>
+                <span class="valo-banner__item__social__counter">{{totalLikes SPWebUrl ListID ListItemID UniqueId}}</span>
+              </span>
+              {{/if}}
+              {{#or ValoLocationOWSTEXT ValoTags owstaxIdValoTags}}
+                <span class="valo-banner__item__social__separator"></span>
+              {{/or}}
+              <span class="valo-banner__item__social__tags">
+                {{#or owstaxIdValoOfficeLocation ValoOfficeLocation}}
+                  <valo-terms term-value="{{#if owstaxIdValoOfficeLocation}}{{owstaxIdValoOfficeLocation}}{{else if ValoOfficeLocation }}{{ValoOfficeLocation}}{{/if}}"
+                              web-url="{{SPWebUrl}}"
+                              multilingual="{{@root.parameters.UseMultilingualTerms}}"
+                              css-span="valo-banner__item__social__tags__location"
+                              css-icon="valo-banner__item__social-icon ms-Icon ms-Icon--POI">
+                  </valo-terms>
+                {{else}}
+                  {{#if ValoLocationOWSTEXT}}
+                    <span class="valo-banner__item__social__tags__location">
+                      <i class="valo-banner__item__social-icon ms-Icon ms-Icon--POI" aria-hidden="true"></i>
+                      {{ValoLocationOWSTEXT}}
+                    </span>
+                  {{/if}}
+                {{/or}}
+  
+                {{#or ValoTagsTaxonomy owstaxIdValoTags ValoTags}}
+                  <valo-terms term-value="{{#if ValoTagsTaxonomy}}{{ValoTagsTaxonomy}}{{else if owstaxIdValoTags }}{{owstaxIdValoTags}}{{else if ValoTags}}{{ValoTags}}{{/if}}"
+                              web-url="{{SPWebUrl}}"
+                              multilingual="{{@root.parameters.UseMultilingualTerms}}"
+                              css-span="valo-banner__item__social__tags__tag"
+                              css-icon="valo-banner__item__social-icon ms-Icon ms-Icon--Tag">
+                  </valo-terms>
+                {{/or}}
+              </span>
+            </div>
+          </a>
+        </div>
+        {{/each}}
+      </div>
+  
+    </div>
+  </content>
+  
+  
+  <content id="placeholder" type="x-handlebars-template">
+    <div class="valo-banner hero placeholder">
+      <div class="valo-banner__item">
+        <div class="valo-banner__item__image" style="background-image:url('/_layouts/15/images/sitepagethumbnail.png');">
+        </div>
+        <div class="valo-banner__item__link">
+          <span class="valo-banner__item__title"></span>
+          <div class="valo-banner__item__description"></div>
+          <div class="valo-banner__item__description"></div>
+          <div class="valo-banner__item__description"></div>
+          <div class="valo-banner__item__social"></div>
+          <span class="valo-banner__item__social__meta"></span>
+        </div>
+      </div>
+    </div>
+  </content>
