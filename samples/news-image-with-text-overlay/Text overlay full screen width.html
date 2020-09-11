@@ -1,0 +1,199 @@
+<content id="metadata" type="x-handlebars-metadata">
+    {
+    "fields": ["Path", "LastModifiedTime", "FirstPublishedDate", "Title", "AuthorOWSUSER", "EditorOWSUSER", "Author", "BannerImageUrlOWSURLH", "PictureThumbnailURL", "Description", "ListID", "ListItemID", "UniqueId", "SPWebUrl", "ValoLocationOWSTEXT", "owstaxIdValoOfficeLocation", "ValoOfficeLocation", "ValoTagsTaxonomy", "owstaxIdValoTags", "ValoTags", "ValoHighlightOWSBOOL", "ValoCommentingTypeOWSCHCS", "ValoYammerThreadIdOWSTEXT", "LayoutWebpartsContentOWSHTML","ValoNewsPublishDate"],
+    "query": "(ContentTypeId:0x0101009D1CB255DA76424F860D91F20E6C41180065789619A4EFB44992AF42CEEBB13C9A02* OR (PromotedState:1 OR PromotedState:2)) AND -ValoHighlightOWSBOOL:1 AND NOT(ValoExpirationDate&lt;{Today})",
+    "refinementFilters": "ValoNewsPublishDate:range(min,{Now},to=\"le\")",
+    "sorting": "ValoNewsPublishDate:descending",
+    "totalResults": 3,
+    "mobileResults": 1,
+    "skipResults": 0,
+    "resources": [
+    {
+    "key": "title",
+    "values": {
+    "default": "Title:",
+    "nl-nl": "Titel:"
+    }
+    }
+    ],
+    "parameters": [
+        {
+          "name": "ShowMoreTitle",
+          "value": "Read more",
+          "description": "Title for show more link"
+        },
+        {
+          "name": "ShowMoreUrl",
+          "value": "",
+          "description": "Url for show more link"
+        },
+        {
+          "name": "ShowMoreTarget",
+          "value": "_blank",
+          "description": "Target for show more link"
+        },
+        {
+          "name": "UseThumbnailImages",
+          "value": "false",
+          "options": ["true","false"],
+          "description": "universalBannerUseThumbnailImagesDesc"
+        },
+        {
+          "name": "UseImageLazyLoading",
+          "value": "true",
+          "options": ["true","false"],
+          "description": "universalBannerUseImageLazyLoadingDesc"
+        },
+        {
+          "name": "UseMultilingualTerms",
+          "value": "true",
+          "options": ["true","false"],
+          "description": "universalUseMultilingualTerms"
+        }
+      ]
+    }
+  </content>
+  
+  <content id="template" type="x-handlebars-template">
+      <style>
+          .portiva-news__item__wrapper {
+            font-family: "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont,                  Roboto, "Helvetica Neue", sans-serif;
+            -webkit-font-smoothing: antialiased;
+            font-size: 14px;
+            font-weight: 600;
+            background-color: #fff;
+            border: 1px solid;
+            border-color: #eaeaea;
+            color: #b6b6b6;
+            height: 185px !important;
+            margin: 0 10px;
+            box-shadow: 0 0 0 transparent;
+            transition: all .2s ease;
+            position: relative;
+          }
+
+          .portiva-text-overlay {
+            font-family: "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+            font-size: 20px;
+            line-height: 30px;
+            overflow-wrap: break-word;
+            word-break: break-word;
+            -webkit-font-smoothing: antialiased;
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            margin-left: 20px;
+            background-color: rgb(0,0,0,0.7);
+            color: white;
+            padding-left: 20px;
+            padding-right: 20px;
+          }
+
+          .portiva-text-overlay > p {
+            margin-block-start: 10px;
+            margin-block-end: 10px;
+          }
+
+          .portiva-news__item {
+            font-family: "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+            -webkit-font-smoothing: antialiased;
+            font-size: 14px;
+            font-weight: 400;
+            color: inherit;
+            position: relative;
+            min-width: 265px;
+            max-width: 1600px;
+            opacity: 1;
+            transition: opacity .4s ease-in;
+            margin: 10px 0 20px;
+            width: 100%!important;
+          }
+
+      </style>
+      <style>
+          a.vm-Card.valo-news__item:hover,
+          a.vm-Card.valo-news__item:visited {
+            color: inherit;
+            text-decoration: none;
+          }
+  
+          a.vm-Card.valo-news__item {
+            display: block;
+            text-decoration: none;
+          }
+      </style>
+  
+    <!-- Initialize batched Likes/Comments requests-->
+    {{prepareBatchSocialInfoPromises dsData.items}}
+    <!-- Initialize batched terms requests-->
+    {{#if parameters.UseMultilingualTerms}}
+      {{prepareBatchTermsPromises dsData.items language}}
+    {{/if}}
+  
+    <!-- Initialize batched PageImageInfo requests-->
+    {{prepareBatchPageImageInfoPromises dsData.items}}
+  
+    <div class="valo-news ms-Grid">
+      {{setVariable "id" (randomId "news")}}
+      {{setVariable "canUseIntersectionObserver" (useIntersectionObserver parameters.UseImageLazyLoading) }}
+      <div class="valo-news__list ms-Grid-row vm-Cards" id="{{@root.id}}">
+        {{#each dsData.items}}
+        <div class="portiva-news__item showTransition">
+          <a href="{{Path}}">
+          <div class="portiva-news__item__wrapper">
+            {{#if PictureThumbnailURL}} 
+              <valo-image-focal-point css-names="valo-news__item__banner__parallax parallax parallaxSlow" img-url="{{imageResolution PictureThumbnailURL 4 null null ../parameters.UseThumbnailImages}}" item-id="{{ListItemID}}" list-id="{{ListID}}" site-url="{{SPWebUrl}}" layout-content="{{LayoutWebpartsContentOWSHTML}}" observer-support="{{@root.canUseIntersectionObserver}}"></valo-image-focal-point>
+              <div class="portiva-text-overlay">
+                <p>{{ellipsis Title 80}}</p>
+              </div>
+            {{else}}
+                <valo-image-focal-point css-names="valo-news__item__banner__parallax parallax parallaxSlow" img-url="{{imageResolution BannerImageUrlOWSURLH 4 null null ../parameters.UseThumbnailImages}}" item-id="{{ListItemID}}" list-id="{{ListID}}" site-url="{{SPWebUrl}}" layout-content="{{LayoutWebpartsContentOWSHTML}}" observer-support="{{@root.canUseIntersectionObserver}}"></valo-image-focal-point>
+                <div class="portiva-text-overlay">
+                <p>{{ellipsis Title 80}}</p>
+                </div>
+              {{/if}}
+           
+          </div>
+          </a>
+        </div>
+        {{/each}}
+      </div>
+    </div>
+    {{#if parameters.ShowMoreUrl}}
+      <div class="valo-showMore">
+        <a href="{{parameters.ShowMoreUrl}}" target="{{parameters.ShowMoreTarget}}">{{parameters.ShowMoreTitle}}</a>
+      </div>
+    {{/if}}
+  
+  </content>
+  
+  
+  <content id="placeholder" type="x-handlebars-template">
+    <div class="valo-news ms-Grid">
+      <div class="valo-news__list ms-Grid-row vm-Cards placeholder">
+        {{#repeat nrOfResults}}
+        <div class="valo-news__item ms-sm4 vm-Card">
+          <div class="valo-news__item__wrapper">
+            <div class="valo-news__item__banner">
+              <div style="background-image:url('/_layouts/15/images/sitepagethumbnail.png');"></div>
+            </div>
+            <div class="valo-news__item__info">
+              <p class="valo-news__item__title"></p>
+              <div class="valo-news__item__meta"></div>
+              <div class="valo-news__item__abstract"></div>
+              <div class="valo-news__item__social"></div>
+              <div class="valo-news__item__tags"></div>
+            </div>
+          </div>
+        </div>
+        {{/repeat}}
+      </div>
+    </div>
+  </content>
+  <html xmlns:mso="urn:schemas-microsoft-com:office:office" xmlns:msdt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882"><head>
+  <!--[if gte mso 9]><xml>
+  <mso:CustomDocumentProperties>
+  <mso:TemplateTitle msdt:dt="string">Text overlay full screen width</mso:TemplateTitle>
+  </mso:CustomDocumentProperties>
+  </xml><![endif]-->
+  </head>
