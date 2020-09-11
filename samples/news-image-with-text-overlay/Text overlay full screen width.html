@@ -1,199 +1,326 @@
 <content id="metadata" type="x-handlebars-metadata">
-    {
-    "fields": ["Path", "LastModifiedTime", "FirstPublishedDate", "Title", "AuthorOWSUSER", "EditorOWSUSER", "Author", "BannerImageUrlOWSURLH", "PictureThumbnailURL", "Description", "ListID", "ListItemID", "UniqueId", "SPWebUrl", "ValoLocationOWSTEXT", "owstaxIdValoOfficeLocation", "ValoOfficeLocation", "ValoTagsTaxonomy", "owstaxIdValoTags", "ValoTags", "ValoHighlightOWSBOOL", "ValoCommentingTypeOWSCHCS", "ValoYammerThreadIdOWSTEXT", "LayoutWebpartsContentOWSHTML","ValoNewsPublishDate"],
-    "query": "(ContentTypeId:0x0101009D1CB255DA76424F860D91F20E6C41180065789619A4EFB44992AF42CEEBB13C9A02* OR (PromotedState:1 OR PromotedState:2)) AND -ValoHighlightOWSBOOL:1 AND NOT(ValoExpirationDate&lt;{Today})",
-    "refinementFilters": "ValoNewsPublishDate:range(min,{Now},to=\"le\")",
-    "sorting": "ValoNewsPublishDate:descending",
-    "totalResults": 3,
-    "mobileResults": 1,
-    "skipResults": 0,
-    "resources": [
+  {
+  "fields": ["BannerImageUrlOWSURLH", "PictureThumbnailURL", "SPContentType", "SPSiteURL", "SiteTitle", "Path", "Title", "Description", "AuthorOWSUSER", "EditorOWSUSER", "FirstPublishedDate", "ValoNewsPublishDate", "ViewCount"],
+  "query": "(ContentTypeId:0x0101009D1CB255DA76424F860D91F20E6C41180065789619A4EFB44992AF42CEEBB13C9A02* OR (PromotedState:1 OR PromotedState:2)) AND NOT(ValoExpirationDate&lt;{Today})",
+  "refinementFilters": "ValoNewsPublishDate:range(min,{Now},to=\"le\")",
+  "sorting": "ValoNewsPublishDate:descending",
+  "totalResults": 4,
+  "mobileResults": 2,
+  "skipResults": 0,
+  "resources": [
     {
     "key": "title",
     "values": {
     "default": "Title:",
     "nl-nl": "Titel:"
     }
+  }
+  ],
+  "parameters": [
+    {
+      "name": "ShowMoreTitle",
+      "value": "Meer nieuws",
+      "description": "Title for show more link"
+    },
+    {
+      "name": "ShowMoreUrl",
+      "value": "",
+      "description": "Url for show more link"
+    },
+    {
+      "name": "ShowMoreTarget",
+      "value": "_blank",
+      "description": "Target for show more link"
     }
-    ],
-    "parameters": [
-        {
-          "name": "ShowMoreTitle",
-          "value": "Read more",
-          "description": "Title for show more link"
-        },
-        {
-          "name": "ShowMoreUrl",
-          "value": "",
-          "description": "Url for show more link"
-        },
-        {
-          "name": "ShowMoreTarget",
-          "value": "_blank",
-          "description": "Target for show more link"
-        },
-        {
-          "name": "UseThumbnailImages",
-          "value": "false",
-          "options": ["true","false"],
-          "description": "universalBannerUseThumbnailImagesDesc"
-        },
-        {
-          "name": "UseImageLazyLoading",
-          "value": "true",
-          "options": ["true","false"],
-          "description": "universalBannerUseImageLazyLoadingDesc"
-        },
-        {
-          "name": "UseMultilingualTerms",
-          "value": "true",
-          "options": ["true","false"],
-          "description": "universalUseMultilingualTerms"
+  ]
+  }
+</content>
+
+<content id="template" type="x-handlebars-template">
+  <style>
+    .portiva-overlay-news-text-overlay {
+      font-family: "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+      font-size: 20px;
+      line-height: 30px;
+      overflow-wrap: break-word;
+      word-break: break-word;
+      -webkit-font-smoothing: antialiased;
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      margin-left: 20px;
+      background-color: rgb(0,0,0,0.7);
+      color: white;
+      padding-left: 20px;
+      padding-right: 20px;
+      }      
+
+    .portiva-overlay-news-text-overlay > p {
+      margin-block-start: 10px;
+      margin-block-end: 10px;
+      }
+    
+    .portiva-overlay-news-news-gridLayout {
+      color: #1a1a1a;
+      content: normal;
+      display: block;
+      font-size: 14px;
+      font-weight: 400;
+    }
+    .portiva-overlay-news-newsitems {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+    .portiva-overlay-news-newsitem {
+      display: block;
+      padding-bottom: 12px;
+      width: calc(100% - 16px);
+    }
+    .portiva-overlay-news-newsitem-hasimage {
+      display: flex;
+      overflow: hidden;
+      position: relative;
+      height: 100%;
+      box-sizing: border-box;
+    }
+    .portiva-overlay-news-newsitem-imageArea {
+      align-self: flex-start;
+      border: 1px solid #eaeaea;
+      display: block;
+      height: 185px;
+      margin-right: 12px;
+      width: 100%;
+    }
+    .portiva-overlay-news-newsitem-imageArea-link {
+      color: #1a1a1a;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .portiva-overlay-news-imageArea-imageFrame {
+      max-width: 100%;
+      max-height: 100%;
+      position: relative;
+      text-align: left;
+    }
+    .portiva-overlay-news-objectFit {
+      width: 100%;
+      height: 100%;
+    }
+    .portiva-overlay-news-imageFrame-imageArea {
+      margin: 0 auto;
+      overflow: hidden;
+      max-width: 100%;
+    }
+    .portiva-overlay-news-objectFitCover {
+      object-fit: cover;
+      display: block;
+      margin: 0 auto;
+      position: relative;
+    }
+    .portiva-overlay-news-imageFrame-captionElement{
+      white-space: pre-wrap;
+      margin-bottom: 0;
+      text-align: center;
+      font-size: 14px;
+      font-weight: 400;
+      font-weight: 300;
+      line-height: 1.6em;
+      overflow-x: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .portiva-overlay-news-newsitem-text {
+      display: flex;
+      flex-basis: 0;
+      flex-direction: column;
+      flex-grow: 1;
+      justify-content: space-between;
+      margin-bottom: -6px;
+      /*margin-top: -4px;*/
+      max-width: 100%;
+      overflow: hidden;
+    }
+    .portiva-overlay-news-newsitem-text-siteTitle {
+      width: 100%;
+      display: inline-block;
+      line-height: 1.4;
+      text-decoration: none;
+      word-break: break-word;
+      font-size: 12px;
+      margin-bottom: 2px;
+      font-weight: 600;
+      color: #d30910;
+    }
+    .portiva-overlay-news-newsitem-text-title {
+      width: 100%;
+      display: inline-block;
+      line-height: 1.4;
+      text-decoration: none;
+      word-break: break-word;
+      font-size: 17px;
+      margin-bottom: 2px;
+      font-weight: 400;
+      color: #1a1a1a;
+    }
+    .portiva-overlay-news-newsitem-text-description {
+      width: 100%;
+      line-height: 1.4;
+      padding-bottom: 10px;
+      word-break: break-word;
+      color: #989898;
+    }
+    .portiva-overlay-news-text-metadata {
+      margin-bottom: 12px;
+      justify-content: space-between;
+      overflow: hidden;
+      display: flex;
+    }
+    .portiva-overlay-news-text-metadata-authorDate {
+      display: flex;
+      margin-bottom: 2px;
+    }
+    .portiva-overlay-news-text-metadata-author {
+      padding-right: 5px;
+      display: inline-block;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      vertical-align: top;
+      color: #1a1a1a;
+    }
+    .portiva-overlay-news-date {
+      font-size: 12px;
+      display: inline-block;
+      vertical-align: top;
+      flex: 0 0 auto;
+      white-space: nowrap;
+      color: #989898;
+    }
+    .portiva-overlay-news-text-metadata-views {
+      min-height: 19px;
+      color: #989898;
+    }
+    .portiva-overlay-news-viewCounts{
+      font-size: 12px;
+    }
+    .portiva-overlay-news-showMore {
+      color: #989898;
+    }
+
+    @media only screen and (max-width: 480px) {
+        .portiva-overlay-news-newsitems {
+          flex-direction: column;
         }
-      ]
+        .portiva-overlay-news-newsitem {
+          border-bottom: 1px solid #e0e0e0;
+          margin-bottom:20px;
+          padding-bottom: 6px;
+          width: 100%;
+        }
+        .portiva-overlay-news-newsitem-text {
+          margin-top:6px;
+        }
     }
-  </content>
-  
-  <content id="template" type="x-handlebars-template">
-      <style>
-          .portiva-news__item__wrapper {
-            font-family: "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont,                  Roboto, "Helvetica Neue", sans-serif;
-            -webkit-font-smoothing: antialiased;
-            font-size: 14px;
-            font-weight: 600;
-            background-color: #fff;
-            border: 1px solid;
-            border-color: #eaeaea;
-            color: #b6b6b6;
-            height: 185px !important;
-            margin: 0 10px;
-            box-shadow: 0 0 0 transparent;
-            transition: all .2s ease;
-            position: relative;
-          }
 
-          .portiva-text-overlay {
-            font-family: "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
-            font-size: 20px;
-            line-height: 30px;
-            overflow-wrap: break-word;
-            word-break: break-word;
-            -webkit-font-smoothing: antialiased;
-            position: absolute;
-            bottom: 20px;
-            right: 20px;
-            margin-left: 20px;
-            background-color: rgb(0,0,0,0.7);
-            color: white;
-            padding-left: 20px;
-            padding-right: 20px;
-          }
+    @media only screen and (max-width: 820px) {
+        .portiva-overlay-news-newsitem-hasimage {
+          display: initial;
+          flex-direction: column;
+          height: auto;
+          overflow: initial;
+        }
+    }
+  </style>
 
-          .portiva-text-overlay > p {
-            margin-block-start: 10px;
-            margin-block-end: 10px;
-          }
-
-          .portiva-news__item {
-            font-family: "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
-            -webkit-font-smoothing: antialiased;
-            font-size: 14px;
-            font-weight: 400;
-            color: inherit;
-            position: relative;
-            min-width: 265px;
-            max-width: 1600px;
-            opacity: 1;
-            transition: opacity .4s ease-in;
-            margin: 10px 0 20px;
-            width: 100%!important;
-          }
-
-      </style>
-      <style>
-          a.vm-Card.valo-news__item:hover,
-          a.vm-Card.valo-news__item:visited {
-            color: inherit;
-            text-decoration: none;
-          }
-  
-          a.vm-Card.valo-news__item {
-            display: block;
-            text-decoration: none;
-          }
-      </style>
-  
-    <!-- Initialize batched Likes/Comments requests-->
-    {{prepareBatchSocialInfoPromises dsData.items}}
-    <!-- Initialize batched terms requests-->
-    {{#if parameters.UseMultilingualTerms}}
-      {{prepareBatchTermsPromises dsData.items language}}
-    {{/if}}
-  
-    <!-- Initialize batched PageImageInfo requests-->
-    {{prepareBatchPageImageInfoPromises dsData.items}}
-  
-    <div class="valo-news ms-Grid">
-      {{setVariable "id" (randomId "news")}}
-      {{setVariable "canUseIntersectionObserver" (useIntersectionObserver parameters.UseImageLazyLoading) }}
-      <div class="valo-news__list ms-Grid-row vm-Cards" id="{{@root.id}}">
-        {{#each dsData.items}}
-        <div class="portiva-news__item showTransition">
-          <a href="{{Path}}">
-          <div class="portiva-news__item__wrapper">
-            {{#if PictureThumbnailURL}} 
-              <valo-image-focal-point css-names="valo-news__item__banner__parallax parallax parallaxSlow" img-url="{{imageResolution PictureThumbnailURL 4 null null ../parameters.UseThumbnailImages}}" item-id="{{ListItemID}}" list-id="{{ListID}}" site-url="{{SPWebUrl}}" layout-content="{{LayoutWebpartsContentOWSHTML}}" observer-support="{{@root.canUseIntersectionObserver}}"></valo-image-focal-point>
-              <div class="portiva-text-overlay">
-                <p>{{ellipsis Title 80}}</p>
-              </div>
-            {{else}}
-                <valo-image-focal-point css-names="valo-news__item__banner__parallax parallax parallaxSlow" img-url="{{imageResolution BannerImageUrlOWSURLH 4 null null ../parameters.UseThumbnailImages}}" item-id="{{ListItemID}}" list-id="{{ListID}}" site-url="{{SPWebUrl}}" layout-content="{{LayoutWebpartsContentOWSHTML}}" observer-support="{{@root.canUseIntersectionObserver}}"></valo-image-focal-point>
-                <div class="portiva-text-overlay">
-                <p>{{ellipsis Title 80}}</p>
+  <div class="portiva-overlay-news-news-gridLayout">
+    <div class="portiva-overlay-news-newsitems">
+      {{#each dsData.items}}
+      <div class="portiva-overlay-news-newsitem">
+        <div class="portiva-overlay-news-newsitem-hasimage">
+          <div class="portiva-overlay-news-newsitem-imageArea">
+            <a class="portiva-overlay-news-newsitem-imageArea-link" href="{{Path}}">
+              <div class="portiva-overlay-news-imageArea-imageFrame portiva-overlay-news-objectFit">
+                <div class="portiva-overlay-news-imageFrame-imageArea portiva-overlay-news-objectFit" style="opacity: 1;">
+                  {{#if PictureThumbnailURL}}
+                    <!--<img class="portiva-overlay-news-objectFitCover portiva-overlay-news-objectFit" src="{{imageResolution BannerImageUrlOWSURLH 1}}" style="max-width: 100%;" />-->
+                    <valo-image-focal-point css-names="valo-news__item__banner__parallax parallax parallaxSlow" img-url="{{imageResolution PictureThumbnailURL 4 null null ../parameters.UseThumbnailImages}}" item-id="{{ListItemID}}" list-id="{{ListID}}" site-url="{{SPWebUrl}}" layout-content="{{LayoutWebpartsContentOWSHTML}}" observer-support="{{@root.canUseIntersectionObserver}}"></valo-image-focal-point>
+                  {{else}}
+                    <!--<img class="portiva-overlay-news-objectFitCover portiva-overlay-news-objectFit" src="{{imageResolution PictureThumbnailURL 1}}" style="max-width: 100%;" />-->
+                    <valo-image-focal-point css-names="valo-news__item__banner__parallax parallax parallaxSlow" img-url="{{imageResolution PictureThumbnailURL 4 null null ../parameters.UseThumbnailImages}}" item-id="{{ListItemID}}" list-id="{{ListID}}" site-url="{{SPWebUrl}}" layout-content="{{LayoutWebpartsContentOWSHTML}}" observer-support="{{@root.canUseIntersectionObserver}}"></valo-image-focal-point>
+                  {{/if}}
                 </div>
-              {{/if}}
-           
+                  <div class="portiva-overlay-news-text-overlay">
+                    <p>{{ellipsis Title 60}}</p>
+                  </div>
+                <div class="portiva-overlay-news-imageFrame-captionElement portiva-overlay-news-objectFit">
+                  <span></span>
+                </div>
+              </div>
+              <div class="imageArea-link-content"></div>
+            </a>
           </div>
-          </a>
-        </div>
-        {{/each}}
+        </div> 
       </div>
+      {{/each}}
     </div>
     {{#if parameters.ShowMoreUrl}}
-      <div class="valo-showMore">
-        <a href="{{parameters.ShowMoreUrl}}" target="{{parameters.ShowMoreTarget}}">{{parameters.ShowMoreTitle}}</a>
-      </div>
+    <div class="valo-showMore">
+      <a href="{{parameters.ShowMoreUrl}}" target="{{parameters.ShowMoreTarget}}">{{parameters.ShowMoreTitle}}</a>
+    </div>
     {{/if}}
-  
-  </content>
-  
-  
-  <content id="placeholder" type="x-handlebars-template">
-    <div class="valo-news ms-Grid">
-      <div class="valo-news__list ms-Grid-row vm-Cards placeholder">
-        {{#repeat nrOfResults}}
-        <div class="valo-news__item ms-sm4 vm-Card">
-          <div class="valo-news__item__wrapper">
-            <div class="valo-news__item__banner">
-              <div style="background-image:url('/_layouts/15/images/sitepagethumbnail.png');"></div>
-            </div>
-            <div class="valo-news__item__info">
-              <p class="valo-news__item__title"></p>
-              <div class="valo-news__item__meta"></div>
-              <div class="valo-news__item__abstract"></div>
-              <div class="valo-news__item__social"></div>
-              <div class="valo-news__item__tags"></div>
-            </div>
+  </div>
+</content>
+
+
+<content id="placeholder" type="x-handlebars-template">
+  <div class="valo-news compact ms-Grid">
+    <div class="valo-news__list ms-Grid-row vm-Cards placeholder compact">
+      <div class="valo-news__item ms-sm4 vm-Card">
+        <div>
+          <div class="valo-news__item__banner">
+            <div style="background-image:url('/_layouts/15/images/sitepagethumbnail.png');"></div>
+          </div>
+          <div class="valo-news__item__info">
+            <p class="valo-news__item__title"></p>
+            <div class="valo-news__item__meta"></div>
+            <div class="valo-news__item__abstract"></div>
+            <div class="valo-news__item__social"></div>
+            <div class="valo-news__item__tags"></div>
           </div>
         </div>
-        {{/repeat}}
+      </div>
+      <div class="valo-news__item ms-sm4 vm-Card">
+        <div>
+          <div class="valo-news__item__banner">
+            <div style="background-image:url('/_layouts/15/images/sitepagethumbnail.png');"></div>
+          </div>
+          <div class="valo-news__item__info">
+            <p class="valo-news__item__title"></p>
+            <div class="valo-news__item__meta"></div>
+            <div class="valo-news__item__abstract"></div>
+            <div class="valo-news__item__social"></div>
+            <div class="valo-news__item__tags"></div>
+          </div>
+        </div>
+      </div>
+      <div class="valo-news__item ms-sm4 vm-Card">
+        <div>
+          <div class="banner">
+            <div style="background-image:url('/_layouts/15/images/sitepagethumbnail.png');"></div>
+          </div>
+          <div class="valo-news__item__info">
+            <p class="valo-news__item__title"></p>
+            <div class="valo-news__item__meta"></div>
+            <div class="valo-news__item__abstract"></div>
+            <div class="valo-news__item__social"></div>
+            <div class="valo-news__item__tags"></div>
+          </div>
+        </div>
       </div>
     </div>
-  </content>
-  <html xmlns:mso="urn:schemas-microsoft-com:office:office" xmlns:msdt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882"><head>
-  <!--[if gte mso 9]><xml>
-  <mso:CustomDocumentProperties>
-  <mso:TemplateTitle msdt:dt="string">Text overlay full screen width</mso:TemplateTitle>
-  </mso:CustomDocumentProperties>
-  </xml><![endif]-->
-  </head>
+  </div>
+</content>
+<html xmlns:mso="urn:schemas-microsoft-com:office:office" xmlns:msdt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882"><head>
+</head>
