@@ -132,6 +132,12 @@ There are some more parameters in the "templateMetaData" section of the object s
 
 ![skip results](images/skipresult-param.png)
 
+### Backup
+
+It is strongly recommended to use the -BackupOldPages flag to generate a backup file of each page before actually migrating it. Backup files will be generated in the [temp folder](./temp). The Script will create a folder for each hub (using the "HubPrefix" parameter) and a subfolder for the current site.
+
+If someting went desperately wrong in your migration process you have now the option to iterate over the files here and apply the templates to get back to your old pages. This is a good approach to be scripted to repair lots of pages. If you're just handling individual pages the SharePoint version history of the page should be sufficient for restoring the old state.
+
 ## Setup
 
 First you have to checkout the whole solution folder somewhere to your local harddisk. Now make sure that PnP PowerShell is installed on your machine.
