@@ -46,4 +46,4 @@ If flag is set, script will just do a 'dry run' without actually converting the 
 
 ### Force [flag]
 
-If flag is set, script will do a 'cancel checkout' on pages currently checked out. 
+If flag is set, script will do a 'cancel checkout' on pages currently checked out.

@@ -86,7 +86,7 @@ $page = Get-PnPClientSidePage -Identity sample-page.aspx
 # Show page components
 Get-PnPClientSideComponent -Page $page
 
-# You will get output with all components on the page. 
+# You will get output with all components on the page.
 # Search for Title "Valo - Search" and copy the "IntanceId" value
 
 # Get Valo Search web part
@@ -112,7 +112,6 @@ Here are some properties I've noticed we have to check for existence:
 If you don't set a title in the Valo Universal web part or don't play with the paging options these both properties at the end of the configuration might be missing. Please make sure to add them in that case. The actual values in the template don't really matter, as the will be overwritten in the actual mapping process:
 
 ![title and paging options](images/title-and-paging-params.png)
-
 
 ### Skip Results Property
 
