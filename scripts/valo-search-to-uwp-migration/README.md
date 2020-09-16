@@ -42,30 +42,18 @@ Luckily we can limit this additional mapping effort mainly to some generic setti
 
 The effort you still need to invest before running the script on a specific tenant really depends on the amount and type of Handlebar templates you've currently in use. We've already prepared most of the Valo standard templates (at least the ones we use at the moment). These templates are included here - feel free to add more! Of course we had a couple more templates, but those are plain customer specific and thus not included here.
 
-### Operation Modes
-
-This script solution has three general operation modes. Which one is best suited for your scenario you'll have to find out yourself. However - for a starting point I would recommend to choose just a few dedicated pages of interest and define them in the [Excel sheet](./input/migrate-pages.xlsx). Then use the Excel-based, page-wise migration option to process these pages.
-
-These are the operation modes:
-
-* Migrate specific pages defined in an [Excel sheet](./input/migrate-pages.xlsx).
-* Migrate all pages in a specific site.
-* Migrate all pages in all sites of a Valo hub.
-
-You'll find a [sample bootstrap script](./valo-uwp-migration.ps1) that showcases most of the relevant operation modes more practical.
-
 ### Required Steps
 
 Before you can actually think about using one of the above methods you should check that you've all your preparations in place. So - what needs to be done first?
 
-* Try to find out which handlebar templates are in use in your pages! For each handlebar template in use we will need a matching JSON template as configuration "stub". How you get that I will tell you in a minute ...
-* For Valo standard handlebars I've already included some required templates (but not all). If you need more, you'll have to generate them. The same is true of course for further custom templates you might have in use.
-* You're unsure which kind of templates are in use? You're lucky - this solution will help you find out. Just start it in one of the above operation modes with the flag *-Analyse* set. Plese see the [sample bootstrap script](./valo-uwp-migration.ps1) for more details. Running the analysis will give you warning outputs for all handlebar templates the solution currently cannot match. These are the templates you'll have to focus on.
+1. Try to find out which handlebar templates are in use in your pages! For each handlebar template in use we will need a matching JSON template as configuration "stub". How you get that I will tell you in a minute ...
+1. For Valo standard handlebars I've already included some required templates (but not all). If you need more, you'll have to generate them. The same is true of course for further custom templates you might have in use.
+1. You're unsure which kind of templates are in use? You're lucky - this solution will help you find out. Just start it in one of the above operation modes with the flag *-Analyze* set. Plese see the section "Commands" below for more details. Running the analysis will give you warning outputs for all handlebar templates the solution currently cannot match. These are the templates you'll have to focus on.
 ![analysis output](./images/template-analysis.png)
-* Thanks to the analyisis mode of the solution you've now identified the template configuration stubs you need to add. A detailed description how to do that you'll find below in the section "Extending the template mapping".
-* Ok - fine. Now you now, what needs to be mapped, but how to get that JSON template? That's actually easy - all you need is a Valo Universal webpart on a site page running the desired target handlebar template. You can easily export the JSON from there - it's exactly the PropertyJson Data of the web part. For more details on this process please see the section "Exporting a configuration stub" below.
-* Oops, you don't have a handlebar that's Valo Universal web part compatible? Yes, that's some point. There is some template migration work to be done first, if you're using custom templates. Further details on that might be found in Valo documentation.
-* Once you've done the above steps you might want to repeat the analysis done before. It should now look like this:
+1. Thanks to the analyisis mode of the solution you've now identified the template configuration stubs you need to add. A detailed description how to do that you'll find below in the section "Extending the template mapping".
+1. Ok - fine. Now you now, what needs to be mapped, but how to get that JSON template? That's actually easy - all you need is a Valo Universal webpart on a site page running the desired target handlebar template. You can easily export the JSON from there - it's exactly the PropertyJson Data of the web part. For more details on this process please see the section "Exporting a configuration stub" below.
+1. Oops, you don't have a handlebar that's Valo Universal web part compatible? Yes, that's some point. There is some template migration work to be done first, if you're using custom templates. Further details on that might be found in Valo documentation.
+1. Once you've done the above steps you might want to repeat the analysis done before. It should now look like this:
 ![successfull analysis](./images/template-analysis-success.png)
 If that's the case, you're ready to roll. If not make sure to map all templates that still produce a waring first.
 
@@ -137,6 +125,18 @@ There are some more parameters in the "templateMetaData" section of the object s
 It is strongly recommended to use the -BackupOldPages flag to generate a backup file of each page before actually migrating it. Backup files will be generated in the [temp folder](./temp). The Script will create a folder for each hub (using the "HubPrefix" parameter) and a subfolder for the current site.
 
 If someting went desperately wrong in your migration process you have now the option to iterate over the files here and apply the templates to get back to your old pages. This is a good approach to be scripted to repair lots of pages. If you're just handling individual pages the SharePoint version history of the page should be sufficient for restoring the old state.
+
+## Commands
+
+This script solution has three available commands. Which one is best suited for your scenario you'll have to find out yourself. However - for a starting point I would recommend to just choose a few dedicated pages of interest and define them in the [Excel sheet](./input/migrate-pages.xlsx). Then use the Excel-based, [page-wise migration option](./Update-ValoPages.md) to process these pages.
+
+For further documentation on the individual commands, please see the following documentations:
+
+* [Update-ValoPages](./Update-ValoPages.md): Migrate specific pages defined in an [Excel sheet](./input/migrate-pages.xlsx).
+* [Update-ValoSites](./Update-ValoSites.md): Migrate all pages in a specific site.
+* [Update-AllValo-Sites](./Update-AllValoSites.md): Migrate all pages in all sites of a Valo hub.
+
+You'll find a [sample bootstrap script](./valo-uwp-migration.ps1) that incorporates sample code for the commands as a quick start.
 
 ## Setup
 

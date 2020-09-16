@@ -1,6 +1,7 @@
 
 Import-Module $PSScriptRoot/Log.psm1 -Force
 Import-Module $PSScriptRoot/Update-ValoWebParts.psm1 -Force
+Import-Module $PSScriptRoot/Get-AllValoSites.psm1 -Force
 
 $global:lastSiteUrl = $null;
 
@@ -14,15 +15,18 @@ $global:lastSiteUrl = $null;
  .Parameter HubSiteUrl
   The URL of the Valo hub's root site to process.
 
-  .Parameter HubPrefix
+ .Parameter HubPrefix
   Valo hub site prefix - defaults to 'default'. This is required for defining the backup location.
 
  .Parameter BackupOldPages
-  If set to $true script will backup the pages prior to the actual migration.
+  If flag is set, script will backup the pages prior to the actual migration.
 
- .Parameter Analyse
-  If set to $true script will just do a 'dry run' without actually converting the pages.
-  This mode is very usefull to see which kind of view templates (Handlebar) are used by the pages.
+ .Parameter Analyze
+  If flag is set, script will just do a 'dry run' without actually converting the pages.
+  This mode is very useful to see which kind of view templates (Handlebar) are used by the pages.
+
+ .Parameter Force
+  If flag is set, script will do a 'cancel checkout' on pages currently checked out.  
 
  .Example
    # Process all sites in the hub
@@ -38,14 +42,15 @@ $global:lastSiteUrl = $null;
 
  .Example
    # Process all sites in the hub in dry mode (analysis only)
-   Update-AllValoSites -HubSiteUrl "https://mytenant.sharepoint.com/sites/sample-hub" -Analyse
+   Update-AllValoSites -HubSiteUrl "https://mytenant.sharepoint.com/sites/sample-hub" -Analyze
 #>
 function Update-AllValoSites {
     param (
         [parameter(Mandatory=$true)]$HubSiteUrl,
         [parameter(Mandatory=$false)]$HubPrefix = "default",
         [switch] $BackupOldPages,
-        [switch] $Analyse
+        [switch] $Analyze,
+        [switch] $Force
     )
     try {
         Log "[Update-AllValoSites]: Start" -level Debug
@@ -61,7 +66,7 @@ function Update-AllValoSites {
 
             try {
                 # Update the site
-                Update-ValoSite -SiteUrl $siteUrl -HubPrefix $HubPrefix -BackupOldPages:$BackupOldPages -Analyse:$Analyse;
+                Update-ValoSite -SiteUrl $siteUrl -HubPrefix $HubPrefix -BackupOldPages:$BackupOldPages -Analyze:$Analyze -Force:$Force;
             }
             catch {
                 Log -log "[Update-AllValoSites]: Something went wrong processing site $siteUrl. Error='$($_.Exception.Message)'" -level Error
@@ -88,15 +93,18 @@ function Update-AllValoSites {
  .Parameter SiteUrl
   The URL of the site to process.
 
-  .Parameter HubPrefix
+ .Parameter HubPrefix
   Valo hub site prefix - defaults to 'default'. This is required for defining the backup location.
 
  .Parameter BackupOldPages
-  If set to $true script will backup the pages prior to the actual migration.
+  If flag is set, script will backup the pages prior to the actual migration.
 
- .Parameter Analyse
-  If set to $true script will just do a 'dry run' without actually converting the pages.
-  This mode is very usefull to see which kind of view templates (Handlebar) are used by the pages.
+ .Parameter Analyze
+  If flag is set, script will just do a 'dry run' without actually converting the pages.
+  This mode is very useful to see which kind of view templates (Handlebar) are used by the pages.
+
+ .Parameter Force
+  If flag is set, script will do a 'cancel checkout' on pages currently checked out.    
 
  .Example
    # Process excel file named 'worksheet.xlsx'
@@ -108,7 +116,7 @@ function Update-AllValoSites {
 
  .Example
    # Process excel file named 'worksheet.xlsx' in dry mode (analysis only)
-   Update-ValoSite -FileName c:\tmp\worksheet.xslx -Analyse
+   Update-ValoSite -FileName c:\tmp\worksheet.xslx -Analyze
 #>
 function Update-ValoSite
 {
@@ -116,7 +124,8 @@ function Update-ValoSite
         [parameter(Mandatory=$true)]$SiteUrl,
         $HubPrefix = "default",
         [switch] $BackupOldPages,
-        [switch] $Analyse
+        [switch] $Analyze,
+        [switch] $Force
     )
 
     # connect to site
@@ -148,7 +157,7 @@ function Update-ValoSite
                 }
 
                 # process page
-                Update-SitePage -Page $Page -HubName $HubPrefix -SiteName $siteName -PageName $_.FieldValues.FileLeafRef -BackupOldPages $BackupOldPages -Analyse $Analyse;
+                Update-SitePage -Page $Page -HubName $HubPrefix -SiteName $siteName -PageName $_.FieldValues.FileLeafRef -BackupOldPages $BackupOldPages -Analyze $Analyze;
             }
             else 
             {
@@ -172,11 +181,14 @@ function Update-ValoSite
   The name of the sheet that contains the relevant data. Defaults to "Update Pages".
 
  .Parameter BackupOldPages
-  If set to $true script will backup the pages prior to the actual migration.
+  If flag is set, script will backup the pages prior to the actual migration.
 
- .Parameter Analyse
-  If set to $true script will just do a 'dry run' without actually converting the pages.
-  This mode is very usefull to see which kind of view templates (Handlebar) are used by the pages.
+ .Parameter Analyze
+  If flag is set, script will just do a 'dry run' without actually converting the pages.
+  This mode is very useful to see which kind of view templates (Handlebar) are used by the pages.
+
+ .Parameter Force
+  If flag is set, script will do a 'cancel checkout' on pages currently checked out.    
 
  .Example
    # Process excel file named 'worksheet.xlsx'
@@ -188,7 +200,7 @@ function Update-ValoSite
 
  .Example
    # Process excel file named 'worksheet.xlsx' in dry mode (analysis only)
-   Update-ValoPages -FileName c:\tmp\worksheet.xslx -Analyse
+   Update-ValoPages -FileName c:\tmp\worksheet.xslx -Analyze
 #>
 function Update-ValoPages 
 {
@@ -196,7 +208,8 @@ function Update-ValoPages
         [parameter(Mandatory=$true)]$FileName,
         [parameter(Mandatory=$false)]$Sheetname = "Update Pages",
         [switch] $BackupOldPages,
-        [switch] $Analyse
+        [switch] $Analyze,
+        [switch] $Force
     )
     
     $sheet = $null;
@@ -237,7 +250,7 @@ function Update-ValoPages
                 }
 
                 # process page
-                Update-SitePage -Page $Page -HubName $_.Hub -SiteName $siteName -PageName $_.Name -BackupOldPages $BackupOldPages -Analyse $Analyse;
+                Update-SitePage -Page $Page -HubName $_.Hub -SiteName $siteName -PageName $_.Name -BackupOldPages:$BackupOldPages -Analyze:$Analyze -Force:$Force;
             }
             else 
             {
@@ -247,15 +260,22 @@ function Update-ValoPages
     }   
 }
 
-function Update-SitePage($Page, $HubName, $SiteName, $PageName, $BackupOldPages = $false, $Analyse = $false)
+function Update-SitePage($Page, $HubName, $SiteName, $PageName, $BackupOldPages = $false, $Analyze = $false, $Force = $false)
 {
     # undo checkout - if needed
     if ($null -ne $Page.FieldValues.CheckoutUser)
     {
-        Log "Page $($PageName) is checked-out. We'll have to cancel that ..." -level Warning
-        $file = $Page.File;
-        $file.UndoCheckOut();
-        $file.Context.ExecuteQuery();
+        if ($Force)
+        {
+            Log "Page $($PageName) is checked-out. We'll have to cancel that ..." -level Warning
+            $file = $Page.File;
+            $file.UndoCheckOut();
+            $file.Context.ExecuteQuery();
+        } 
+        else 
+        {
+            Log "Page $($PageName) is checked-out. We cannot handle that. Use -Force parameter to override ..." -level Warning
+        }
     }
 
     # make PnP template export as backup
@@ -264,13 +284,17 @@ function Update-SitePage($Page, $HubName, $SiteName, $PageName, $BackupOldPages 
         # create hub directory, if necessary
         if (!(Test-Path "$($PSScriptRoot)\..\temp\$($HubName)"))
         {
-            mkdir "$($PSScriptRoot)\..\temp\$($HubName)";
+            $Null = @( 
+                mkdir "$($PSScriptRoot)\..\temp\$($HubName)";
+            );
         }
 
         # create site directory, if necessary
         if (!(Test-Path "$($PSScriptRoot)\..\temp\$($HubName)\$($SiteName)"))
         {
-            mkdir "$($PSScriptRoot)\..\temp\$($HubName)\$($SiteName)";
+            $Null = @( 
+                mkdir "$($PSScriptRoot)\..\temp\$($HubName)\$($SiteName)";
+            );
         }
 
         # export page
@@ -281,7 +305,7 @@ function Update-SitePage($Page, $HubName, $SiteName, $PageName, $BackupOldPages 
     $Page = Get-PnPClientSidePage -Identity $PageName;
     if ($Page)
     {
-        Update-ValoWebParts -Page $Page -Analyse:$Analyse;
+        Update-ValoWebParts -Page $Page -Analyze:$Analyze;
     }
     else {
         Log "File '$($PageName)' not found!" -level Warning;

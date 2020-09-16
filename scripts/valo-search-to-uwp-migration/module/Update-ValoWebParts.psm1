@@ -18,7 +18,7 @@
 
  .Example
    # Perfrom migration of "samplePage" in dry mode (only analysing).
-   Update-ValoWebParts -Page $samplePag -Analyse $true
+   Update-ValoWebParts -Page $samplePag -Analyze $true
 #>
 Import-Module $PSScriptRoot/Log.psm1 -Force
 
@@ -33,7 +33,7 @@ function Update-ValoWebParts
 {
     param (
         [parameter(Mandatory=$true)]$Page,
-        [switch] $Analyse
+        [switch] $Analyze
     )
 
     $searchWps = Get-PnPClientSideComponent -Page $Page  | where {$_.Title -eq $global:valo_search_title }
@@ -42,7 +42,7 @@ function Update-ValoWebParts
         $searchWps | ForEach-Object {
             if ($_.WebPartId -eq $global:valo_search_id)
             {           
-                ConvertWebparts -Page $Page -SearchWP $_ -Analyse $Analyse;
+                ConvertWebparts -Page $Page -SearchWP $_ -Analyze:$Analyze;
             }
             else 
             {
@@ -50,9 +50,12 @@ function Update-ValoWebParts
             }
         };
 
-        # save the page
-        $Page.Save();
-        $Page.Publish();
+        if (!$Analyze)
+        {
+            # save the page
+            $Page.Save();
+            $Page.Publish();
+        }
     }
     else 
     {
@@ -60,7 +63,7 @@ function Update-ValoWebParts
     }
 }
 
-function ConvertWebparts($Page, $SearchWP, $Analyse)
+function ConvertWebparts($Page, $SearchWP, $Analyze)
 {
     Log "Migrating 'Valo Search' web part '$($SearchWP.InstanceId)' on '$($Page.PageTitle)' ..." -level Debug;
 
@@ -72,9 +75,9 @@ function ConvertWebparts($Page, $SearchWP, $Analyse)
     $wpSearch_Properties = $SearchWP.PropertiesJson | ConvertFrom-Json;
 
     # determine correct template type
-    $type = Get-TemplateType -properties $wpSearch_Properties -analyse $Analyse;
+    $type = Get-TemplateType -properties $wpSearch_Properties -Analyze $Analyze;
 
-    if (!$Analyse)
+    if (!$Analyze)
     {
         Log "Removing 'Valo - Search' web part '$($wpSearch_IntanceId)' ..." -level Debug;
 
@@ -246,7 +249,7 @@ function ConvertWebparts($Page, $SearchWP, $Analyse)
     }
 }
 
-function Get-TemplateType($Properties, $Analyse)
+function Get-TemplateType($Properties, $Analyze)
 {
     $Null = @(  
         $value = $null;
@@ -285,7 +288,7 @@ function Get-TemplateType($Properties, $Analyse)
             }            
             default { 
                 $message = "Unknown view template type: '$($value)'";
-                if ($Analyse)
+                if ($Analyze)
                 {
                     Log $message -level Warning;
                 }

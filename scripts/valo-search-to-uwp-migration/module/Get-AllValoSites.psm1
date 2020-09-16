@@ -23,11 +23,11 @@ function Get-AllValoSites {
     Log "$PSScriptRoot\Get-AllValosites.psm1 has started" -level Debug
 
     try {
-        Log "[Find-AllValoSites]: Start" -level Debug
+        Log "[Get-AllValoSites]: Start" -level Debug
         Log "Find all the Valo sites from HubSite: $HubsiteUrl." -level "Info"
 
         # connect to site
-        Connect-PnPOnline -siteUrl $HubSiteUrl -UseWebLogin;
+        Connect-PnPOnline $HubSiteUrl -UseWebLogin;
 
         $site = Get-PnPSite -Includes HubSiteId
         $hubsiteId = $site.HubSiteId;
@@ -42,10 +42,10 @@ function Get-AllValoSites {
         return $sitesUrls;
     }
     catch {
-        Log "[Find-AllValoSites]: Something went wrong. Error='$($_.Exception.Message)'" -level Error
+        Log "[Get-AllValoSites]: Something went wrong. Error='$($_.Exception.Message)'" -level Error
     }
     finally {
-        Log "[Find-AllValoSites]: Finish" -level Debug
+        Log "[Get-AllValoSites]: Finish" -level Debug
     }
 
     Log "DONE" -level Debug
