@@ -1,0 +1,35 @@
+<Objs Version="1.1.0.1" xmlns="http://schemas.microsoft.com/powershell/2004/04">
+  <Obj RefId="0">
+    <TN RefId="0">
+      <T>System.Collections.Hashtable</T>
+      <T>System.Object</T>
+    </TN>
+    <DCT>
+      <En>
+        <S N="Key">ValoPageTemplateNamePolicy</S>
+        <S N="Value">Policy</S>
+      </En>
+      <En>
+        <S N="Key">ValoPageTemplateNameProcedure</S>
+        <S N="Value">Procedure</S>
+      </En>
+      <En>
+        <S N="Key">ValoPageTemplateNameHowToGuide</S>
+        <S N="Value">How to guide</S>
+      </En>
+      <En>
+        <S N="Key">ValoPageTemplateNameWithAttachment</S>
+        <S N="Value"> (with attachment)</S>
+      </En>
+      <En>
+        <S N="Key">ValoWebPartTemplateName</S>
+        <S N="Value">Document Hub</S>
+      </En>
+      <En>
+        <S N="Key">ValoSearchBoxPlaceholder</S>
+        <S N="Value">Search policies, procedures, and how-to guides</S>
+      </En>
+      
+    </DCT>
+  </Obj>
+</Objs>

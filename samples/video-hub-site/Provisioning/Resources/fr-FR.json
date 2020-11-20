@@ -1,0 +1,18 @@
+{
+  "ContentTypeValoVideoPageTitle": "Valo Video Page",
+  "FieldValoVideoPlaylistDisplayName": "Liste de lecture",
+  "FieldValoVideoPlaylistChoiceDefault": "Webinaire",
+  "FieldValoVideoPlaylistChoice01": "Webinaire",
+  "FieldValoVideoPlaylistChoice02": "Rencontre générale",
+  "FieldValoVideoPlaylistChoice03": "Conférence midi",
+  "FieldValoVideoSpeakersDisplayName": "Présentateurs",
+  "ListSitePagesTitle": "Pages du site",
+  "PageVideoTemplateTitle": "Page Vidéo",
+  "PageVideoHubTitle": "Hub Vidéo",
+  "FileVideosCardTemplateTitle": "Valo - Videos",
+  "FileVideosCardTemplateDataSource": "SearchDataSource",
+  "FileVideosSingleTemplateTitle": "Valo - Videos - Single",
+  "FileVideosSingleTemplateDataSource": "SearchDataSource",
+  "FilePersonTemplateTitle": "Valo - Person",
+  "FilePersonTemplateDataSource": "CurrentPageDataSource"
+}

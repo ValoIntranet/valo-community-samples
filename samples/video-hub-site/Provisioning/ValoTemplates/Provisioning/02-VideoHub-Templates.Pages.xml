@@ -1,0 +1,30 @@
+<pnp:Provisioning xmlns:pnp="http://schemas.dev.office.com/PnP/2020/02/ProvisioningSchema">
+  <pnp:Preferences />
+  <pnp:Templates ID="CONTAINER-TEMPLATE-VIDEOHUB">
+    <pnp:ProvisioningTemplate ID="TEMPLATE-VIDEOHUB" Version="1" Scope="RootSite">
+      <pnp:ClientSidePages>
+        <pnp:ClientSidePage PromoteAsNewsArticle="false" PromoteAsTemplate="false" Overwrite="false" Title="{localization:template:PageVideoTemplateTitle}" ContentTypeID="0x0101009D1CB255DA76424F860D91F20E6C41180056084879C22372419844A40A70A26EE6" ThumbnailUrl="" PageName="Video.aspx">
+          <pnp:Header Type="Custom" ServerRelativeImageUrl="{site}/SiteAssets/SitePages/Video/61847-art-backdrop-bright-53265.jpg" TranslateX="50.0326583932071" TranslateY="27.8571428571429" LayoutType="FullWidthImage" TextAlignment="Center" ShowTopicHeader="false" ShowPublishDate="false" TopicHeader="" AlternativeText="" Authors="[]" AuthorByLine="[]" AuthorByLineId="-1" />
+          <pnp:Sections>
+            <pnp:Section Order="1" Type="TwoColumnLeft">
+              <pnp:Controls>
+                <pnp:CanvasControl WebPartType="DocumentEmbed" ControlId="b7dd04e1-19ce-4b24-9132-b60a1c2b910d" Order="1" Column="1" />
+                <pnp:CanvasControl WebPartType="Text" ControlId="0e372161-3595-446f-9a64-7d3d08bb22a1" Order="2" Column="1">
+                  <pnp:CanvasControlProperties>
+                    <pnp:CanvasControlProperty Key="Text" Value="" />
+                  </pnp:CanvasControlProperties>
+                </pnp:CanvasControl>
+                <pnp:CanvasControl WebPartType="Custom" JsonControlData="{&quot;id&quot;: &quot;0767823f-7fc4-48f8-9e92-3678d353f033&quot;, &quot;instanceId&quot;: &quot;79b17b0e-fec0-4865-b227-bd790e3d929c&quot;, &quot;title&quot;: &quot;Valo - Universal&quot;, &quot;description&quot;: &quot;Valo - Universal&quot;, &quot;dataVersion&quot;: &quot;1.0&quot;, &quot;properties&quot;: {&quot;templateGallery&quot;:&quot;Templates gallery&quot;,&quot;templateMetadata&quot;:{&quot;parameters&quot;:[{&quot;name&quot;:&quot;ColumnName&quot;,&quot;value&quot;:&quot;AuthorId&quot;,&quot;description&quot;:&quot;Internal Column Name&quot;}]},&quot;templateParams&quot;:[{&quot;name&quot;:&quot;ColumnName&quot;,&quot;value&quot;:&quot;ValoVideoSpeakersId&quot;,&quot;description&quot;:&quot;Internal Column Name&quot;,&quot;sortIdx&quot;:1}],&quot;templateMappingSlots&quot;:[],&quot;numberOfPagesToDisplay&quot;:5,&quot;cacheTime&quot;:5,&quot;hotItemSwap&quot;:true,&quot;templateMappingsSlotsUpdated&quot;:false,&quot;dataSourceConnection&quot;:&quot;CurrentPageDataSource&quot;,&quot;lastUpdated&quot;:&quot;1598542253182&quot;,&quot;template&quot;:{&quot;key&quot;:&quot;{site}/TemplatesGallery/Valo.Person.html&quot;,&quot;id&quot;:&quot;{site}/TemplatesGallery/Valo.Person.html&quot;,&quot;label&quot;:&quot;Valo - Person&quot;,&quot;editUrl&quot;:&quot;https://{fqdn}{site}/TemplatesGallery/Forms/AllItems11.aspx?id={site}/TemplatesGallery/Valo.Person.html&amp;parent=80&amp;p=5&quot;,&quot;fullBleed&quot;:&quot;No&quot;,&quot;imageUrl&quot;:&quot;&quot;,&quot;scope&quot;:2,&quot;type&quot;:&quot;external&quot;,&quot;dataSourceId&quot;:&quot;CurrentPageDataSource&quot;},&quot;title&quot;:&quot;Speaker&quot;,&quot;disableGlobalStyling&quot;:true}, &quot;serverProcessedContent&quot;: {&quot;htmlStrings&quot;:{},&quot;searchablePlainTexts&quot;:{},&quot;imageSources&quot;:{},&quot;links&quot;:{}}, &quot;dynamicDataPaths&quot;: {}, &quot;dynamicDataValues&quot;: {}}" ControlId="0767823f-7fc4-48f8-9e92-3678d353f033" Order="1" Column="2" />
+                <pnp:CanvasControl WebPartType="QuickLinks" JsonControlData="{&quot;id&quot;: &quot;c70391ea-0b10-4ee9-b2b4-006d3fcad0cd&quot;, &quot;instanceId&quot;: &quot;d6308bcd-cae5-4e52-a487-59a15690dc6c&quot;, &quot;title&quot;: &quot;Quick links&quot;, &quot;description&quot;: &quot;Quick links&quot;, &quot;dataVersion&quot;: &quot;2.2&quot;, &quot;properties&quot;: {&quot;items&quot;:[],&quot;isMigrated&quot;:true,&quot;layoutId&quot;:&quot;CompactCard&quot;,&quot;shouldShowThumbnail&quot;:true,&quot;imageWidth&quot;:100,&quot;buttonLayoutOptions&quot;:{&quot;showDescription&quot;:false,&quot;buttonTreatment&quot;:2,&quot;iconPositionType&quot;:2,&quot;textAlignmentVertical&quot;:2,&quot;textAlignmentHorizontal&quot;:2,&quot;linesOfText&quot;:2},&quot;listLayoutOptions&quot;:{&quot;showDescription&quot;:false,&quot;showIcon&quot;:true},&quot;waffleLayoutOptions&quot;:{&quot;iconSize&quot;:1,&quot;onlyShowThumbnail&quot;:false},&quot;hideWebPartWhenEmpty&quot;:true,&quot;dataProviderId&quot;:&quot;QuickLinks&quot;,&quot;webId&quot;:&quot;{siteid}&quot;,&quot;siteId&quot;:&quot;{sitecollectionid}&quot;}, &quot;serverProcessedContent&quot;: {&quot;htmlStrings&quot;:{},&quot;searchablePlainTexts&quot;:{&quot;title&quot;:&quot;Resources&quot;},&quot;imageSources&quot;:{},&quot;links&quot;:{&quot;baseUrl&quot;:&quot;https://{fqdn}{site}&quot;},&quot;componentDependencies&quot;:{&quot;layoutComponentId&quot;:&quot;706e33c8-af37-4e7b-9d22-6e5694d92a6f&quot;}}, &quot;dynamicDataPaths&quot;: {}, &quot;dynamicDataValues&quot;: {}}" ControlId="c70391ea-0b10-4ee9-b2b4-006d3fcad0cd" Order="2" Column="2" />
+              </pnp:Controls>
+            </pnp:Section>
+          </pnp:Sections>
+          <pnp:FieldValues>
+            <pnp:FieldValue Key="ValoPageType" Value="page" />
+            <pnp:FieldValue Key="ValoContentType" Value="{localization:template:ContentTypeValoVideoPageTitle}" />
+          </pnp:FieldValues>
+        </pnp:ClientSidePage>
+      </pnp:ClientSidePages>
+    </pnp:ProvisioningTemplate>
+  </pnp:Templates>
+</pnp:Provisioning>

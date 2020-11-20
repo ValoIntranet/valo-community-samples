@@ -1,0 +1,165 @@
+<content id="metadata" type="x-handlebars-metadata">
+    {
+      "fields": ["Title", "SiteName", "SiteTitle", "HitHighlightedSummary", "ModifiedBy", "ModifiedById", "ModifiedOWSDATE", "ServerRedirectedPreviewURL", "BannerImageUrlOWSURLH", "PictureThumbnailURL", "FileExtension", "Path", "LayoutWebpartsContentOWSHTML", "ContentType"],
+      "query": "ContentTypeId:0x0101009D1CB255DA76424F860D91F20E6C41180065789619A4EFB44992AF42CEEBB13C9A03*",
+      "totalResults": 12,
+      "sorting": "ViewsLifeTime:descending",
+      "pagingType": 3,
+      "parameters": [
+        {
+          "name": "ShowMoreTitle",
+          "value": "Read more",
+          "description": "Title for show more link"
+        },
+        {
+          "name": "ShowMoreUrl",
+          "value": "",
+          "description": "Url for show more link"
+        },
+        {
+          "name": "ShowMoreTarget",
+          "value": "_blank",
+          "description": "Target for show more link"
+        },
+        {
+          "name": "UseThumbnailImages",
+          "value": "false",
+          "options": ["true","false"],
+          "description": "universalBannerUseThumbnailImagesDesc"
+        }
+      ]
+    }
+  </content>
+
+  <content id="customHelpers" type="x-handlebars-template">
+    <script>
+        (function () {
+            function removeCharset(value) {
+                console.log('removeCharset(' + value + ')');
+                if (!value || !value.replace) return value;
+                return value.replace(/charset\=[\w-]*\s*/gi, '');
+            }
+            function removeMimeType(value) {
+                console.log('removeMimeType(' + value + ')');
+                if (!value || !value.replace) return value;
+                return value.replace(/\w*\/\w*[\s;]*/gi, '');
+            }
+            Handlebars.registerHelper('removeCharset', removeCharset);
+            Handlebars.registerHelper('removeMimeType', removeMimeType);
+        })();
+    </script>
+
+  </content>
+  
+  <content id="template" type="x-handlebars-template">
+    <style>
+        .valo-policy-procedures__item__sub-link {
+            cursor: inherit;
+        }
+        .valo-documents__item__header {
+            background-color: inherit;
+        }
+        .valo-documents__item__file-icon {
+            color: inherit;
+        }
+        .valo-documents__item__title {
+            font-weight: inherit;
+            color: #333333;
+        }
+        .valo-documents__item__title:hover {
+            color: #111111;
+        }
+        .valo-documents__item__sub-link {
+            color: #7b7b7b;
+        }
+    </style>
+    <div class="valo-documents ms-Grid">
+      <div class="valo-documents__list ms-Grid-row vm-Cards">
+        {{#if dsData.items}}
+          {{#each dsData.items}}
+            <div target="_blank" class="valo-documents__item vm-Card ms-sm12 ms-md6 ms-lg4 ms-xlg3 showTransition">
+              <div class="valo-documents__item-wrapper">
+                <div class="valo-documents__item__header valo-classic-spfxcontrols-bgcolor valo-classic-spfxcontrols-wp-title">
+                  {{#if ServerRedirectedPreviewURL}}
+                    <div class="valo-documents__item__img-container"><img src="{{ServerRedirectedPreviewURL}}" loading="lazy" alt="" class="valo-documents__item__img"/></div>
+                  {{else}}
+                    {{#if PictureThumbnailURL}}
+                      <div class="valo-documents__item__img-container"><img src="{{imageResolution PictureThumbnailURL 1 null null ../parameters.UseThumbnailImages}}" loading="lazy" alt="" class="valo-documents__item__img"/></div>
+                    {{else}}
+                      <div class="valo-documents__item__img-container"><img src="{{imageResolution BannerImageUrlOWSURLH 1 null null ../parameters.UseThumbnailImages}}" loading="lazy" alt="" class="valo-documents__item__img"/></div>
+                    {{/if}}
+                  {{/if}}
+                  <i class="valo-documents__item__file-icon ms-Icon ms-Icon--{{fileIconName FileExtension}}" aria-hidden="true"></i>
+                </div>
+                <div class="valo-documents__item__content">
+                  {{#if_containsQueryString Path}}
+                    <a href="{{Path}}" class="valo-documents__item__title">
+                        {{Title}}
+                    </a>
+                  {{else}}
+                    <a href="{{Path}}?web=1" class="valo-documents__item__title">
+                        {{Title}}
+                    </a>
+                  {{/if_containsQueryString}}
+                  <div class="valo-documents__item__excerpt">
+                      {{{summary HitHighlightedSummary}}}
+                  </div>
+                  <div class="valo-documents__item__info">
+                    <div class="valo-documents__item__info__location">
+                      <!-- "{Policy}" -->
+                      Document type:
+                      <span class="valo-documents__item__sub-link valo-policy-procedures__item__sub-link">{{removeCharset (removeMimeType ContentType)}}</span>
+                    </div>
+                    <div class="valo-documents__item__info__updated">
+                      <!-- " | by John Doe" -->
+                      {{#if ModifiedBy}}
+                        {{resourceLabel "LabelUpdatedBy"}}
+                        <span class="valo-documents__item__sub-link" onclick="window.open('{{userProfileUrl ModifiedById}}', '_blank'); return false;" role="link">{{ModifiedBy}}</span>
+                      {{/if}}
+                      <!-- " 3 days ago" -->
+                      {{#if ModifiedOWSDATE}}
+                        <span> {{dateAgoFormat ModifiedOWSDATE}}</span>
+                      {{/if}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          {{/each}}
+        {{else}}
+          {{resourceLabel "NoResultsFound"}}
+        {{/if}}
+      </div>
+    </div>
+    {{#if parameters.ShowMoreUrl}}
+      <div class="valo-showMore">
+        <a href="{{parameters.ShowMoreUrl}}" target="{{parameters.ShowMoreTarget}}">{{parameters.ShowMoreTitle}}</a>
+      </div>
+    {{/if}}
+  </content>
+  
+  
+  <content id="placeholder" type="x-handlebars-template">
+    <div class="valo-documents ms-Grid">
+      <div class="valo-documents__list ms-Grid-row vm-Cards placeholder">
+        {{#repeat nrOfResults}}
+        <a class="vm-Card ms-sm12 ms-md6 ms-lg4 ms-xlg3">
+          <div class="valo-documents__item-wrapper">
+              <div class="valo-documents__item__header"></div>
+              <div class="valo-documents__item__content">
+                  <div class="valo-documents__item__title"></div>
+                  <div class="valo-documents__item__info"></div>
+              </div>
+          </div>
+        </a>
+        {{/repeat}}
+      </div>
+    </div>
+  </content>
+  <html xmlns:mso="urn:schemas-microsoft-com:office:office" xmlns:msdt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882"><head>
+<!--[if gte mso 9]><xml>
+<mso:CustomDocumentProperties>
+<mso:TemplateTitle msdt:dt="string">Document Hub</mso:TemplateTitle>
+</mso:CustomDocumentProperties>
+</xml><![endif]-->
+</head>

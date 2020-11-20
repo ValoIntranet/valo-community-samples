@@ -4,4 +4,6 @@ release.json
 
 .DS_Store
 
-.vscode
+*.log
+
+pnp-debug*
