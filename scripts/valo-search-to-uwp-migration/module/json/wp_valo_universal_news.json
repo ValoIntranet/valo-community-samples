@@ -1,0 +1,211 @@
+{
+    "templateGallery": "Templates gallery",
+    "templateMetadata": {
+        "fields": [
+            "Path",
+            "LastModifiedTime",
+            "FirstPublishedDate",
+            "Title",
+            "AuthorOWSUSER",
+            "EditorOWSUSER",
+            "Author",
+            "BannerImageUrlOWSURLH",
+            "PictureThumbnailURL",
+            "Description",
+            "ListID",
+            "ListItemID",
+            "UniqueId",
+            "SPWebUrl",
+            "ValoLocationOWSTEXT",
+            "owstaxIdValoOfficeLocation",
+            "ValoOfficeLocation",
+            "ValoTagsTaxonomy",
+            "owstaxIdValoTags",
+            "ValoTags",
+            "ValoHighlightOWSBOOL",
+            "ValoCommentingTypeOWSCHCS",
+            "ValoYammerThreadIdOWSTEXT",
+            "LayoutWebpartsContentOWSHTML",
+            "ValoNewsPublishDate"
+        ],
+        "query": "(ContentTypeId:0x0101009D1CB255DA76424F860D91F20E6C41180065789619A4EFB44992AF42CEEBB13C9A02* OR (PromotedState:1 OR PromotedState:2)) AND -ValoHighlightOWSBOOL:1 AND NOT(ValoExpirationDate<{Today})",
+        "refinementFilters": "ValoNewsPublishDate:range(min,{Now},to=\"le\")",
+        "sorting": "ValoNewsPublishDate:descending",
+        "totalResults": 3,
+        "mobileResults": 1,
+        "skipResults": 0,
+        "pagingType": 3,
+        "resources": [
+            {
+                "key": "title",
+                "values": {
+                    "default": "Title:",
+                    "nl-nl": "Titel:"
+                }
+            }
+        ],
+        "parameters": [
+            {
+                "name": "ShowMoreTitle",
+                "value": "Read more",
+                "description": "Title for show more link"
+            },
+            {
+                "name": "ShowMoreUrl",
+                "value": "",
+                "description": "Url for show more link"
+            },
+            {
+                "name": "ShowMoreTarget",
+                "value": "_blank",
+                "description": "Target for show more link"
+            },
+            {
+                "name": "UseThumbnailImages",
+                "value": "false",
+                "options": [
+                    "true",
+                    "false"
+                ],
+                "description": "universalBannerUseThumbnailImagesDesc"
+            },
+            {
+                "name": "UseImageLazyLoading",
+                "value": "true",
+                "options": [
+                    "true",
+                    "false"
+                ],
+                "description": "universalBannerUseImageLazyLoadingDesc"
+            },
+            {
+                "name": "UseMultilingualTerms",
+                "value": "true",
+                "options": [
+                    "true",
+                    "false"
+                ],
+                "description": "universalUseMultilingualTerms"
+            }
+        ]
+    },
+    "templateParams": [
+        {
+            "name": "ShowMoreTitle",
+            "value": "Read more",
+            "description": "Title for show more link"
+        },
+        {
+            "name": "ShowMoreUrl",
+            "value": "",
+            "description": "Url for show more link"
+        },
+        {
+            "name": "ShowMoreTarget",
+            "value": "_blank",
+            "description": "Target for show more link"
+        },
+        {
+            "name": "UseThumbnailImages",
+            "value": "false",
+            "options": [
+                "true",
+                "false"
+            ],
+            "description": "universalBannerUseThumbnailImagesDesc"
+        },
+        {
+            "name": "UseImageLazyLoading",
+            "value": "true",
+            "options": [
+                "true",
+                "false"
+            ],
+            "description": "universalBannerUseImageLazyLoadingDesc"
+        },
+        {
+            "name": "UseMultilingualTerms",
+            "value": "true",
+            "options": [
+                "true",
+                "false"
+            ],
+            "description": "universalUseMultilingualTerms"
+        }
+    ],
+    "templateMappingSlots": [],
+    "templateMappingsSlotsUpdated": false,
+    "numberOfPagesToDisplay": 10,
+    "cacheTime": 5,
+    "hotItemSwap": true,
+    "dataSourceConnection": "SearchDataSource",
+    "lastUpdated": "1599042020661",
+    "template": {
+        "key": "news.async.html",
+        "id": "news.async.html",
+        "editUrl": "",
+        "fullBleed": false,
+        "imageUrl": "",
+        "label": "News",
+        "type": "news",
+        "scope": 1,
+        "dataSourceId": "SearchDataSource"
+    },
+    "searchDataSource": {
+        "showAdvancedSearchOptions": true,
+        "useSearchQueryBuilder": false,
+        "itemsCountPerPage": 6,
+        "searchQuerySettings": {
+            "searchQuery": "(ContentTypeId:0x0101009D1CB255DA76424F860D91F20E6C41180065789619A4EFB44992AF42CEEBB13C9A02* OR (PromotedState:1 OR PromotedState:2)) AND -ValoHighlightOWSBOOL:1 AND NOT(ValoExpirationDate<{Today})",
+            "sortList": [
+                {
+                    "sortField": {
+                        "name": "ValoNewsPublishDate",
+                        "typeInfo": null
+                    },
+                    "sortDirection": 2
+                }
+            ],
+            "selectedProperties": [
+                "Path",
+                "LastModifiedTime",
+                "FirstPublishedDate",
+                "Title",
+                "AuthorOWSUSER",
+                "EditorOWSUSER",
+                "Author",
+                "BannerImageUrlOWSURLH",
+                "PictureThumbnailURL",
+                "Description",
+                "ListID",
+                "ListItemID",
+                "UniqueId",
+                "SPWebUrl",
+                "ValoLocationOWSTEXT",
+                "owstaxIdValoOfficeLocation",
+                "ValoOfficeLocation",
+                "ValoTagsTaxonomy",
+                "owstaxIdValoTags",
+                "ValoTags",
+                "ValoHighlightOWSBOOL",
+                "ValoCommentingTypeOWSCHCS",
+                "ValoYammerThreadIdOWSTEXT",
+                "LayoutWebpartsContentOWSHTML",
+                "ValoNewsPublishDate"
+            ],
+            "refinementFilters": "ValoNewsPublishDate:range(min,{Now},to=\"le\")",
+            "privateGroups": false
+        },
+        "searchScope": 1,
+        "selectedListIds": [],
+        "filterConditions": [],
+        "searchBoxSourceId": null,
+        "searchRefinersSourceId": null,
+        "enableAudienceTargeting": false,
+        "onlyShowResultsOnSearch": false,
+        "numberOfItemsToSkip": 0
+    },
+    "selectedPagingOption": 1,
+    "isPagingFixed": true,
+    "title": ""
+}

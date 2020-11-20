@@ -1,0 +1,110 @@
+{
+    "numberOfPagesToDisplay": 5,
+    "cacheTime": 5,
+    "dataSourceConnection": "SearchDataSource",
+    "lastUpdated": "1",
+    "template": {
+        "key": "People.html",
+        "id": "People.html",
+        "editUrl": "",
+        "fullBleed": false,
+        "imageUrl": "",
+        "label": "People",
+        "type": "peoplefinder",
+        "scope": 1,
+        "dataSourceId": "SearchDataSource"
+    },
+    "searchDataSource": {
+        "showAdvancedSearchOptions": true,
+        "useSearchQueryBuilder": true,
+        "itemsCountPerPage": 12,
+        "searchQuerySettings": {
+            "searchQuery": "-PreferredName:\"_spo*\" -PreferredName:\"app@*\" -PreferredName:\"Foreign Principal*\" -AccountName:%23ext%23",
+            "sortList": [
+                {
+                    "sortField": {
+                        "name": "FirstName",
+                        "typeInfo": null
+                    },
+                    "sortDirection": 1
+                }
+            ],
+            "selectedProperties": [
+                "FirstName",
+                "LastName",
+                "JobTitle",
+                "Department",
+                "WorkPhone",
+                "MobilePhone",
+                "WorkEmail",
+                "OfficeNumber",
+                "PictureURL",
+                "AccountName"
+            ],
+            "refinementFilters": "",
+            "resultSourceId": "b09a7990-05ea-4af9-81ef-edfab16c4e31",
+            "privateGroups": false
+        },
+        "searchScope": 1,
+        "selectedListIds": [],
+        "filterConditions": [],
+        "searchBoxSourceId": null,
+        "searchRefinersSourceId": null,
+        "enableAudienceTargeting": false,
+        "onlyShowResultsOnSearch": false,
+        "numberOfItemsToSkip": 0
+    },
+    "selectedPagingOption": 3,
+    "hotItemSwap": true,
+    "title": "Search Results",
+    "templateMetadata": {
+        "fields": [
+            "FirstName",
+            "LastName",
+            "JobTitle",
+            "Department",
+            "WorkPhone",
+            "MobilePhone",
+            "WorkEmail",
+            "OfficeNumber",
+            "PictureURL",
+            "AccountName"
+        ],
+        "query": "-PreferredName:\"_spo*\" -PreferredName:\"app@*\" -PreferredName:\"Foreign Principal*\" -PreferredName:\"spsearch\" -\"sps-usertype\":1",
+        "sorting": "FirstName:ascending",
+        "sourceId": "b09a7990-05ea-4af9-81ef-edfab16c4e31",
+        "totalResults": 12,
+        "resources": [
+            {
+                "key": "empty",
+                "values": {
+                    "default": "n/a"
+                }
+            }
+        ],
+        "parameters": [
+            {
+                "name": "BannerStyle",
+                "value": "Candela",
+                "options": [
+                    "Candela",
+                    "Lux"
+                ],
+                "description": "universalBannerTmplStyleParamDesc"
+            }
+        ],
+        "pagingType": 3
+    },
+    "templateParams": [
+        {
+            "name": "BannerStyle",
+            "value": "Candela",
+            "options": [
+                "Candela",
+                "Lux"
+            ],
+            "description": "universalBannerTmplStyleParamDesc"
+        }
+    ],
+    "templateMappingSlots": []
+}
