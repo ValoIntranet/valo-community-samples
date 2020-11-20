@@ -1,3 +1,14 @@
+---
+title: Search WP to Universal WP migration script
+author: Ole Rühaak
+createdByValo: false
+htmlTemplate: ""
+pnpTemplate: ""
+script: 
+- valo-uwp-migration.ps1
+sppkg: ""
+---
+
 # Valo Universal web part migration
 
 A solution to automate the migration from "Valo Search" web part to the "Valo Universal" web part.
