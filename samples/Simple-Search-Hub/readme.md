@@ -15,6 +15,7 @@ sppkg: ""
 This is a sample of a Search Hub utilizing Valo components.
 
 ## Used Valo Version 
+
 ![Version 1.6](https://img.shields.io/badge/version-1.6-green.svg)
 
 ## Prerequisites
@@ -41,4 +42,5 @@ Version|Date|Comments
 1.0 | August 06, 2020 | Initial Release
 
 ## Disclaimer
+
 **THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.**
