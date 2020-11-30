@@ -1,0 +1,1 @@
+Get-Disk |Where-Object PartitionStyle -eq 'RAW' |Initialize-Disk -PartitionStyle GPT -PassThru |New-Partition -DriveLetter V -UseMaximumSize |Format-Volume -FileSystem NTFS -NewFileSystemLabel Data -Confirm:$false
