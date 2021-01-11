@@ -91,12 +91,14 @@ function ConvertWebparts($Page, $SearchWP, $Analyze)
 
         # add 'Valo - Univeral" web part instance
         $wpUniversal = Add-PnPClientSideWebPart -Page $Page -Component $global:valo_universal_title -Order $wpSearch_order -Section $wpSearch_section -Column $wpSearch_column;
+        if (!$wpUniversal -or !$wpUniversal.InstanceId)
+        {
+            throw "Unable to add new web part to page. This might be due to an issue with PnP. Please try another PnP version with your tenant. Just use version history to restore the current page.";
+        }
 
         Log "'Valo - Universal' web part '$($wpUniversal.InstanceId)' successfully added." -level Debug;
 
         Log "Configuring 'Valo - Universal' web part '$($wpUniversal.InstanceId)' ..." -level Debug;
-
-        
 
         # read JSON template for web part properties matching the specified template type
         $wpUniversal_Properties_Json =  Get-Content -Raw -Path "$PSScriptRoot\json\wp_valo_universal_$($type).json";

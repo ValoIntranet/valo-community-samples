@@ -113,6 +113,22 @@ If you don't set a title in the Valo Universal web part or don't play with the p
 
 ![title and paging options](images/title-and-paging-params.png)
 
+#### Issues updating the web part
+
+In some cases adding the new Valo Universal web part will fail. This is usually a PnP bug that sometimes prevents adding a client-component (Add-PnPClientSideComponent / Add-PnPClientSideWebPart) on specific tenants at some times.
+
+If this excepion occurrs, the only thing you can do, is try out another PnP version. First try should be, to give the latest version a chance. If that doensn't help, try out version *3.22.2006.2*. This one has proved most stable in that aspect for me.
+
+You can force the script to use a dedicated PnP version, by adding somthing like this in the first line:
+
+```
+Import-Module SharePointPnPPowerShellOnline -MaximumVersion 3.22.2006.2 -Force
+```
+
+Please note: If you run into this issue, you will naturally not be able to restore the old version of your page by re-applying the backuped page template. Apply-PnPProvisioningTemplate will also use the add-client-side-component call under the hood. Result will usually be an empty or unchanged page and an ominous error message that "one or more errors have occurred".
+
+To restore your page you'll have to rely on the SP version history, or you'll have to solve the PnP issue by using a working version for your tenants current issue first.
+
 ### Skip Results Property
 
 There are some more parameters in the "templateMetaData" section of the object structure that need you attention. Most of the stuff should be fine here, but make sure that the "skipResults" parameter is set as shown below. Here again - the actual value is not important.
@@ -147,15 +163,15 @@ If you want to use an Excel sheet as input, you can use the [provided file](./in
 
 ## Solution
 
-Solution|Author(s)
---------|---------
+Solution                     | Author(s)
+-----------------------------|-------------------------------------------------------------------------------------
 valo-search-to-uwp-migration | [Ole Rühaak](https://www.linkedin.com/in/ole-ruehaak/), [GIS AG](https://gis-ag.com)
 
 ## Version history
 
-Version|Date|Comments
--------|----|--------
-1.0 | September 16, 2020 | Initial Release
+Version | Date               | Comments
+--------|--------------------|----------------
+1.0     | September 16, 2020 | Initial Release
 
 ## Disclaimer
 
