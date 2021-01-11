@@ -1,5 +1,6 @@
 
 Import-Module $PSScriptRoot/Log.psm1 -Force
+Import-Module $PSScriptRoot/Get-Context.psm1 -Force
 Import-Module $PSScriptRoot/Update-ValoWebParts.psm1 -Force
 Import-Module $PSScriptRoot/Get-AllValoSites.psm1 -Force
 
@@ -132,7 +133,7 @@ function Update-ValoSite
     if ($SiteUrl -ne $global:lastSiteUrl)
     {
         Log "Connecting to site $($SiteUrl)." -level Info;
-        Connect-PnPOnline $SiteUrl -UseWebLogin;
+        Get-Context -SiteUrl $SiteUrl;
         $global:lastSiteUrl = $SiteUrl;
     }
 
@@ -233,7 +234,7 @@ function Update-ValoPages
             if ($_.Site -ne $global:lastSiteUrl)
             {
                 Log "Connecting to site $($_.Site)." -level Info;
-                Connect-PnPOnline $_.Site -UseWebLogin;
+                Get-Context -SiteUrl $_.Site;
                 $global:lastSiteUrl = $_.Site;
             }
 
