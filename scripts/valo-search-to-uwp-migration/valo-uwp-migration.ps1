@@ -10,7 +10,6 @@ $global:logFileName = "$($global:dir)/logs/site-update_$([DateTime]::Now.ToStrin
 
 # migrate pages in the given hub - only 'dry mode'
 # Update-AllValoSites -HubSiteUrl "https://mytenant.sharepoint.com/sites/sample-hub" -Analyze;
-Update-AllValoSites -HubSiteUrl "https://draeger.sharepoint.com/sites/d-world-global-de" -Analyze;
 
 # migrate pages in the given site, backup pages first
 # Update-ValoSite -SiteUrl "https://mytenant.sharepoint.com/sites/sample-site" -BackupOldPages;
