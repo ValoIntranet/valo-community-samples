@@ -26,6 +26,16 @@ It is required that the users have PowerShell 5.1 on Windows. As the solution ma
 
 [PnP PowerShell](https://docs.microsoft.com/en-us/powershell/sharepoint/sharepoint-pnp/sharepoint-pnp-cmdlets) must be installed on the client. We usually are working with the latest release as stated above, but feel free to test another one ...
 
+To provide the functionality to migrate pages based on an Excel file input (see [Update-ValoPages](./Update-ValoPages.md)), you'll have to install the module [ImportExcel](https://www.powershellgallery.com/packages/ImportExcel) from PowerShell Gallery.
+
+If you miss this installation step, you'll get an error message running the script.
+
+You can install the module locally using the following command in a PowerShell session with admin permissions:
+
+```
+Install-Module -Name ImportExcel -Force
+```
+
 ## Migration Procedure
 
 ### General Approach

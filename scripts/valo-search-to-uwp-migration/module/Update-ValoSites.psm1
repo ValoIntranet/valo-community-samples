@@ -1,3 +1,6 @@
+# load import excel module
+# see https://www.powershellgallery.com/packages/ImportExcel/
+Import-Module ImportExcel -MinimumVersion 7.1.1 -Force
 
 Import-Module $PSScriptRoot/Log.psm1 -Force
 Import-Module $PSScriptRoot/Get-Context.psm1 -Force
