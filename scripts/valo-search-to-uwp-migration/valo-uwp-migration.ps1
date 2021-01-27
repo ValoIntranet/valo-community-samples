@@ -5,6 +5,8 @@ Import-Module $global:dir/module/Update-ValoSites.psm1 -Force
 # define log file location
 $global:logFileName = "$($global:dir)/logs/site-update_$([DateTime]::Now.ToString("yyyMMddhhmm")).log";
 
+$global:logLevel = "debug";
+
 # migrate pages in the given hub, backup pages first
 # Update-AllValoSites -HubSiteUrl "https://mytenant.sharepoint.com/sites/sample-hub" -BackupOldPages;
 

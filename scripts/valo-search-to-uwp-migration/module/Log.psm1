@@ -1,4 +1,3 @@
-
 <#
  .Synopsis
   Module to write log messages.
@@ -25,44 +24,115 @@
    # Log a message with severity level "Debug"
    Log "hello world" -level Debug
 #>
-function Log {
+function Log 
+{
     
     param (
         [string]$log,
-        [string]$level = "Info",
-        [string]$logFileName
+        [string]$level = "debug",
+        [string]$logFileName,
+        [string]$logLevel
     )
 
-    $wrappedLog = "[$([DateTime]::Now.ToString("yyyy-MM-dd-hh:mm:ss"))] [$level]: $log"
-    
-    $color = "White";
-    if($level -eq "Debug")
-	{
-		$color = "Blue";
-	}
-	if($level -eq "Info" -or $Level -eq "OK")
-	{
-		$color = "darkgreen";
-	}
-	if($level -eq "Warning")
-	{
-		$color = "Yellow";
-	}
-	if($level -eq "Error")
-	{
-		$color = "Red";
-	}
-
-    Write-Host $wrappedLog -ForegroundColor $color
-
-    $filePath = $logFileName;
-    if (!$filePath -or $filePath -eq "")
+    if (!$logLevel -or $logLevel.Length -lt 1)
     {
-        $filePath = $global:logFileName;
+        $logLevel = $global:logLevel;
     }
-    if ($filePath) {
-        Add-Content -Path $filePath -Value $wrappedLog
+    if ($logLevel)
+    {
+       $logLevel = $logLevel.ToLower(); 
+    }
+    else 
+    {
+        $logLevel = "warning";
+    }    
+
+    $level = $level.ToLower();
+    
+    $logLevelSeverity = Get-Severity -Level $logLevel;
+    $currentSeverity = Get-Severity -Level $level;
+
+    if ($currentSeverity -ge $logLevelSeverity)
+    {    
+        $color = switch ($level)
+        {
+            "trace" { 
+                "DarkGray";
+            }
+            "debug" { 
+                "Blue";
+            }
+            "info" { 
+                "DarkGreen";
+            }
+            "ok" { 
+                "DarkGreen";
+            }
+            "warn" { 
+                "Yellow";
+            }
+            "warning" { 
+                "Yellow";
+            }
+            "error" {
+                "Red";
+            }                    
+            default { 
+                "Gray";
+            }
+        }
+
+        $wrappedLog = "[$([DateTime]::Now.ToString("yyyy-MM-dd-hh:mm:ss"))] [$level]: $log"
+
+        Write-Host $wrappedLog -ForegroundColor $color
+
+        $filePath = $logFileName;
+        if (!$filePath -or $filePath.Length -lt 1)
+        {
+            $filePath = $global:logFileName;
+        }
+        if ($filePath) 
+        {            
+            Add-Content -Path $filePath -Value $wrappedLog
+        }
     }
 }
 
-Export-ModuleMember -Function Log
+function Get-Severity($level)
+{
+    $severity = $null;
+
+    $null = @(
+        $severity =  switch ($level)
+        {
+            "trace" { 
+                0;
+            }
+            "debug" { 
+                1;
+            }
+            "info" { 
+                2;
+            }
+            "ok" { 
+                2;
+            }
+            "warn" { 
+                3;
+            }
+            "warning" { 
+                3;
+            }
+            "error" {
+                4;
+            }                    
+            default { 
+                4;
+            }
+        }
+    );
+
+    return $severity;
+}
+
+Export-ModuleMember -Function Log;

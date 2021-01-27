@@ -91,16 +91,16 @@ You nee a JSON configuration stub for a Handlebar template not previously mapped
 Connect-PnPOnline https://mytenant.sharepoint.com/sites/sample-site
 
 # Get page
-$page = Get-PnPClientSidePage -Identity sample-page.aspx
+$page = Get-PnPPage -Identity sample-page.aspx
 
 # Show page components
-Get-PnPClientSideComponent -Page $page
+Get-PnPPageComponent -Page $page
 
 # You will get output with all components on the page.
 # Search for Title "Valo - Search" and copy the "IntanceId" value
 
 # Get Valo Search web part
-$wp = Get-PnPClientSideComponent -Page $page -InstanceId some-guid
+$wp = Get-PnPPageComponent -Page $page -InstanceId some-guid
 
 # Display the JSON data
 $wp.PropertiesJson
@@ -125,7 +125,7 @@ If you don't set a title in the Valo Universal web part or don't play with the p
 
 #### Issues updating the web part
 
-In some cases adding the new Valo Universal web part will fail. This is usually a PnP bug that sometimes prevents adding a client-component (Add-PnPClientSideComponent / Add-PnPClientSideWebPart) on specific tenants at some times.
+In some cases adding the new Valo Universal web part will fail. This is usually a PnP bug that sometimes prevents adding a client-component (Add-PnPPageComponent / Add-PnPPageWebPart) on specific tenants at some times.
 
 If this excepion occurrs, the only thing you can do, is try out another PnP version. First try should be, to give the latest version a chance. If that doensn't help, try out version *3.22.2006.2*. This one has proved most stable in that aspect for me.
 
@@ -135,7 +135,7 @@ You can force the script to use a dedicated PnP version, by adding somthing like
 Import-Module SharePointPnPPowerShellOnline -MaximumVersion 3.22.2006.2 -Force
 ```
 
-Please note: If you run into this issue, you will naturally not be able to restore the old version of your page by re-applying the backuped page template. Apply-PnPProvisioningTemplate will also use the add-client-side-component call under the hood. Result will usually be an empty or unchanged page and an ominous error message that "one or more errors have occurred".
+Please note: If you run into this issue, you will naturally not be able to restore the old version of your page by re-applying the backuped page template. Invoke-PnPSiteTemplate will also use the add-client-side-component call under the hood. Result will usually be an empty or unchanged page and an ominous error message that "one or more errors have occurred".
 
 To restore your page you'll have to rely on the SP version history, or you'll have to solve the PnP issue by using a working version for your tenants current issue first.
 

@@ -18,42 +18,50 @@ function Get-Context
         [parameter(Mandatory=$true)][string]$SiteUrl
     )
 
+    $currentCtx = $null;
+
     $Null = @(
-        $currentCtx = $null;
-        
         try {
             # try to reuse context
-            $currentCtx = Get-PnPContext;
+            $currentCtx = Get-PnPContext -ErrorAction SilentlyContinue;
         }
         catch 
         {
             # do nothing
         }
         
+        # if we have a current context we will clone the new one.
         if ($currentCtx)
         {
-            # if we have a current context we will clone the new one.
-            SetPnPNewUrl -NewUrl $SiteUrl
+            # make sure, the new url get propagated
+            Set-PnPNewUrl -NewUrl $SiteUrl
 
             $newCtx = [Microsoft.SharePoint.Client.ClientContextExtensions]::Clone($currentCtx, $SiteUrl);
             if ($newCtx)
             {
                 Set-PnPContext -Context $newCtx -ErrorAction Stop;
+
+                $currentCtx = Get-PnPContext -ErrorAction SilentlyContinue;
             }
             else 
             {
-                Disconnect-PnPOnline
+                Disconnect-PnPOnline -ErrorAction SilentlyContinue;
+                $currentCtx = $null;
             }
         }
-        else 
+        
+        # if we don't have a current context, we will just connect.
+        if (!$currentCtx) 
         {
-            # if we don't have a current context, we will just connect.
             Connect-PnPOnline $SiteUrl -UseWebLogin -ErrorAction Stop;
+            $currentCtx = Get-PnPContext -ErrorAction SilentlyContinue;
         }
     );
+
+    return $currentCtx;
 }
 
-function SetPnPNewUrl($NewUrl)
+function Set-PnPNewUrl($NewUrl)
 {
     # works with SharePointPnPPowerShellOnline version 3.22.2006.2 
     # $connection = [SharePointPnP.PowerShell.Commands.Base.PnPConnection](Get-PnPConnection);
