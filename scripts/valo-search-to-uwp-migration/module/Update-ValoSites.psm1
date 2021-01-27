@@ -1,5 +1,12 @@
+# enforce usage of PnP.PowerShell
+Import-Module PnP.PowerShell -MinimumVersion 1.2.0 -Force
+
+# load import excel module
+# see https://www.powershellgallery.com/packages/ImportExcel/
+Import-Module ImportExcel -MinimumVersion 7.1.1 -Force
 
 Import-Module $PSScriptRoot/Log.psm1 -Force
+Import-Module $PSScriptRoot/Get-Context.psm1 -Force
 Import-Module $PSScriptRoot/Update-ValoWebParts.psm1 -Force
 Import-Module $PSScriptRoot/Get-AllValoSites.psm1 -Force
 
@@ -131,8 +138,9 @@ function Update-ValoSite
     # connect to site
     if ($SiteUrl -ne $global:lastSiteUrl)
     {
-        Log "Connecting to site $($SiteUrl)." -level Info;
-        Connect-PnPOnline $SiteUrl -UseWebLogin;
+        Log "Connecting to site '$($SiteUrl)' ..." -level trace;
+        $ctx = Get-Context -SiteUrl $SiteUrl;
+        Log "Now using site context '$($ctx.Url)'." -level trace;
         $global:lastSiteUrl = $SiteUrl;
     }
 
@@ -146,7 +154,13 @@ function Update-ValoSite
             $i++;
             Log "Processing page. Url='$($_.FieldValues.FileRef)' ; Progress='$($i)/$($total)'" -level Info;  
 
-            $Page = Get-PnPClientSidePage -Identity $_.FieldValues.FileLeafRef
+            $Page = Get-PnPPage -Identity $_.FieldValues.FileLeafRef -ErrorAction SilentlyContinue;
+
+            if (!$Page) {
+                # sometimes it seem we need some delay, here ...
+                Start-Sleep -Seconds 2;
+                $Page = Get-PnPPage -Identity $_.FieldValues.FileLeafRef -ErrorAction SilentlyContinue;
+            }
 
             if ($Page)
             {
@@ -233,7 +247,7 @@ function Update-ValoPages
             if ($_.Site -ne $global:lastSiteUrl)
             {
                 Log "Connecting to site $($_.Site)." -level Info;
-                Connect-PnPOnline $_.Site -UseWebLogin;
+                Get-Context -SiteUrl $_.Site;
                 $global:lastSiteUrl = $_.Site;
             }
 
@@ -298,11 +312,11 @@ function Update-SitePage($Page, $HubName, $SiteName, $PageName, $BackupOldPages 
         }
 
         # export page
-        Export-PnPClientSidePage -Identity $PageName -Out "$($PSScriptRoot)\..\temp\$($HubName)\$($SiteName)\$($PageName).xml" -Force;
+        Export-PnPPage -Identity $PageName -Out "$($PSScriptRoot)\..\temp\$($HubName)\$($SiteName)\$($PageName).xml" -Force;
     }
 
     # proceed operation on ClientSidePage
-    $Page = Get-PnPClientSidePage -Identity $PageName;
+    $Page = Get-PnPPage -Identity $PageName;
     if ($Page)
     {
         Update-ValoWebParts -Page $Page -Analyze:$Analyze;

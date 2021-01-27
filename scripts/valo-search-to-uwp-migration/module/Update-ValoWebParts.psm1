@@ -23,7 +23,6 @@
 Import-Module $PSScriptRoot/Log.psm1 -Force
 
 
-$global:valo_search_title = "Valo - Search";
 $global:valo_search_id = "0651b316-c8f2-4e27-887a-b7a46b3e94c1";
 $global:valo_universal_title = "Valo - Universal";
 $global:valo_refiners_title = "Valo - Refiners";
@@ -36,18 +35,11 @@ function Update-ValoWebParts
         [switch] $Analyze
     )
 
-    $searchWps = Get-PnPClientSideComponent -Page $Page  | where {$_.Title -eq $global:valo_search_title }
+    $searchWps = Get-PnPPageComponent -Page $Page  | Where-Object { $_.WebPartId -eq $global:valo_search_id }
     if ($searchWps)
     {
         $searchWps | ForEach-Object {
-            if ($_.WebPartId -eq $global:valo_search_id)
-            {           
-                ConvertWebparts -Page $Page -SearchWP $_ -Analyze:$Analyze;
-            }
-            else 
-            {
-                Log "The given 'Valo - Search' web part instance has the wrong Id - skipping." -level Warning;   
-            }
+            ConvertWebparts -Page $Page -SearchWP $_ -Analyze:$Analyze;
         };
 
         if (!$Analyze)
@@ -59,7 +51,7 @@ function Update-ValoWebParts
     }
     else 
     {
-        Log "No 'Valo - Search' web parts found on given page - skipping." -level Warning; 
+        Log "No 'Valo - Search' web parts found on given page - skipping." -level trace; 
     }
 }
 
@@ -90,13 +82,15 @@ function ConvertWebparts($Page, $SearchWP, $Analyze)
         Log "Adding new 'Valo - Universal' web part instance ..." -level Debug;
 
         # add 'Valo - Univeral" web part instance
-        $wpUniversal = Add-PnPClientSideWebPart -Page $Page -Component $global:valo_universal_title -Order $wpSearch_order -Section $wpSearch_section -Column $wpSearch_column;
+        $wpUniversal = Add-PnPPageWebPart -Page $Page -Component $global:valo_universal_title -Order $wpSearch_order -Section $wpSearch_section -Column $wpSearch_column;
+        if (!$wpUniversal -or !$wpUniversal.InstanceId)
+        {
+            throw "Unable to add new web part to page. This might be due to an issue with PnP. Please try another PnP version with your tenant. Just use version history to restore the current page.";
+        }
 
         Log "'Valo - Universal' web part '$($wpUniversal.InstanceId)' successfully added." -level Debug;
 
         Log "Configuring 'Valo - Universal' web part '$($wpUniversal.InstanceId)' ..." -level Debug;
-
-        
 
         # read JSON template for web part properties matching the specified template type
         $wpUniversal_Properties_Json =  Get-Content -Raw -Path "$PSScriptRoot\json\wp_valo_universal_$($type).json";
@@ -315,7 +309,7 @@ function Update-RefinersWebpart($Page, $OldInstanceId, $NewInstanceId)
 {
     Log "Updating 'Valo Refiner' web part on '$($Page.PageTitle)' ..." -level Debug;
 
-    $refinersWps = Get-PnPClientSideComponent -Page $page | where {$_.Title -eq $global:valo_refiners_title }
+    $refinersWps = Get-PnPPageComponent -Page $page | where {$_.Title -eq $global:valo_refiners_title }
     $refinersWps | ForEach-Object {
         if ($_.WebPartId -eq $global:valo_refiners_id)
         {

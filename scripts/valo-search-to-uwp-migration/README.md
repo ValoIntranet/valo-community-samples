@@ -37,6 +37,16 @@ It is required that the users have PowerShell 5.1 on Windows. As the solution ma
 
 [PnP PowerShell](https://docs.microsoft.com/en-us/powershell/sharepoint/sharepoint-pnp/sharepoint-pnp-cmdlets) must be installed on the client. We usually are working with the latest release as stated above, but feel free to test another one ...
 
+To provide the functionality to migrate pages based on an Excel file input (see [Update-ValoPages](./Update-ValoPages.md)), you'll have to install the module [ImportExcel](https://www.powershellgallery.com/packages/ImportExcel) from PowerShell Gallery.
+
+If you miss this installation step, you'll get an error message running the script.
+
+You can install the module locally using the following command in a PowerShell session with admin permissions:
+
+```
+Install-Module -Name ImportExcel -Force
+```
+
 ## Migration Procedure
 
 ### General Approach
@@ -92,16 +102,16 @@ You nee a JSON configuration stub for a Handlebar template not previously mapped
 Connect-PnPOnline https://mytenant.sharepoint.com/sites/sample-site
 
 # Get page
-$page = Get-PnPClientSidePage -Identity sample-page.aspx
+$page = Get-PnPPage -Identity sample-page.aspx
 
 # Show page components
-Get-PnPClientSideComponent -Page $page
+Get-PnPPageComponent -Page $page
 
 # You will get output with all components on the page.
 # Search for Title "Valo - Search" and copy the "IntanceId" value
 
 # Get Valo Search web part
-$wp = Get-PnPClientSideComponent -Page $page -InstanceId some-guid
+$wp = Get-PnPPageComponent -Page $page -InstanceId some-guid
 
 # Display the JSON data
 $wp.PropertiesJson
@@ -123,6 +133,22 @@ Here are some properties I've noticed we have to check for existence:
 If you don't set a title in the Valo Universal web part or don't play with the paging options these both properties at the end of the configuration might be missing. Please make sure to add them in that case. The actual values in the template don't really matter, as the will be overwritten in the actual mapping process:
 
 ![title and paging options](images/title-and-paging-params.png)
+
+#### Issues updating the web part
+
+In some cases adding the new Valo Universal web part will fail. This is usually a PnP bug that sometimes prevents adding a client-component (Add-PnPPageComponent / Add-PnPPageWebPart) on specific tenants at some times.
+
+If this excepion occurrs, the only thing you can do, is try out another PnP version. First try should be, to give the latest version a chance. If that doensn't help, try out version *3.22.2006.2*. This one has proved most stable in that aspect for me.
+
+You can force the script to use a dedicated PnP version, by adding somthing like this in the first line:
+
+```
+Import-Module SharePointPnPPowerShellOnline -MaximumVersion 3.22.2006.2 -Force
+```
+
+Please note: If you run into this issue, you will naturally not be able to restore the old version of your page by re-applying the backuped page template. Invoke-PnPSiteTemplate will also use the add-client-side-component call under the hood. Result will usually be an empty or unchanged page and an ominous error message that "one or more errors have occurred".
+
+To restore your page you'll have to rely on the SP version history, or you'll have to solve the PnP issue by using a working version for your tenants current issue first.
 
 ### Skip Results Property
 
@@ -158,15 +184,15 @@ If you want to use an Excel sheet as input, you can use the [provided file](./in
 
 ## Solution
 
-Solution|Author(s)
---------|---------
+Solution                     | Author(s)
+-----------------------------|-------------------------------------------------------------------------------------
 valo-search-to-uwp-migration | [Ole Rühaak](https://www.linkedin.com/in/ole-ruehaak/), [GIS AG](https://gis-ag.com)
 
 ## Version history
 
-Version|Date|Comments
--------|----|--------
-1.0 | September 16, 2020 | Initial Release
+Version | Date               | Comments
+--------|--------------------|----------------
+1.0     | September 16, 2020 | Initial Release
 
 ## Disclaimer
 
