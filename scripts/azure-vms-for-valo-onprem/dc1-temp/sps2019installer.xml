@@ -1,0 +1,539 @@
+<Configuration Environment="sps2019" Version="3.99.70">
+    <Install SPVersion="2019">
+        <ConfigFile>config-AutoSPInstaller.xml</ConfigFile>
+        <InstallDir></InstallDir>
+        <DataDir>v:\Data</DataDir>
+        <PIDKey>YOUR SPS2019 KEY</PIDKey>
+        <SKU>Enterprise</SKU>
+        <OfflineInstall>false</OfflineInstall>
+        <PauseAfterInstall>false</PauseAfterInstall>
+        <RemoteInstall Enable="false">
+            <ParallelInstall>false</ParallelInstall>
+        </RemoteInstall>
+        <AutoAdminLogon Enable="true">
+            <Password>!V4l01N5t4ll3r2019!</Password>
+        </AutoAdminLogon>
+        <Disable>
+            <LoopbackCheck>true</LoopbackCheck>
+            <UnusedServices>true</UnusedServices>
+            <IEEnhancedSecurity>true</IEEnhancedSecurity>
+            <CertificateRevocationListCheck>false</CertificateRevocationListCheck>
+        </Disable>
+    </Install>
+    <Farm>
+        <Passphrase>!53cretP455Phr4s3!</Passphrase>
+        <Account>
+            <AddToLocalAdminsDuringSetup>true</AddToLocalAdminsDuringSetup>
+            <LeaveInLocalAdmins>false</LeaveInLocalAdmins>
+            <Username>YOURDOMAIN\SPSFarm</Username>
+            <Password>!53cret5VC4ctPwd!</Password>
+        </Account>
+        <CentralAdmin Provision="localhost">
+            <Database>Content_CentralAdmin</Database>
+            <Port>2019</Port>
+            <UseSSL>false</UseSSL>
+        </CentralAdmin>
+        <Database>
+            <DBServer>sql</DBServer>
+            <SQLAuthentication Enable="false">
+                <SQLUserName></SQLUserName>
+                <SQLPassword></SQLPassword>
+            </SQLAuthentication>
+            <DBAlias Create="false">
+                <DBInstance>SERVER\INSTANCE</DBInstance>
+                <DBPort></DBPort>
+            </DBAlias>
+            <DBPrefix>sps2019</DBPrefix>
+            <ConfigDB>Config</ConfigDB>
+        </Database>
+        <Services>
+            <SandboxedCodeService Start="localhost"/>
+            <ClaimsToWindowsTokenService Start="localhost" UpdateAccount="false"/>
+            <SMTP Install="false"/>
+            <OutgoingEmail Configure="false">
+                <SMTPServer></SMTPServer>
+                <EmailAddress></EmailAddress>
+                <ReplyToEmail></ReplyToEmail>
+            </OutgoingEmail>
+            <IncomingEmail Start="false"/>
+            <DistributedCache Start="localhost"/>
+            <WorkflowTimer Start="localhost"/>
+            <FoundationWebApplication Start="localhost"/>
+        </Services>
+        <ServerRoles>
+            <Custom Provision="false"/>
+            <WebFrontEnd Provision="false"/>
+            <WebFrontEndWithDistributedCache Provision="false"/>
+            <SingleServerFarm Provision="localhost"/>
+            <Search Provision="false"/>
+            <Application Provision="false"/>
+            <ApplicationWithSearch Provision="false"/>
+            <DistributedCache Provision="false"/>
+        </ServerRoles>
+        <ManagedAccounts>
+            <ManagedAccount CommonName="spservice">
+                <Username>YOURDOMAIN\SPSServices</Username>
+                <Password>!53cret5VC4ctPwd!</Password>
+            </ManagedAccount>
+            <ManagedAccount CommonName="Portal">
+                <Username>YOURDOMAIN\SPSPortalAppPool</Username>
+                <Password>!53cret5VC4ctPwd!</Password>
+            </ManagedAccount>
+            <ManagedAccount CommonName="MySiteHost">
+                <Username>YOURDOMAIN\SPSProfilesAppPool</Username>
+                <Password>!53cret5VC4ctPwd!</Password>
+            </ManagedAccount>
+            <ManagedAccount CommonName="SearchService">
+                <Username>YOURDOMAIN\SPSSearchService</Username>
+                <Password>!53cret5VC4ctPwd!</Password>
+            </ManagedAccount>
+        </ManagedAccounts>
+        <ObjectCacheAccounts>
+            <SuperUser>YOURDOMAIN\SPSCacheSuperUser</SuperUser>
+            <SuperReader>YOURDOMAIN\SPSCacheSuperReader</SuperReader>
+        </ObjectCacheAccounts>
+        <Logging>
+            <IISLogs Compress="true">
+                <Path></Path>
+            </IISLogs>
+            <ULSLogs Compress="true">
+                <LogLocation>v:\logs\uls</LogLocation>
+                <LogDiskSpaceUsageGB></LogDiskSpaceUsageGB>
+                <DaysToKeepLogs></DaysToKeepLogs>
+                <LogCutInterval></LogCutInterval>
+            </ULSLogs>
+            <UsageLogs Compress="true">
+                <UsageLogDir>v:\logs\usage</UsageLogDir>
+                <UsageLogMaxSpaceGB></UsageLogMaxSpaceGB>
+                <UsageLogCutTime></UsageLogCutTime>
+            </UsageLogs>
+        </Logging>
+    </Farm>
+    <WebApplications AddURLsToHOSTS="true">
+        <WebApplication Name="Portal Home">
+            <Type>Portal</Type>
+            <ApplicationPool>portal.YOURDOMAIN.valo.show</ApplicationPool>
+            <Url>https://portal2019.YOURDOMAIN.valo.show</Url>
+            <Port>443</Port>
+            <UseHostHeader>true</UseHostHeader>
+            <AddURLToLocalIntranetZone>true</AddURLToLocalIntranetZone>
+            <GrantCurrentUserFullControl>true</GrantCurrentUserFullControl>
+            <UseClaims>true</UseClaims>
+            <UseBasicAuthentication>false</UseBasicAuthentication>
+            <UseOnlineWebPartCatalog>false</UseOnlineWebPartCatalog>
+            <Database>
+                <Name>Content_Portal</Name>
+                <DBServer></DBServer>
+                <SQLAuthentication UseFarmSetting="true">
+                    <SQLUserName></SQLUserName>
+                    <SQLPassword></SQLPassword>
+                </SQLAuthentication>
+                <DBAlias Create="false">
+                    <DBInstance>SERVER\INSTANCE</DBInstance>
+                    <DBPort></DBPort>
+                </DBAlias>
+            </Database>
+            <ManagedPaths>
+                <ManagedPath relativeUrl="help" explicit="true"/>
+            </ManagedPaths>
+            <SiteCollections>
+                <SiteCollection siteUrl="https://portal2019.YOURDOMAIN.valo.show">
+                    <Name>Portal Home</Name>
+                    <Description>Portal Home Site</Description>
+                    <HostNamedSiteCollection>false</HostNamedSiteCollection>
+                    <Owner></Owner>
+                    <CustomDatabase></CustomDatabase>
+                    <SearchUrl>https://portal2019.YOURDOMAIN.valo.show/</SearchUrl>
+                    <Template>SITEPAGEPUBLISHING#0</Template>
+                    <LCID>1033</LCID>
+                    <Locale>en-us</Locale>
+                    <Time24>false</Time24>
+                </SiteCollection>
+            </SiteCollections>
+        </WebApplication>
+        <WebApplication Name="MySite Host">
+            <Type>MySiteHost</Type>
+            <ApplicationPool>my.YOURDOMAIN.valo.show</ApplicationPool>
+            <Url>https://my2019.YOURDOMAIN.valo.show</Url>
+            <Port>443</Port>
+            <UseHostHeader>true</UseHostHeader>
+            <AddURLToLocalIntranetZone>true</AddURLToLocalIntranetZone>
+            <GrantCurrentUserFullControl>true</GrantCurrentUserFullControl>
+            <UseClaims>true</UseClaims>
+            <UseBasicAuthentication>false</UseBasicAuthentication>
+            <UseOnlineWebPartCatalog>false</UseOnlineWebPartCatalog>
+            <Database>
+                <Name>Content_MySites</Name>
+                <DBServer></DBServer>
+                <SQLAuthentication UseFarmSetting="true">
+                    <SQLUserName></SQLUserName>
+                    <SQLPassword></SQLPassword>
+                </SQLAuthentication>
+                <DBAlias Create="false">
+                    <DBInstance>SERVER\INSTANCE</DBInstance>
+                    <DBPort></DBPort>
+                </DBAlias>
+            </Database>
+            <ManagedPaths>
+                <ManagedPath relativeUrl="personal" explicit="false"/>
+            </ManagedPaths>
+            <SiteCollections>
+                <SiteCollection siteUrl="https://my2019.YOURDOMAIN.valo.show">
+                    <Name>My Site Host</Name>
+                    <Description>My Site Host</Description>
+                    <HostNamedSiteCollection>false</HostNamedSiteCollection>
+                    <Owner></Owner>
+                    <CustomDatabase></CustomDatabase>
+                    <SearchUrl>https://portal2019.YOURDOMAIN.valo.show</SearchUrl>
+                    <Template>SPSMSITEHOST#0</Template>
+                    <LCID>1033</LCID>
+                    <Locale>en-us</Locale>
+                    <Time24>false</Time24>
+                </SiteCollection>
+            </SiteCollections>
+        </WebApplication>
+    </WebApplications>
+    <ServiceApps>
+        <ManagedMetadataServiceApp Provision="localhost">
+            <Name>Managed Metadata Service</Name>
+            <ProxyName>Managed Metadata Service</ProxyName>
+            <Database>
+                <Name>Metadata</Name>
+                <DBServer></DBServer>
+                <SQLAuthentication UseFarmSetting="true">
+                    <SQLUserName></SQLUserName>
+                    <SQLPassword></SQLPassword>
+                </SQLAuthentication>
+                <DBAlias Create="false">
+                    <DBInstance>SERVER\INSTANCE</DBInstance>
+                    <DBPort></DBPort>
+                </DBAlias>
+            </Database>
+        </ManagedMetadataServiceApp>
+        <UserProfileServiceApp Provision="localhost">
+            <Name>User Profile Service Application</Name>
+            <ProxyName>User Profile Service Application</ProxyName>
+            <MySiteHostLocation>https://my2019.YOURDOMAIN.valo.show</MySiteHostLocation>
+            <MySiteManagedPath>personal</MySiteManagedPath>
+            <EnableNetBIOSDomainNames>false</EnableNetBIOSDomainNames>
+            <StartProfileSync>true</StartProfileSync>
+            <CreateDefaultSyncConnection>false</CreateDefaultSyncConnection>
+            <SyncConnectionAccount>YOURDOMAIN\SPSProfileSync</SyncConnectionAccount>
+            <SyncConnectionAccountPassword>!53cret5VC4ctPwd!</SyncConnectionAccountPassword>
+            <Database>
+                <ProfileDB>Profile</ProfileDB>
+                <SyncDB>Profile_Sync</SyncDB>
+                <SocialDB>Profile_Social</SocialDB>
+                <DBServer></DBServer>
+                <SQLAuthentication UseFarmSetting="true">
+                    <SQLUserName></SQLUserName>
+                    <SQLPassword></SQLPassword>
+                </SQLAuthentication>
+                <DBAlias Create="false">
+                    <DBInstance>SERVER\INSTANCE</DBInstance>
+                    <DBPort></DBPort>
+                </DBAlias>
+            </Database>
+        </UserProfileServiceApp>
+        <EnterpriseSearchService Provision="localhost">
+            <ContactEmail>admin@YOURDOMAIN.valo.show</ContactEmail>
+            <ConnectionTimeout>60</ConnectionTimeout>
+            <AcknowledgementTimeout>60</AcknowledgementTimeout>
+            <ProxyType>Default</ProxyType>
+            <IgnoreSSLWarnings>true</IgnoreSSLWarnings>
+            <InternetIdentity>Mozilla/4.0 (compatible; MSIE 4.01; Windows NT; MS Search 6.0 Robot)</InternetIdentity>
+            <CustomIndexLocation>v:\index</CustomIndexLocation>
+            <PerformanceLevel>PartlyReduced</PerformanceLevel>
+            <ShareName>SearchIndex</ShareName>
+            <EnterpriseSearchServiceApplications>
+                <EnterpriseSearchServiceApplication Name="Search Service Application">
+                    <FailoverDatabaseServer></FailoverDatabaseServer>
+                    <Partitioned>false</Partitioned>
+                    <Partitions>1</Partitions>
+                    <SearchServiceApplicationType>Regular</SearchServiceApplicationType>
+                    <ContentAccessAccount>YOURDOMAIN\SPSSearchContent</ContentAccessAccount>
+                    <ContentAccessAccountPassword>!53cret5VC4ctPwd!</ContentAccessAccountPassword>
+                    <Database>
+                        <Name>Search</Name>
+                        <DBServer></DBServer>
+                        <SQLAuthentication UseFarmSetting="true">
+                            <SQLUserName></SQLUserName>
+                            <SQLPassword></SQLPassword>
+                        </SQLAuthentication>
+                        <DBAlias Create="false">
+                            <DBInstance>SERVER\INSTANCE</DBInstance>
+                            <DBPort></DBPort>
+                        </DBAlias>
+                    </Database>
+                    <ApplicationPool Name="SharePoint Search Application Pool"/>
+                    <CrawlComponent Provision="localhost"/>
+                    <QueryComponent Provision="localhost"/>
+                    <SearchQueryAndSiteSettingsComponent Provision="localhost"/>
+                    <AdminComponent Provision="localhost">
+                        <ApplicationPool Name="SharePoint Search Application Pool"/>
+                    </AdminComponent>
+                    <IndexComponent Provision="localhost"/>
+                    <ContentProcessingComponent Provision="localhost"/>
+                    <AnalyticsProcessingComponent Provision="localhost"/>
+                    <Proxy Name="Search Service Application">
+                        <Partitioned>false</Partitioned>
+                        <ProxyGroup>Default</ProxyGroup>
+                    </Proxy>
+                    <SearchCenterUrl>https://portal2019.YOURDOMAIN.valo.show</SearchCenterUrl>
+                </EnterpriseSearchServiceApplication>
+            </EnterpriseSearchServiceApplications>
+        </EnterpriseSearchService>
+        <StateService Provision="localhost">
+            <Name>State Service</Name>
+            <ProxyName>State Service</ProxyName>
+            <Database>
+                <Name>StateService</Name>
+                <DBServer></DBServer>
+                <SQLAuthentication UseFarmSetting="true">
+                    <SQLUserName></SQLUserName>
+                    <SQLPassword></SQLPassword>
+                </SQLAuthentication>
+                <DBAlias Create="false">
+                    <DBInstance>SERVER\INSTANCE</DBInstance>
+                    <DBPort></DBPort>
+                </DBAlias>
+            </Database>
+        </StateService>
+        <WebAnalyticsService Provision="localhost">
+            <Name>Web Analytics Service Application</Name>
+            <Database>
+                <ReportingDB>WebAnalyticsReporting</ReportingDB>
+                <StagingDB>WebAnalyticsStaging</StagingDB>
+                <DBServer></DBServer>
+                <SQLAuthentication UseFarmSetting="true">
+                    <SQLUserName></SQLUserName>
+                    <SQLPassword></SQLPassword>
+                </SQLAuthentication>
+                <DBAlias Create="false">
+                    <DBInstance>SERVER\INSTANCE</DBInstance>
+                    <DBPort></DBPort>
+                </DBAlias>
+            </Database>
+        </WebAnalyticsService>
+        <SPUsageService Provision="localhost">
+            <Name>Usage and Health Data Collection</Name>
+            <Database>
+                <Name>UsageAndHealth</Name>
+                <DBServer></DBServer>
+                <SQLAuthentication UseFarmSetting="true">
+                    <SQLUserName></SQLUserName>
+                    <SQLPassword></SQLPassword>
+                </SQLAuthentication>
+                <DBAlias Create="false">
+                    <DBInstance>SERVER\INSTANCE</DBInstance>
+                    <DBPort></DBPort>
+                </DBAlias>
+            </Database>
+        </SPUsageService>
+        <SecureStoreService Provision="localhost">
+            <Name>Secure Store Service</Name>
+            <ProxyName>Secure Store Service</ProxyName>
+            <Database>
+                <Name>SecureStore</Name>
+                <DBServer></DBServer>
+                <SQLAuthentication UseFarmSetting="true">
+                    <SQLUserName></SQLUserName>
+                    <SQLPassword></SQLPassword>
+                </SQLAuthentication>
+                <DBAlias Create="false">
+                    <DBInstance>SERVER\INSTANCE</DBInstance>
+                    <DBPort></DBPort>
+                </DBAlias>
+            </Database>
+        </SecureStoreService>
+        <BusinessDataConnectivity Provision="localhost">
+            <Name>Business Data Connectivity Service</Name>
+            <ProxyName>Business Data Connectivity Service</ProxyName>
+            <Database>
+                <Name>BusinessDataCatalog</Name>
+                <DBServer></DBServer>
+                <SQLAuthentication UseFarmSetting="true">
+                    <SQLUserName></SQLUserName>
+                    <SQLPassword></SQLPassword>
+                </SQLAuthentication>
+                <DBAlias Create="false">
+                    <DBInstance>SERVER\INSTANCE</DBInstance>
+                    <DBPort></DBPort>
+                </DBAlias>
+            </Database>
+        </BusinessDataConnectivity>
+        <WordAutomationService Provision="localhost">
+            <Name>Word Automation Services</Name>
+            <ProxyName>Word Automation Services</ProxyName>
+            <Database>
+                <Name>WordAutomation</Name>
+                <DBServer></DBServer>
+                <SQLAuthentication UseFarmSetting="true">
+                    <SQLUserName></SQLUserName>
+                    <SQLPassword></SQLPassword>
+                </SQLAuthentication>
+                <DBAlias Create="false">
+                    <DBInstance>SERVER\INSTANCE</DBInstance>
+                    <DBPort></DBPort>
+                </DBAlias>
+            </Database>
+        </WordAutomationService>
+        <AppManagementService Provision="localhost">
+            <Name>App Management Service</Name>
+            <ProxyName>App Management Service</ProxyName>
+            <AppDomain>apps.YOURDOMAIN.valo.show</AppDomain>
+            <Database>
+                <Name>AppManagement</Name>
+                <DBServer></DBServer>
+                <SQLAuthentication UseFarmSetting="true">
+                    <SQLUserName></SQLUserName>
+                    <SQLPassword></SQLPassword>
+                </SQLAuthentication>
+                <DBAlias Create="false">
+                    <DBInstance>SERVER\INSTANCE</DBInstance>
+                    <DBPort></DBPort>
+                </DBAlias>
+            </Database>
+        </AppManagementService>
+        <SubscriptionSettingsService Provision="localhost">
+            <Name>Subscription Settings Service</Name>
+            <AppSiteSubscriptionName>app</AppSiteSubscriptionName>
+            <Database>
+                <Name>SubscriptionSettings</Name>
+                <DBServer></DBServer>
+                <SQLAuthentication UseFarmSetting="true">
+                    <SQLUserName></SQLUserName>
+                    <SQLPassword></SQLPassword>
+                </SQLAuthentication>
+                <DBAlias Create="false">
+                    <DBInstance>SERVER\INSTANCE</DBInstance>
+                    <DBPort></DBPort>
+                </DBAlias>
+            </Database>
+        </SubscriptionSettingsService>
+        <WorkManagementService Provision="localhost">
+            <Name>Work Management Service Application</Name>
+            <ProxyName>Work Management Service Application</ProxyName>
+        </WorkManagementService>
+        <MachineTranslationService Provision="localhost">
+            <Name>Machine Translation Service</Name>
+            <ProxyName>Machine Translation Service</ProxyName>
+            <Database>
+                <Name>TranslationService</Name>
+                <DBServer></DBServer>
+                <SQLAuthentication UseFarmSetting="true">
+                    <SQLUserName></SQLUserName>
+                    <SQLPassword></SQLPassword>
+                </SQLAuthentication>
+                <DBAlias Create="false">
+                    <DBInstance>SERVER\INSTANCE</DBInstance>
+                    <DBPort></DBPort>
+                </DBAlias>
+            </Database>
+        </MachineTranslationService>
+        <PowerPointConversionService Provision="localhost">
+            <Name>PowerPoint Conversion Service Application</Name>
+            <ProxyName>PowerPoint Conversion Service Application</ProxyName>
+        </PowerPointConversionService>
+    </ServiceApps>
+    <EnterpriseServiceApps>
+        <ExcelServices Provision="false">
+            <Name>Excel Services Application</Name>
+            <UnattendedIDUser>YOURDOMAIN\SP_ExcelUser</UnattendedIDUser>
+            <UnattendedIDPassword></UnattendedIDPassword>
+        </ExcelServices>
+        <VisioService Provision="localhost">
+            <Name>Visio Graphics Service</Name>
+            <ProxyName>Visio Graphics Service</ProxyName>
+            <UnattendedIDUser>YOURDOMAIN\SPSOfficeUser</UnattendedIDUser>
+            <UnattendedIDPassword>!53cret5VC4ctPwd!</UnattendedIDPassword>
+        </VisioService>
+        <AccessService Provision="false">
+            <Name>Access 2010 Service</Name>
+            <ProxyName>Access 2010 Service</ProxyName>
+        </AccessService>
+        <AccessServices Provision="false">
+            <Name>Access Services</Name>
+            <ProxyName>Access Services</ProxyName>
+            <Database>
+                <Name>AccessServices</Name>
+                <DBServer></DBServer>
+                <SQLAuthentication UseFarmSetting="true">
+                    <SQLUserName></SQLUserName>
+                    <SQLPassword></SQLPassword>
+                </SQLAuthentication>
+                <DBAlias Create="false">
+                    <DBInstance>SERVER\INSTANCE</DBInstance>
+                    <DBPort></DBPort>
+                </DBAlias>
+            </Database>
+        </AccessServices>
+        <PerformancePointService Provision="localhost">
+            <Name>PerformancePoint Service</Name>
+            <ProxyName>PerformancePoint Service</ProxyName>
+            <UnattendedIDUser>YOURDOMAIN\SPSPPService</UnattendedIDUser>
+            <UnattendedIDPassword>!53cret5VC4ctPwd!</UnattendedIDPassword>
+            <Database>
+                <Name>PerformancePoint</Name>
+                <DBServer></DBServer>
+                <SQLAuthentication UseFarmSetting="true">
+                    <SQLUserName></SQLUserName>
+                    <SQLPassword></SQLPassword>
+                </SQLAuthentication>
+                <DBAlias Create="false">
+                    <DBInstance>SERVER\INSTANCE</DBInstance>
+                    <DBPort></DBPort>
+                </DBAlias>
+            </Database>
+        </PerformancePointService>
+    </EnterpriseServiceApps>
+    <OfficeWebApps Install="false">
+        <ConfigFile>config-OWA-2010.xml</ConfigFile>
+        <PIDKeyOWA></PIDKeyOWA>
+        <ExcelService Provision="false">
+            <Name>Excel Web App</Name>
+            <ProxyName>Excel Web App</ProxyName>
+            <UnattendedIDUser>YOURDOMAIN\SP_ExcelUser</UnattendedIDUser>
+            <UnattendedIDPassword></UnattendedIDPassword>
+        </ExcelService>
+        <WordViewingService Provision="false">
+            <Name>Word Viewing Service</Name>
+            <ProxyName>Word Viewing Service</ProxyName>
+        </WordViewingService>
+        <PowerPointService Provision="false">
+            <Name>PowerPoint Service Application</Name>
+            <ProxyName>PowerPoint Service Application</ProxyName>
+        </PowerPointService>
+    </OfficeWebApps>
+    <ProjectServer Install="false">
+        <ConfigFile>config-ProjectServer2013.xml</ConfigFile>
+        <PIDKeyProjectServer></PIDKeyProjectServer>
+        <ServiceApp Provision="localhost">
+            <Name>Project Server Service Application</Name>
+            <ProxyName>Project Server Service Application</ProxyName>
+            <ManagedPath>PWA</ManagedPath>
+            <ServiceAccount>YOURDOMAIN\SP_ProjectServer</ServiceAccount>
+            <ServiceAccountPassword></ServiceAccountPassword>
+            <Database>
+                <Name>ProjectServer</Name>
+                <DBServer></DBServer>
+                <SQLAuthentication UseFarmSetting="true">
+                    <SQLUserName></SQLUserName>
+                    <SQLPassword></SQLPassword>
+                </SQLAuthentication>
+                <DBAlias Create="false">
+                    <DBInstance>SERVER\INSTANCE</DBInstance>
+                    <DBPort></DBPort>
+                </DBAlias>
+            </Database>
+        </ServiceApp>
+    </ProjectServer>
+    <AdobePDF>
+        <iFilter Install="false"/>
+        <Icon Configure="true"/>
+        <MIMEType Configure="true"/>
+    </AdobePDF>
+    <ForeFront Install="false">
+        <ConfigFile>answerfile-ForeFront-2010.xml</ConfigFile>
+    </ForeFront>
+</Configuration>

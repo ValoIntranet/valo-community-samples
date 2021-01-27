@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+    <CustomAction
+        Title="ValoQuickNews"
+        Location="ClientSideExtension.ApplicationCustomizer"
+        ClientSideComponentId="69eb39e3-19e6-4b33-a3e5-dd3b93834419"
+        ClientSideComponentProperties="{&quot;testMessage&quot;:&quot;Test message&quot;}">
+    </CustomAction>
+</Elements>
