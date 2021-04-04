@@ -18,3 +18,4 @@ Import-Module -Name SharePointPnPPowerShellOnline -Force -DisableNameChecking
 Import-Module PnP.PowerShell -Force -DisableNameChecking
 Import-Module -Name Microsoft.Online.SharePoint.PowerShell -Force -DisableNameChecking
 Invoke-WebRequest -Uri https://aka.ms/installazurecliwindows -OutFile .\AzureCLI.msi; Start-Process msiexec.exe -Wait -ArgumentList '/I AzureCLI.msi /quiet'; rm .\AzureCLI.msi
+
