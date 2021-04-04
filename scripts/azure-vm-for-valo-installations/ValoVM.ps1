@@ -6,7 +6,7 @@ param (
     [Alias("LOC")]
     [string]$VMLocation,
     [Alias("SIZE")]
-    [string]$VMSize ='Standard_DS1_v2',
+    [string]$VMSize ='Standard_DS2_v2',
     [Alias("RG")]
     [string]$VMResourceGroupName
 )
