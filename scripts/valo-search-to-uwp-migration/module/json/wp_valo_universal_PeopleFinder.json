@@ -1,0 +1,144 @@
+{
+    "templateGallery": "Templates gallery",
+    "templateMetadata": {
+        "fields": [
+            "FirstName",
+            "LastName",
+            "JobTitle",
+            "Department",
+            "WorkPhone",
+            "MobilePhone",
+            "WorkEmail",
+            "BaseOfficeLocation",
+            "PictureURL",
+            "AccountName",
+            "OriginalPath"
+        ],
+        "query": "(Title:{searchTerms} OR XRANK(cb=10) PreferredName:\" {searchTerms}\" OR WorkPhone:{searchTerms} OR MobilePhone:{searchTerms} OR WorkEmail:{searchTerms} OR JobTitle:{searchTerms} OR Department:{searchTerms} OR OfficeNumber:{searchTerms}) AND (-PreferredName:\"_spo*\" -PreferredName:\"app@*\" -PreferredName:\"Foreign Principal*\" -PreferredName:\"spsearch\" -\"sps-usertype\":1)",
+        "sourceId": "b09a7990-05ea-4af9-81ef-edfab16c4e31",
+        "totalResults": 1,
+        "pagingType": 3,
+        "resources": [
+            {
+                "key": "empty",
+                "values": {
+                    "default": "n/a"
+                }
+            }
+        ],
+        "parameters": [
+            {
+                "name": "BannerStyle",
+                "value": "Candela",
+                "options": [
+                    "Candela",
+                    "Lux"
+                ],
+                "description": "universalBannerTmplStyleParamDesc"
+            },
+            {
+                "name": "ShowMoreTitle",
+                "value": "Read more",
+                "description": "Title for show more link"
+            },
+            {
+                "name": "ShowMoreUrl",
+                "value": "",
+                "description": "Url for show more link"
+            },
+            {
+                "name": "ShowMoreTarget",
+                "value": "_blank",
+                "description": "Target for show more link"
+            }
+        ]
+    },
+    "templateParams": [
+        {
+            "name": "BannerStyle",
+            "value": "Candela",
+            "options": [
+                "Candela",
+                "Lux"
+            ],
+            "description": "universalBannerTmplStyleParamDesc"
+        },
+        {
+            "name": "ShowMoreTitle",
+            "value": "Read more",
+            "description": "Title for show more link"
+        },
+        {
+            "name": "ShowMoreUrl",
+            "value": "",
+            "description": "Url for show more link"
+        },
+        {
+            "name": "ShowMoreTarget",
+            "value": "_blank",
+            "description": "Target for show more link"
+        }
+    ],
+    "templateMappingSlots": [],
+    "templateMappingsSlotsUpdated": false,
+    "numberOfPagesToDisplay": 10,
+    "cacheTime": 5,
+    "hotItemSwap": true,
+    "dataSourceConnection": "SearchDataSource",
+    "lastUpdated": "1611235826736",
+    "template": {
+        "key": "PeopleFinder.html",
+        "id": "PeopleFinder.html",
+        "editUrl": "",
+        "fullBleed": false,
+        "imageUrl": "",
+        "label": "People Finder",
+        "type": "peoplefinder",
+        "scope": 1,
+        "dataSourceId": "SearchDataSource"
+    },
+    "searchDataSource": {
+        "showAdvancedSearchOptions": true,
+        "useSearchQueryBuilder": false,
+        "itemsCountPerPage": 1,
+        "searchQuerySettings": {
+            "searchQuery": "*",
+            "sortList": [
+                {
+                    "sortField": {
+                        "name": "FirstName",
+                        "typeInfo": null
+                    },
+                    "sortDirection": 1
+                }
+            ],
+            "selectedProperties": [
+                "FirstName",
+                "LastName",
+                "JobTitle",
+                "Department",
+                "WorkPhone",
+                "MobilePhone",
+                "WorkEmail",
+                "BaseOfficeLocation",
+                "PictureURL",
+                "AccountName",
+                "OriginalPath"
+            ],
+            "resultSourceId": "b09a7990-05ea-4af9-81ef-edfab16c4e31",
+            "privateGroups": false,
+            "refinementFilters": ""
+        },
+        "searchScope": 1,
+        "selectedListIds": [],
+        "filterConditions": [],
+        "searchBoxSourceId": "e4efa3c5-a1db-4858-9ccb-79f0ace6c0ca",
+        "searchRefinersSourceId": null,
+        "enableAudienceTargeting": false,
+        "onlyShowResultsOnSearch": true,
+        "numberOfItemsToSkip": 0
+    },
+    "selectedPagingOption": 1,
+    "isPagingFixed": true,
+    "title": ""
+}

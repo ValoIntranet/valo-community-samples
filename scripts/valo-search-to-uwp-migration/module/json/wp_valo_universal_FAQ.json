@@ -1,0 +1,91 @@
+{
+    "templateGallery": "Templates gallery",
+    "templateMetadata": {
+        "fields": [
+            "Title",
+            "ValoFAQCategoryOWSCHCS",
+            "ValoFAQAnswerOWSMTXT",
+            "UniqueId"
+        ],
+        "query": "Path:{site} AND ContentTypeId:0x010073A54E79C2E6914EBBFB29EF7861951E*",
+        "sorting": "ViewsLifeTime:descending",
+        "totalResults": 20,
+        "skipResults": 0,
+        "pagingType": 3,
+        "uiBehaviours": {
+            "Valo__ExpandCollapseBehaviour": {
+                "parameters": {
+                    "toggleTriggerElementSelector": ".valoFAQQuestionToggle",
+                    "expandableContentElementsSelector": ".valoFAQAnswer",
+                    "toggleIconSelector": ".valoFAQQuestionToggleIcon",
+                    "toggleIconAddClassName": "ms-Icon--Add",
+                    "toggleIconRemoveClassName": "ms-Icon--Remove"
+                }
+            },
+            "Valo__FilterContentBehaviour": {
+                "parameters": {
+                    "triggerElementsSelector": ".valoFAQCatFilter",
+                    "triggerElementFilterValueAttributeName": "id",
+                    "filterableElementsSelector": "[data-category]",
+                    "matchingFilterElementsSelector": "[data-category='{value}']",
+                    "cssDisplayType": "block"
+                }
+            }
+        }
+    },
+    "templateParams": [],
+    "templateMappingSlots": [],
+    "templateMappingsSlotsUpdated": false,
+    "numberOfPagesToDisplay": 3,
+    "cacheTime": 5,
+    "hotItemSwap": true,
+    "dataSourceConnection": "SearchDataSource",
+    "lastUpdated": "1611661209251",
+    "template": {
+        "key": "FAQ.html",
+        "id": "FAQ.html",
+        "editUrl": "",
+        "fullBleed": false,
+        "imageUrl": "",
+        "label": "FAQ",
+        "type": "faq",
+        "scope": 1,
+        "dataSourceId": "SearchDataSource"
+    },
+    "searchDataSource": {
+        "showAdvancedSearchOptions": false,
+        "useSearchQueryBuilder": false,
+        "itemsCountPerPage": 5,
+        "searchQuerySettings": {
+            "searchQuery": "*",
+            "sortList": [
+                {
+                    "sortField": {
+                        "name": "ViewsLifeTime",
+                        "typeInfo": null
+                    },
+                    "sortDirection": 2
+                }
+            ],
+            "selectedProperties": [
+                "Title",
+                "ValoFAQCategoryOWSCHCS",
+                "ValoFAQAnswerOWSMTXT",
+                "UniqueId"
+            ],
+            "privateGroups": false,
+            "refinementFilters": ""
+        },
+        "searchScope": 2,
+        "selectedListIds": [],
+        "filterConditions": [],
+        "searchBoxSourceId": null,
+        "searchRefinersSourceId": null,
+        "enableAudienceTargeting": false,
+        "onlyShowResultsOnSearch": false,
+        "numberOfItemsToSkip": 0
+    },
+    "selectedPagingOption": 1,
+    "isPagingFixed": true,
+    "title": ""
+}
