@@ -105,7 +105,12 @@ function ConvertWebparts($Page, $SearchWP, $Analyze)
         $wpUniversal_Properties = $wpUniversal_Properties_Json | ConvertFrom-Json;
 
         # set web part title
-        $wpUniversal_Properties.title = $wpSearch_Properties.wpTitle;
+        if (-not ([string]::IsNullOrEmpty($wpSearch_Properties.wpTitle)))
+        {
+            $wpUniversal_Properties.title = $wpSearch_Properties.wpTitle;
+        }else{
+            $wpUniversal_Properties.title = $wpSearch_Properties.title;
+        }
 
         # set paging option
         if ($wpSearch_Properties.pagingOption)
@@ -137,7 +142,12 @@ function ConvertWebparts($Page, $SearchWP, $Analyze)
         }
 
         # search scope
-        if ($wpSearch_Properties.searchHub)
+        if ($wpSearch_Properties.searchHub -and $wpSearch_Properties.searchSite)
+        {
+            # limit to current site when both are true, since it should limit it to current site instead of hubsite
+            $wpUniversal_Properties.searchDataSource.searchScope = 2;
+        }
+        elseif ($wpSearch_Properties.searchHub)
         {
             # limit to current hub
             $wpUniversal_Properties.searchDataSource.searchScope = 3;
@@ -285,7 +295,19 @@ function Get-TemplateType($Properties, $Analyze)
             }
             "events.html" {
                 "events"
-            }            
+            }
+            "PeopleFinder.html" {
+                "PeopleFinder"
+            }
+            "FAQ.html" {
+                "FAQ"
+            }
+            "List.html" {
+                "List"
+            }
+            "events.compact.html" {
+                "events.compact"
+            }
             default { 
                 $message = "Unknown view template type: '$($value)'";
                 if ($Analyze)

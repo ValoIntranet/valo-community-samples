@@ -1,0 +1,133 @@
+{
+    "templateGallery": "Templates gallery",
+    "templateMetadata": {
+        "fields": [
+            "Path",
+            "Title",
+            "BannerUrlOWSURLH",
+            "Location",
+            "EventsRollUpStartDate",
+            "EventsRollUpEndDate",
+            "Description",
+            "ValoEventDate",
+            "SPWebUrl",
+            "ListID",
+            "ListItemID",
+            "IsAllDayEvent",
+            "SiteID",
+            "WebID"
+        ],
+        "query": "contentclass:STS_ListItem_Events AND (ValoEventDate>={Today} OR EventsRollUpEndDate>={Today})",
+        "sorting": "ValoEventDate:ascending",
+        "totalResults": 3,
+        "skipResults": 0,
+        "pagingType": 3,
+        "resources": [
+            {
+                "key": "title",
+                "values": {
+                    "default": "Title:",
+                    "nl-nl": "Titel:"
+                }
+            }
+        ],
+        "parameters": [
+            {
+                "name": "ShowMoreTitle",
+                "value": "Read more",
+                "description": "Title for show more link"
+            },
+            {
+                "name": "ShowMoreUrl",
+                "value": "",
+                "description": "Url for show more link"
+            },
+            {
+                "name": "ShowMoreTarget",
+                "value": "_blank",
+                "description": "Target for show more link"
+            }
+        ]
+    },
+    "templateParams": [
+        {
+            "name": "ShowMoreTitle",
+            "value": "Read more",
+            "description": "Title for show more link"
+        },
+        {
+            "name": "ShowMoreUrl",
+            "value": "",
+            "description": "Url for show more link"
+        },
+        {
+            "name": "ShowMoreTarget",
+            "value": "_blank",
+            "description": "Target for show more link"
+        }
+    ],
+    "templateMappingSlots": [],
+    "numberOfPagesToDisplay": 5,
+    "cacheTime": 5,
+    "hotItemSwap": true,
+    "dataSourceConnection": "SearchDataSource",
+    "lastUpdated": "1611661155230",
+    "template": {
+        "key": "events.compact.html",
+        "id": "events.compact.html",
+        "editUrl": "",
+        "fullBleed": false,
+        "imageUrl": "",
+        "label": "Events - Compact",
+        "type": "events",
+        "scope": 1,
+        "dataSourceId": "SearchDataSource"
+    },
+    "searchDataSource": {
+        "showAdvancedSearchOptions": false,
+        "useSearchQueryBuilder": false,
+        "itemsCountPerPage": 3,
+        "searchQuerySettings": {
+            "searchQuery": "contentclass:STS_ListItem_Events AND (ValoEventDate>={Today} OR EventsRollUpEndDate>={Today})",
+            "sortList": [
+                {
+                    "sortField": {
+                        "name": "ValoEventDate",
+                        "typeInfo": null
+                    },
+                    "sortDirection": 1
+                }
+            ],
+            "selectedProperties": [
+                "Path",
+                "Title",
+                "BannerUrlOWSURLH",
+                "Location",
+                "EventsRollUpStartDate",
+                "EventsRollUpEndDate",
+                "Description",
+                "ValoEventDate",
+                "SPWebUrl",
+                "ListID",
+                "ListItemID",
+                "IsAllDayEvent",
+                "SiteID",
+                "WebID"
+            ],
+            "privateGroups": false,
+            "refinementFilters": ""
+        },
+        "searchScope": 3,
+        "selectedListIds": [],
+        "filterConditions": [],
+        "searchBoxSourceId": null,
+        "searchRefinersSourceId": null,
+        "enableAudienceTargeting": false,
+        "onlyShowResultsOnSearch": false,
+        "numberOfItemsToSkip": 0
+    },
+    "templateMappingsSlotsUpdated": false,
+    "selectedPagingOption": 1,
+    "isPagingFixed": true,
+    "title": ""
+}

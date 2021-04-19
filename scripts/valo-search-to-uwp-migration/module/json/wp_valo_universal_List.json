@@ -1,0 +1,116 @@
+{
+    "templateGallery": "Templates gallery",
+    "templateMetadata": {
+        "fields": [
+            "Title",
+            "SiteName",
+            "SiteTitle",
+            "HitHighlightedSummary",
+            "ModifiedBy",
+            "ModifiedById",
+            "ModifiedOWSDATE",
+            "FileExtension",
+            "Path",
+            "RefinableString100"
+        ],
+        "query": "IsDocument:1",
+        "totalResults": 30,
+        "sorting": "ViewsLifeTime:descending",
+        "skipResults": 0,
+        "pagingType": 3,
+        "parameters": [
+            {
+                "name": "ShowMoreTitle",
+                "value": "Read more",
+                "description": "Title for show more link"
+            },
+            {
+                "name": "ShowMoreUrl",
+                "value": "",
+                "description": "Url for show more link"
+            },
+            {
+                "name": "ShowMoreTarget",
+                "value": "_blank",
+                "description": "Target for show more link"
+            }
+        ]
+    },
+    "templateParams": [
+        {
+            "name": "ShowMoreTitle",
+            "value": "Read more",
+            "description": "Title for show more link"
+        },
+        {
+            "name": "ShowMoreUrl",
+            "value": "",
+            "description": "Url for show more link"
+        },
+        {
+            "name": "ShowMoreTarget",
+            "value": "_blank",
+            "description": "Target for show more link"
+        }
+    ],
+    "templateMappingSlots": [],
+    "numberOfPagesToDisplay": 5,
+    "cacheTime": 5,
+    "hotItemSwap": true,
+    "dataSourceConnection": "SearchDataSource",
+    "lastUpdated": "1611661160339",
+    "template": {
+        "key": "List.html",
+        "id": "List.html",
+        "editUrl": "",
+        "fullBleed": false,
+        "imageUrl": "",
+        "label": "List",
+        "type": "search",
+        "scope": 1,
+        "dataSourceId": "SearchDataSource"
+    },
+    "searchDataSource": {
+        "showAdvancedSearchOptions": false,
+        "useSearchQueryBuilder": false,
+        "itemsCountPerPage": 30,
+        "searchQuerySettings": {
+            "searchQuery": "IsDocument:1",
+            "sortList": [
+                {
+                    "sortField": {
+                        "name": "ViewsLifeTime",
+                        "typeInfo": null
+                    },
+                    "sortDirection": 2
+                }
+            ],
+            "selectedProperties": [
+                "Title",
+                "SiteName",
+                "SiteTitle",
+                "HitHighlightedSummary",
+                "ModifiedBy",
+                "ModifiedById",
+                "ModifiedOWSDATE",
+                "FileExtension",
+                "Path",
+                "RefinableString100"
+            ],
+            "privateGroups": false,
+            "refinementFilters": ""
+        },
+        "searchScope": 3,
+        "selectedListIds": [],
+        "filterConditions": [],
+        "searchBoxSourceId": null,
+        "searchRefinersSourceId": null,
+        "enableAudienceTargeting": false,
+        "onlyShowResultsOnSearch": false,
+        "numberOfItemsToSkip": 0
+    },
+    "templateMappingsSlotsUpdated": false,
+    "selectedPagingOption": 1,
+    "isPagingFixed": true,
+    "title": ""
+}
