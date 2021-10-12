@@ -6,9 +6,11 @@ param (
     [Alias("LOC")]
     [string]$VMLocation,
     [Alias("SIZE")]
-    [string]$VMSize ='Standard_DS2_v2',
+    [string]$VMSize = 'Standard_DS1_v2',
     [Alias("RG")]
-    [string]$VMResourceGroupName
+    [string]$VMResourceGroupName,
+    [Alias("NAME")]
+    [string]$VMName = 'win11'
 )
 . .\ValoVM-Helpers.ps1
 #PSScriptInfo      
@@ -39,53 +41,55 @@ Write-Host 'Password must be compliant - min. 12 char, lowercase[a-z], uppercase
 $adminCredentials = Get-Credential -Message "Provice admin account for the virtual machine. "
 Test-ValoVMPasswordComplexity -cred $adminCredentials
 
-try{
+try {
     $VMLocation = Test-ValoVMResourceGroupLocation -location $VMLocation
     Test-ValoVMSize -location $VMLocation -VMSize $VMSize
     
     #Get-AzVMSize -Location $VMLocation
     #Get-AzVMImagePublisher -Location $VMLocation
-    $publisher='MicrosoftWindowsDesktop'
+    $publisher = 'MicrosoftWindowsDesktop'
+    #$publisher = 'MicrosoftWindowsServer'
     #Get-AzVMImageOffer -Location $VMLocation -PublisherName $publisher
-    $offer='windows-10'
+    $offer = 'windows-11'
+    #$offer = 'WindowsServer'
     #Get-AzVMImageSku -Location $VMLocation -PublisherName $publisher -Offer $offer
-    $sku='20h2-ent'
-    $version='latest'
+    $sku = 'win11-21h2-ent'
+    #$sku = '2022-datacenter'
+    $version = 'latest'
 
     #generic contatenated parameters
     $timeStamp = (Get-Date -Format "MMddyy-HHmm")
-    if ($VMResourceGroupName){
+    if ($VMResourceGroupName) {
         $resourceGroupName = $VMResourceGroupName
     }
     else {
-        $resourceGroupName='valo-win10-'+$timeStamp
+        $resourceGroupName = "valo-$offer-$timeStamp"
     }
-    $vmName='win10'
-    $osDiskName=$vmName+"-osdisk"
+    $osDiskName = "$VMName-osdisk"
 
     New-ValoVMResourceGroup -resourceGroupName $resourceGroupName -location $VMLocation 
 
-    $vmPublicIP = New-ValoVMNetwork -resourceGroupName $resourceGroupName -location $VMLocation -vmName $vmName 
+    $vmPublicIP = New-ValoVMNetwork -resourceGroupName $resourceGroupName -location $VMLocation -vmName $VMName 
 
-    $vm = New-AzVMConfig -VMName $vmName -VMSize $VMSize
-    $vm = Set-AzVMOperatingSystem -VM $vm -Windows -ComputerName $vmName -Credential $adminCredentials -ProvisionVMAgent -EnableAutoUpdate 
-    $vm = Add-AzVMNetworkInterface -VM $vm  -Id (Get-AzNetworkInterface -Name ("$vmName-nic1") -ResourceGroupName $resourceGroupName).Id 
+    $vm = New-AzVMConfig -VMName $VMName -VMSize $VMSize
+    $vm = Set-AzVMOperatingSystem -VM $vm -Windows -ComputerName $VMName -Credential $adminCredentials -ProvisionVMAgent -EnableAutoUpdate 
+    $vm = Add-AzVMNetworkInterface -VM $vm  -Id (Get-AzNetworkInterface -Name ("$VMName-nic1") -ResourceGroupName $resourceGroupName).Id 
     $vm = Set-AzVMSourceImage -VM $vm -PublisherName $publisher -Offer $offer -Skus $sku -Version $version  
     $vm = Set-AzVMOSDisk -VM $vm -Name $osDiskName -Windows -CreateOption FromImage -DiskSizeInGB 128 -StorageAccountType StandardSSD_LRS
     $vm = Set-AzVMBootDiagnostic -VM $vm -Disable
-    Write-Host 'Starting creating virtual machine '$vmName
+    Write-Host 'Starting creating virtual machine '$VMName
     $valoVM = New-AzVM -ResourceGroupName $resourceGroupName -Location $vmLocation -VM $vm
-    if ($null -ne $valoVM){
-        Write-Host 'Virtual machine '$vmName' created in resource group '$resourceGroupName'.'
+    if ($null -ne $valoVM) {
+        Write-Host 'Virtual machine '$VMName' created in resource group '$resourceGroupName'.'
         Write-Host 'Executing PowerShell script InitIE.ps1 to initialize IE. Verify by opening IE when logging in.'
-        Invoke-AzVMRunCommand -ResourceGroupName $resourceGroupName -VMName $vmName -CommandId RunPowerShellScript -ScriptPath 'InitIE.ps1'                                                
+        Invoke-AzVMRunCommand -ResourceGroupName $resourceGroupName -VMName $VMName -CommandId RunPowerShellScript -ScriptPath 'InitIE.ps1'                                                
         Write-Host 'Connect to the VM in Windows using command: mstsc /v:'$vmPublicIP.IpAddress
     }
 }
-catch{
+catch {
     Write-Host "Error: "$_.Exception.Message " with item "$_.Exception.ItemNameß
 
 }
-finally{
+finally {
     Disconnect-AzAccount
 }
