@@ -21,6 +21,6 @@
   "devDependencies": {
     "fast-glob": "3.2.2",
     "gray-matter": "4.0.2",
-    "node-fetch": "2.6.1"
+    "node-fetch": "2.6.7"
   }
 }
